@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Reset.css">
+    <title>CSSHW02</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        .section-main {
+            width: 100%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 40px;
+            color: #42474c;
+        }
+
+        .section-title span {
+            /* color: #c2b697; */
+        }
+
+        .list {
+            display: flex;
+            justify-content: center;
+        }
+
+        /*#region Unleash Your Team’s Productive Power */
+
+        .stayalwaysintouch {}
+
+        /*#endregion */
+
+        /*#region Why Traders Choose US */
+
+        section.whytraderschooseus {
+            background-color: #f7f7f7;
+            padding: 65px 0 65px 0;
+        }
+
+        .whytraderschooseus>p {
+            max-width: 50%;
+            text-align: center;
+            font-size: 18px;
+            margin: auto;
+            line-height: 30px;
+        }
+
+        .whytraderschooseus .benefits {
+            display: flex;
+            justify-content: center;
+            margin: 50px 0 0 0;
+
+        }
+
+        .whytraderschooseus .benefits-list {
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: center;
+        }
+
+        .benefits>.benefits-logo {
+            padding: 0 20px 0 20px;
+        }
+
+        .benefits-item {
+            display: flex;
+            margin: 20px 0;
+            padding: 20px 0;
+        }
+
+        .benefits-item>.txt {
+            max-width: 280px;
+            line-height: 20px;
+        }
+
+        .benefits-item>img {
+            border-radius: 50%;
+            margin: 0 10px;
+        }
+
+        /* benefits-item items-iconright */
+        .benefits-item.items-iconright {
+            text-align: right;
+
+        }
+
+        .benefits-item.items-iconleft {
+            flex-direction: row-reverse;
+            text-align: left;
+        }
+
+        /* #endregion */
+
+        /*#region Our Latest Projects*/
+
+        section.ourlatestprojects {
+            background-color: #f7f7f7;
+            padding: 65px 0 150px 0;
+        }
+
+        .ourlatestprojects .list {
+            margin: 30px;
+        }
+
+        .ourlatestprojects .list-item {
+            padding: 5px 20px;
+        }
+
+        .ourlatestprojects .list a {
+            color: #899296;
+            font-size: 14px;
+        }
+
+        .ourlatestprojects .list a:hover {
+            color: #c1b797;
+        }
+
+        /* Clients Testimonials */
+        section.clientstestimonials {
+            padding: 70px 0;
+            margin: 0 0 50px 0
+        }
+
+        /* #endregion */
+
+        /*#region Our Offices */
+        section.ouroffices {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+        }
+
+        .ouroffices .location {
+            display: flex;
+            flex-wrap: wrap;
+            width: 50%;
+        }
+
+        .ouroffices .leader-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .leader-item img {
+            vertical-align: middle;
+        }
+
+        /* #endregion */
+
+        /* #region Stay Always In Touch */
+        section.stayalwaysintouch {
+            background-color: #c2b697;
+            padding: 50px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .stayalwaysintouch .section-title {
+            color: #fff;
+        }
+
+        .stayalwaysintouch .input-form {
+            /* padding: 30px; */
+            width: 33%;
+            display: flex;
+            align-items: center;
+        }
+
+        .stayalwaysintouch .form-email {
+            width: 70%;
+
+        }
+
+        .input-form .form-submit {
+            background-color: #fff;
+            border: none;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .input-form .form-submit:hover {
+            /* background-color: #c1b797; */
+            opacity: .7;
+        }
+
+        /* #endregion */
+
+        /*#region Common */
+        .font-goldcolor {
+            color: #c2b697;
+        }
+
+        /* .bgc-goldcolor {
+
+            background-color: #c2b697;
+        } */
+        /* #endregion */
+    </style>
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        <h1>Imperion</h1>
+    </header>
+    <!--#region Unleash Your Team’s Productive Power -->
+    <section class="section-main stayalwaysintouch">
+        <div class="txt">
+            <h3 class="section-title ">Unleash Your Team’s Productive Power</h3>
+            <p>The truly scarce resources now are the time, the talent, and the energy of the people.</p>
+        </div>
+        <form class="input-form" action="">
+            <input class="form-btn" type="button" value="GET IN TOUCH">
+        </form>
+    </section>
+    <!-- endregion -->
+    <!-- #region whytraderschooseus -->
+    <section class="section-main whytraderschooseus">
+        <h3 class="section-title">Why Traders <span class="font-goldcolor">Choose Us </span></h3>
+        <p>With a community of over 400 million users (and a majority age group being 18 to 29), wouldn’t you want to
+            make sure you’re monitoring what people are posting on social networks? Especially if the demographic of
+            your audience falls in that age range.</p>
+        <div class="benefits">
+            <div class="benefits-list">
+                <div class="benefits-item items-iconright">
+                    <div class="txt">
+                        <h4 class="title">VISIT</h4>
+                        <p>Our values and ideals are our decision making guide.</p>
+                    </div>
+                    <img src="https://picsum.photos/70/70/?random=1">
+                </div>
+                <div class="benefits-item items-iconright">
+                    <div class="txt">
+                        <h4 class="title">SAVE</h4>
+                        <p>We only release our products when we feel they meet our standards.</p>
+                    </div>
+                    <img src="https://picsum.photos/70/70/?random=1">
+                </div>
+                <div class="benefits-item items-iconright">
+                    <div class="txt">
+                        <h4 class="title">EXPLORE</h4>
+                        <p>We rely on the same platform and tools our customers pay us for</p>
+                    </div>
+                    <img src="https://picsum.photos/70/70/?random=1">
+                </div>
+            </div>
+            <div class="benefits-logo">
+                <img src="image/imperion-phone.png" alt="imperion-phone">
+            </div>
+            <div class="benefits-list">
+                <div class="benefits-item items-iconleft">
+                    <div class="txt">
+                        <h4 class="title">ORGANIZE</h4>
+                        <p>Beautiful products to help people with creative ideas succeed</p>
+                    </div>
+                    <img src="https://picsum.photos/70/70/?random=1">
+                </div>
+                <div class="benefits-item items-iconleft">
+                    <div class="txt">
+                        <h4 class="title">COMMUNICATE</h4>
+                        <p>Creative, stylish, and easy-to-manage online presence.</p>
+                    </div>
+                    <img src="https://picsum.photos/70/70/?random=1">
+                </div>
+                <div class="benefits-item items-iconleft">
+                    <div class="txt">
+                        <h4 class="title">SHARE</h4>
+                        <p>Share stories and create an impactful online presence.</p>
+                    </div>
+                    <img src="https://picsum.photos/70/70/?random=1">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- #endregion -->
+
+    <!-- #region Our Latest Projects -->
+    <section class="section-main ourlatestprojects">
+        <h3 class="section-title">Our Latest <span class="font-goldcolor">Projects</span></h3>
+        <ul class="list">
+            <li class="list-item"><a href="javascript:;">ALL</a></li>
+            <li class="list-item"><a href="javascript:;">ADVANCED ANALYTICS</a></li>
+            <li class="list-item"><a href="javascript:;">CORPORATE FINANCE</a></li>
+            <li class="list-item"><a href="javascript:;">DIGITAL</a></li>
+            <li class="list-item"><a href="javascript:;">ORGANIZATION</a></li>
+            <li class="list-item"><a href="javascript:;">PRIVATE EQUITY</a></li>
+            <li class="list-item"><a href="javascript:;">STRATEGY</a></li>
+            <li class="list-item"><a href="javascript:;">STRATEGY & MARKETING</a></li>
+        </ul>
+    </section>
+    <!-- #endregion -->
+
+    <!-- #region Clients Testimonials -->
+    <section class="section-main clientstestimonials">
+        <h3 class="section-title">Clients <span class="font-goldcolor">Testimonials</span></h3>
+    </section>
+    <!-- #endregion -->
+
+    <!-- #region Our Offices -->
+    <section class="section-main ouroffices">
+        <div class="location">
+            <h3 class="section-title">Our111111 <sapn class="font-goldcolor">Offices</sapn>
+            </h3>
+            <div>
+                <h4>HEAD OFFICE#1</h4>
+                <p>
+                    4096 N Highland St, Arlington
+                    <br>
+                    VA 32101, USA
+                </p>
+                <a class="link" href="mailto:javascript:;">imperion@company.com</a>
+                <a class="link" href="tel:javascript:;">800 1234 56 78</a>
+            </div>
+            <div>
+                <h4>BUSINESS HOURS</h4>
+                <p>
+                    Mon-Thu: 9:30 - 21:00<br>
+                    Fri: 6:00 - 21:00<br>
+                    Sat: 10:00 - 15:00<br>
+                </p>
+            </div>
+            <div>
+                <h4>HEAD OFFICE#2</h4>
+                <p>
+                    4096 N Highland St, Arlington
+                    <br>
+                    VA 32101, USA
+                </p>
+                <a class="link" href="mailto:javascript:;">imperion@company.com</a>
+                <a class="link" href="tel:javascript:;">800 1234 56 78</a>
+            </div>
+            <div>
+                <h4>BUSINESS HOURS</h4>
+                <p>
+                    Mon-Thu: 9:30 - 21:00<br>
+                    Fri: 6:00 - 21:00<br>
+                    Sat: 10:00 - 15:00<br>
+                </p>
+            </div>
+        </div>
+        <div class="leader">
+            <div class=leader-item>
+                <div class="leader-item-pic">
+                    <img src="image/CEO.jpeg" alt="CEO, OWNER">
+                </div>
+                <div class="leader-item-description">
+                    <h4>CEO, OWNER</h4>
+                    <h5>Sarah Johnson</h5>
+                    <a href="">+ 800 123 45 70</a>
+                    <a href="">info@imperion.com</a>
+                    <a href="">sarah.johnson</a>
+
+                </div>
+            </div>
+            <div class=leader-item>
+                <div class="leader-item-pic">
+                    <img src="image/Marketing.jpeg" alt="MARKETING DEPARTMEN">
+                </div>
+                <div class="leader-item-description">
+                    <h4>MARKETING DEPARTMEN</h4>
+                    <h5>Irene Doe</h5>
+                    <a href="">+ 800 123 45 85</a>
+                    <a href="">info@imperion.com</a>
+                    <a href="">irene.doe</a>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- #endregion -->
+    <section class="section-main stayalwaysintouch">
+        <h3 class="section-title ">Stay Always In Touch</h3>
+        <form class="input-form" action="">
+            <input class="form-email" type="email" placeholder="Your E-mail">
+            <input class="form-submit" type="submit" value="Subscribe">
+        </form>
+    </section>
+</body>
+
+</html>
