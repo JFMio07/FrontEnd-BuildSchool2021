@@ -1,0 +1,267 @@
+header{
+    width: 100%;
+    background-image:url("image/header-1.jpeg");
+    background-repeat:no-repeat;
+    background-size: cover;      
+    text-align: center;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+header .header-menu{
+    padding: 35px 0;
+    height: 70px;
+    background: rgba(43, 44, 50, 0.3);
+}
+
+.hidetitle{
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+}
+.header-present{
+    display: flex;
+    justify-content: center;
+}
+
+.header-present img{
+    vertical-align: middle;;
+}
+
+.header-present > .card{
+    width: 20%;
+    padding: 20px;
+}
+
+.header-subtitle{
+    padding: 50px 0;
+    font-size: 50px;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+
+.section-main {
+    width: 100%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 40px;
+    color: #42474c;
+}
+
+.section-title span {
+    /* color: #c2b697; */
+}
+
+.list {
+    display: flex;
+    justify-content: center;
+}
+
+/* businessplan */
+
+section.businessplan{
+    display: flex;
+    padding: 25px;
+    justify-content: center;
+}
+.businessplan .section-title {            
+    padding: 0 25px;
+    width: 20%;
+}
+.businessplan p{
+    padding: 0 25px;
+    width: 42%;
+    column-count: 2;
+    column-gap: 20px;
+    border-left: 1px solid black;            
+}
+.businessplan p:first-letter{
+    color: #C2B697;
+    float: left;
+    font-size: 50px;
+}
+
+
+/* #endregion */
+/*#region Unleash Your Team’s Productive Power */
+
+
+
+/*#endregion */
+
+/*#region Why Traders Choose US */
+
+section.whytraderschooseus {
+    background-color: #f7f7f7;
+    padding: 65px 0 65px 0;
+}
+
+.whytraderschooseus>p {
+    max-width: 50%;
+    text-align: center;
+    font-size: 18px;
+    margin: auto;
+    line-height: 30px;
+}
+
+.whytraderschooseus .benefits {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0 0 0;
+
+}
+
+.whytraderschooseus .benefits-list {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+
+.benefits>.benefits-logo {
+    padding: 0 20px 0 20px;
+}
+
+.benefits-item {
+    display: flex;
+    margin: 20px 0;
+    padding: 20px 0;
+}
+
+.benefits-item>.txt {
+    max-width: 280px;
+    line-height: 20px;
+}
+
+.benefits-item>img {
+    border-radius: 50%;
+    margin: 0 10px;
+}
+
+/* benefits-item items-iconright */
+.benefits-item.items-iconright {
+    text-align: right;
+
+}
+
+.benefits-item.items-iconleft {
+    flex-direction: row-reverse;
+    text-align: left;
+}
+
+/* #endregion */
+
+/* #region results */
+/* #endregion */
+
+/*#region Our Latest Projects*/
+
+section.ourlatestprojects {
+    background-color: #f7f7f7;
+    padding: 65px 0 150px 0;
+}
+
+.ourlatestprojects .list {
+    margin: 30px;
+}
+
+.ourlatestprojects .list-item {
+    padding: 5px 20px;
+}
+
+.ourlatestprojects .list a {
+    color: #899296;
+    font-size: 14px;
+}
+
+.ourlatestprojects .list a:hover {
+    color: #c1b797;
+}
+
+/* Clients Testimonials */
+section.clientstestimonials {
+    padding: 70px 0;
+    margin: 0 0 50px 0
+}
+
+/* #endregion */
+
+/*#region Our Offices */
+section.ouroffices {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+.ouroffices .location {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+}
+
+.ouroffices .leader-item {
+    display: flex;
+    align-items: center;
+}
+
+.leader-item img {
+    vertical-align: middle;
+}
+
+/* #endregion */
+
+/* #region Stay Always In Touch */
+section.stayalwaysintouch {
+    background-color: #c2b697;
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.stayalwaysintouch .section-title {
+    color: #fff;
+}
+
+.stayalwaysintouch .input-form {
+    /* padding: 30px; */
+    width: 33%;
+    display: flex;
+    align-items: center;
+}
+
+.stayalwaysintouch .form-email {
+    width: 70%;
+
+}
+
+.input-form .form-submit {
+    background-color: #fff;
+    border: none;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.input-form .form-submit:hover {
+    /* background-color: #c1b797; */
+    opacity: .7;
+}
+
+/* #endregion */
+
+/*#region Common */
+.font-goldcolor {
+    color: #c2b697;
+}
+
+/* .bgc-goldcolor {
+
+    background-color: #c2b697;
+} */
+/* #endregion */

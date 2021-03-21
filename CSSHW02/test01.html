@@ -6,214 +6,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Reset.css">
+    <link rel="stylesheet" href="style.css">
     <title>CSSHW02</title>
-    <style>
-        a {
-            text-decoration: none;
-        }
-
-        .section-main {
-            width: 100%;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 40px;
-            color: #42474c;
-        }
-
-        .section-title span {
-            /* color: #c2b697; */
-        }
-
-        .list {
-            display: flex;
-            justify-content: center;
-        }
-
-        /*#region Unleash Your Team’s Productive Power */
-
-        .stayalwaysintouch {}
-
-        /*#endregion */
-
-        /*#region Why Traders Choose US */
-
-        section.whytraderschooseus {
-            background-color: #f7f7f7;
-            padding: 65px 0 65px 0;
-        }
-
-        .whytraderschooseus>p {
-            max-width: 50%;
-            text-align: center;
-            font-size: 18px;
-            margin: auto;
-            line-height: 30px;
-        }
-
-        .whytraderschooseus .benefits {
-            display: flex;
-            justify-content: center;
-            margin: 50px 0 0 0;
-
-        }
-
-        .whytraderschooseus .benefits-list {
-            display: flex;
-            flex-flow: column wrap;
-            justify-content: center;
-        }
-
-        .benefits>.benefits-logo {
-            padding: 0 20px 0 20px;
-        }
-
-        .benefits-item {
-            display: flex;
-            margin: 20px 0;
-            padding: 20px 0;
-        }
-
-        .benefits-item>.txt {
-            max-width: 280px;
-            line-height: 20px;
-        }
-
-        .benefits-item>img {
-            border-radius: 50%;
-            margin: 0 10px;
-        }
-
-        /* benefits-item items-iconright */
-        .benefits-item.items-iconright {
-            text-align: right;
-
-        }
-
-        .benefits-item.items-iconleft {
-            flex-direction: row-reverse;
-            text-align: left;
-        }
-
-        /* #endregion */
-
-        /*#region Our Latest Projects*/
-
-        section.ourlatestprojects {
-            background-color: #f7f7f7;
-            padding: 65px 0 150px 0;
-        }
-
-        .ourlatestprojects .list {
-            margin: 30px;
-        }
-
-        .ourlatestprojects .list-item {
-            padding: 5px 20px;
-        }
-
-        .ourlatestprojects .list a {
-            color: #899296;
-            font-size: 14px;
-        }
-
-        .ourlatestprojects .list a:hover {
-            color: #c1b797;
-        }
-
-        /* Clients Testimonials */
-        section.clientstestimonials {
-            padding: 70px 0;
-            margin: 0 0 50px 0
-        }
-
-        /* #endregion */
-
-        /*#region Our Offices */
-        section.ouroffices {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: center;
-        }
-
-        .ouroffices .location {
-            display: flex;
-            flex-wrap: wrap;
-            width: 50%;
-        }
-
-        .ouroffices .leader-item {
-            display: flex;
-            align-items: center;
-        }
-
-        .leader-item img {
-            vertical-align: middle;
-        }
-
-        /* #endregion */
-
-        /* #region Stay Always In Touch */
-        section.stayalwaysintouch {
-            background-color: #c2b697;
-            padding: 50px 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .stayalwaysintouch .section-title {
-            color: #fff;
-        }
-
-        .stayalwaysintouch .input-form {
-            /* padding: 30px; */
-            width: 33%;
-            display: flex;
-            align-items: center;
-        }
-
-        .stayalwaysintouch .form-email {
-            width: 70%;
-
-        }
-
-        .input-form .form-submit {
-            background-color: #fff;
-            border: none;
-            border-top-right-radius: 3px;
-            border-bottom-right-radius: 3px;
-        }
-
-        .input-form .form-submit:hover {
-            /* background-color: #c1b797; */
-            opacity: .7;
-        }
-
-        /* #endregion */
-
-        /*#region Common */
-        .font-goldcolor {
-            color: #c2b697;
-        }
-
-        /* .bgc-goldcolor {
-
-            background-color: #c2b697;
-        } */
-        /* #endregion */
-    </style>
 </head>
 
 <body>
     <!-- header -->
     <header>
-        <h1>Imperion</h1>
+        <div class="header-menu">
+            <h1>
+                <span class="hidetitle">Imperion</span>
+                <img src="/image/logo.png" alt="Imperion-logo" title="Imperion">
+            </h1>
+            <nav>
+                <!-- <h3>navigate</h3> -->
+                <a href="">HOME</a>
+                <a href="">PAGES</a>
+                <a href="">FEATURES</a>
+                <a href="">NEWS</a>
+                <a href="">Shop</a>
+            </nav>
+        </div>
+        <h2 class="header-subtitle">The Power
+            <span>
+                OF IMAGINATION MAKES US INFINITE
+            </span>
+        </h2>
+        <div class="header-present">
+            <div class="card">
+                <h3>
+                    <img src="https://picsum.photos/50/50/?random=1">
+                    DEVELOPMENT
+                </h3>
+                <p>We work alongside national and international organizations.</p>
+            </div>
+            <div class="card">
+                <h3>
+                    <img src="https://picsum.photos/50/50/?random=1">
+                    INTEGRATION
+                </h3>
+                <p>Committed to conducting its business according to the highest...</p>
+            </div>
+            <div class="card">
+                <h3>
+                    <img src="https://picsum.photos/50/50/?random=1">
+                    RESPONSIBILITY
+                </h3>
+                <p>Responsible customer relations through clear communication...</p>
+            </div>
+        </div>
     </header>
+    <!-- #region Looking for a First-Class Business Plan  -->
+    <section class ="sectuib-main businessplan">
+        <h3 class="section-title">Looking for a First-Class Business Plan</h3>
+        <p>We’re a financial and consulting business company of professional thinkers, strategists, digital innovators, designers and problem solvers (everyone gets a mention). Our sense of curiosity brings thinkers, strategists, digital innovators, designers and problem solvers (everyone gets a mention). Our sense of curiosity brings brands to life, gets them talking, and makes sure they’re heard above.</p>
+
+    </section>
+    <!-- #endregion -->
+
+    
     <!--#region Unleash Your Team’s Productive Power -->
     <section class="section-main stayalwaysintouch">
         <div class="txt">
-            <h3 class="section-title ">Unleash Your Team’s Productive Power</h3>
+            <h3 class="section-title">Unleash Your Team’s Productive Power</h3>
             <p>The truly scarce resources now are the time, the talent, and the energy of the people.</p>
         </div>
         <form class="input-form" action="">
@@ -279,6 +134,10 @@
             </div>
         </div>
     </section>
+    <!-- #endregion -->
+
+    <!-- #region result -->
+
     <!-- #endregion -->
 
     <!-- #region Our Latest Projects -->
