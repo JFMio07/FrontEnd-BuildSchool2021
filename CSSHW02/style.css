@@ -5,7 +5,7 @@ header {
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
-  height: 700px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -271,8 +271,9 @@ section.ouroffices {
 .location .location-detail {
   display: flex;
   flex-wrap: wrap;
-  padding: 0px 350px 0 50px;
+  padding: 0px 0px 0 50px;
   justify-content: center;
+  width: 100%;
 }
 
 .location-detail> .item{
