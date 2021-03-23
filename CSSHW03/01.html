@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Reset.css">
+    <title>Document</title>
+
+    <style>
+        * {
+            list-style: none;
+        }
+
+        .advantage {
+            width: 1200px;
+            background-color: #ccc;
+            margin: 10px auto;
+        }
+
+        .list {
+            width: 1000px;
+            background-color: pink;
+            padding: 5px;
+            margin: auto;
+
+        }
+
+        .item {
+            background-color: #af0;
+            width: 100%;
+            height: 800px;
+            margin: 5px auto;
+        }
+
+        .advantage .item-info {
+            width: 320px;
+            max-height: 400px;
+            overflow: auto;
+            color: #fff;
+        }
+
+
+        /* item-info >> h3 */
+        .item-info>:first-child {
+            background-color: #b90e0e;
+            font-size: 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* item-info >> h3 >> span */
+        .item-info>:first-child>span {
+            display: inline-block;
+            transform: rotate(90deg);
+            font-size: 100px;
+        }
+
+
+        /* list >> odd of item >> item-info >> info-title */
+        .list>:nth-child(odd)>.item-info>.info-title {
+            flex-direction: row;
+        }
+
+        /* list >> odd of item >> item-info >> info-title >> span  */
+
+        .list>:nth-child(odd)>.item-info>.info-title>:first-child {
+            margin-left: -16px;
+        }
+
+
+        /* list >> even of item >> item-info >> info-title */
+        .list>:nth-child(even)>.item-info>.info-title {
+            flex-direction: row-reverse;
+        }
+
+        /* list >> even of item >> item-info >> info-title >> span  */
+        .list>:nth-child(even)>.item-info>.info-title>:first-child {
+            margin-right: -15px;
+        }
+
+
+        /* .list>:nth-child(even) {
+            background-color: blue;
+        } */
+
+        /* .item-info>:first-child{
+            background-color: #b90e0e;
+            font-size: 50px;
+        }
+
+        .item-info>:first-child>:first-child{
+
+        } */
+    </style>
+</head>
+
+<body>
+    <section class="advantage">
+        <ul class="list">
+            <li class="item">
+                <div class="item-info">
+                    <h3 class="info-title"><span>01</span>操控樂趣</h3>
+                    <div class="info-decsription">
+                        <h4>人人滿意的駕駛體驗</h4>
+                        <p>透過最佳重量分配，實現平順起步、直線穩定加速，過彎同時保持車身平穩，帶給駕駛更靈敏的道路反饋，享受隨心馳騁的行駛快感。</p>
+                    </div>
+                </div>
+                <div class="item-video">
+                    <a href=""></a>
+                </div>
+                <div class="item-innovation">
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="item">
+                <div class="item-info">
+                    <h3 class="info-title"><span>02</span>操控樂趣</h3>
+                    <div class="info-decsription">
+                        <h4>人人滿意的駕駛體驗</h4>
+                        <p>透過最佳重量分配，實現平順起步、直線穩定加速，過彎同時保持車身平穩，帶給駕駛更靈敏的道路反饋，享受隨心馳騁的行駛快感。</p>
+                    </div>
+                </div>
+                <div class="item-video">
+                    <a href=""></a>
+                </div>
+                <div class="item-innovation">
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </section>
+</body>
+
+</html>
