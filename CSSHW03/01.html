@@ -31,7 +31,7 @@
             background-color: #af0;
             width: 100%;
             height: 800px;
-            margin: 5px auto;
+            margin: 30px auto;
         }
 
         /* #region item-info */
@@ -40,6 +40,7 @@
             width: 320px;
             max-height: 400px;
             color: #fff;
+            position: relative;
         }
 
         .info-title {
@@ -91,11 +92,22 @@
         /* #endregion */
 
 
+        /* #region grayblock */
+
+        .grayblock {
+            display: inline-block;
+        }
+
+        /* #endregion */
+
 
 
 
 
         /* ------------ odd of item ------------------*/
+        .list>:nth-child(odd)>.item-info {}
+
+
         /* list >> odd of item >> item-info >> info-title */
         .list>:nth-child(odd)>.item-info>.info-title {
             flex-direction: row;
@@ -107,7 +119,17 @@
             margin-left: -16px;
         }
 
+        /* list >> odd of item >> item-info >> info-title */
+        .list>:nth-child(odd)>.grayblock {}
+
+
+
         /* ------------ even of item ------------------*/
+        .list>:nth-child(even)>.item-info {
+            top: 0;
+            left: calc(100% - 320px);
+        }
+
         /* list >> even of item >> item-info >> info-title */
         .list>:nth-child(even)>.item-info>.info-title {
             flex-direction: row-reverse;
@@ -125,9 +147,6 @@
         <ul class="list">
             <li class="item">
                 <!-- #region item-info -->
-                <!-- #region gray-block -->
-
-                <!-- #endregion -->
                 <div class="item-info">
                     <h3 class="info-title"><span>01</span>操控樂趣</h3>
                     <div class="info-description">
@@ -136,8 +155,12 @@
                     </div>
                 </div>
                 <!-- #endregion -->
+                <!-- #region grayblock -->
+                <div class="grayblock">
+                </div>
+                <!-- #endregion -->
                 <a class="item-video" href="javascript:;">
-                    <img src="image/advantage-1.png" alt="advantage-1">
+                    <!-- <img src="image/advantage-1.png" alt="advantage-1"> -->
                 </a>
                 <div class="item-innovation">
                     <ul>
