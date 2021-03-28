@@ -69,7 +69,7 @@
             container.innerHTML = "";
             let pokemons = "";
             // debugger;
-            for (let i = 1; i < 898; i++) {
+            for (let i = 1; i <= 898; i++) {
                 let fileName = i.toString().padStart(3, '0');
                 let pathFile = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`;
                 let pokemonImg = `<img src='${pathFile}'/>`;
