@@ -49,6 +49,18 @@
             border: none;
         }
 
+        .title-bgimg{
+            background-image: url("images/bg-subtitle.webp");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        .title{
+            color: #fff;
+            background-color: rgba(11, 80, 120, 0.9);
+            /* padding: 10px; */
+        }
+
         /* .core-concept>div:nth-child(2) p {
             column-count: 2;
         } */
@@ -56,8 +68,8 @@
 
         @media screen and (min-width:992px) {
             .core-concept>div:nth-child(2) p {
-            column-count: 2;
-        }
+                column-count: 0;
+            }
         }
     </style>
 </head>
@@ -160,67 +172,106 @@
     </header>
     <main>
         <section class="feature-core container">
-            <div class="core-concept row">
-                <div class="col-12 col-lg-4">
-                    <h2 class="fs-3">/*我們的理念*/</h2>
-                    <p>
-                        Build = 將程式碼編譯及建置成可執行的軟體
-                        Build = 動手做
-                        Build = 軟體開發職涯的打造者
-                    </p>
-                </div>
-                <div class="col-12 col-lg-8">
-                    <h3 class="fs-5 fw-bold" >實作及就業導向的軟體開發學校</h3>
-                    <p class="text">
-                        因應數位新時代的來臨，軟體、App、IoT
-                        、SaaS、雲端平台的應用需求大爆炸，軟體工程師的招募需求持續上升，以2016年5月求職平台的統計資料，從高科技、電商、金融、傳產、網路服務、軟體資訊、新創等各行業，台灣至少有
-                        27,000 位軟體開發工程師的職缺，甚至日本、新加坡等軟體及App 外商也來台灣求才。
-                        為了彌補企業求才所需技能及實務教學上的落差，我們希望能幫助想搭上軟體開發及數位經濟這艘火箭的學員們，打造更有競爭力的職涯!
-                    </p>
-                </div>
+            <div class="core-concept my-5 row justify-content-evenly align-center"">
+                <div class=" col-12 col-lg-6 py-2 d-flex flex-column align-center">
+                <h2 class="fs-3 fw-bold text-center">/*我們的理念*/</h2>
+                <p class="d-flex flex-column m-auto">
+                    <span class="d-block fw-bold">Build = 將程式碼編譯及建置成<span
+                            class="text-decoration-underline">可執行的軟體</span></span>
+                    <span class="d-block fw-bold">Build = <span class="text-decoration-underline">動手做</span></span>
+                    <span class="d-block fw-bold">Build = 軟體開發<span
+                            class="text-decoration-underline">職涯的打造者</span></span>
+                </p>
             </div>
-            <div class="core-learning row">
-                <div class="col-12 col-lg-4">
-                    <img src="images/core-learning.webp" alt="">
-                    <h2 class="fs-3">動手實作才是真學習</h2>
+            <div class="col-12 col-lg-6 py-2 d-flex flex-column justify-content-center">
+                <h3 class="fs-5 fw-bold text-center">實作及就業導向的軟體開發學校</h3>
+                <p class="text text-center">
+                    因應數位新時代的來臨，軟體、App、IoT
+                    、SaaS、雲端平台的應用需求大爆炸，軟體工程師的招募需求持續上升，以2016年5月求職平台的統計資料，從高科技、電商、金融、傳產、網路服務、軟體資訊、新創等各行業，台灣至少有
+                    27,000 位軟體開發工程師的職缺，甚至日本、新加坡等軟體及App 外商也來台灣求才。
+                    為了彌補企業求才所需技能及實務教學上的落差，我們希望能幫助想搭上軟體開發及數位經濟這艘火箭的學員們，打造更有競爭力的職涯!
+                </p>
+            </div>
+            </div>
+            <div class="core-learning my-5 row flex-row-reverse justify-content-evenly align-center">
+                <div class="col-12 col-lg-6 py-2 d-flex  flex-column align-center">
+                    <div class="pic m-auto">
+                        <img class="img-fluid" src="images/core-learning.webp" alt="core-learning">
+                    </div>
+                    <h2 class="fs-3 fw-bold text-center">動手實作才是真學習</h2>
                 </div>
-                <div class="col-12 col-lg-8">
-                    <h3 class="fs-4 fw-bold">
+                <div class="col-12 col-lg-6 py-2 d-flex flex-column justify-content-center">
+                    <h3 class="fs-4 fw-bold text-center">
                         打造專案作品的學習方式
-                        <span>(Project-based Learning)</span>
+                        <span class="d-block fs-5">(Project-based Learning)</span>
                     </h3>
-                    <p class="text">
-                        透過身經百戰的實務講師、各大企業的資深軟體工程師或CTO，帶領學員實作一個真正能運作的產品開發，解決真實世界的問題，透過專題過程中的實作，培養解決問題的能力，這裏不只是程式教學或教育訓練，學的不只是技能，而是 Learn how to learn，以因應變化多端的軟體開發技能，及自主尋找解答的能力。
+                    <p class="text text-center">
+                        透過身經百戰的實務講師、各大企業的資深軟體工程師或CTO，帶領學員實作一個真正能運作的產品開發，解決真實世界的問題，透過專題過程中的實作，培養解決問題的能力，這裏不只是程式教學或教育訓練，學的不只是技能，而是
+                        Learn how to learn，以因應變化多端的軟體開發技能，及自主尋找解答的能力。
                     </p>
                 </div>
             </div>
-            <div class="core-Readiness row">
-                <div class="col-12 col-lg-4">
-                    <h2 class="fs-3">就業銜接</h2>
+            <div class="core-readiness my-5 row justify-content-evenly align-center">
+                <div class="col-12 col-lg-6 py-2 d-flex  flex-column align-center">
+                    <div class="pic m-auto">
+                        <img class="img-fluid" src="images/core-readiness.webp" alt="core-learning">
+                    </div>
+                    <h2 class="fs-3 fw-bold text-center">就業銜接</h2>
                 </div>
-                <div class="col-12 col-lg-8">
-                    <h3 class="fs-4 fw-bold">
+                <div class="col-12 col-lg-6 py-2 d-flex flex-column justify-content-center">
+                    <h3 class="fs-4 fw-bold text-center">
                         真正企業職場所需技能
-                        <span>(Career Readiness)</span>
+                        <span class="d-block fs-5">(Career Readiness)</span>
                     </h3>
-                    <p class="text">
-                        除了透過打造專題作品過程，學到了技術及硬技能外，不同於一般的軟體培訓，我們更加入了簡報技巧、履歷及面試準備、以及真正軟體開發的團隊溝通及運作，這些軟實力 (Soft-Skill) 的培養，讓學員能提早做好準備，在職場上成為一位專業的軟體工程師!
+                    <p class="text text-center">
+                        除了透過打造專題作品過程，學到了技術及硬技能外，不同於一般的軟體培訓，我們更加入了簡報技巧、履歷及面試準備、以及真正軟體開發的團隊溝通及運作，這些軟實力
+                        (Soft-Skill)的培養，讓學員能提早做好準備，在職場上成為一位專業的軟體工程師!
                     </p>
                 </div>
             </div>
-            <div class="core-Network row">
-                <div class="col-12 col-lg-4">
-                    <h2 class="fs-3">連結及影響力</h2>
+            <div class="core-Network my-5 row flex-row-reverse justify-content-evenly align-center">
+                <div class="col-12 col-lg-6 py-2 d-flex  flex-column align-center">
+                    <div class="pic m-auto">
+                        <img class="img-fluid" src="images/core-network.webp" alt="core-learning">
+                    </div>
+                    <h2 class="fs-3 fw-bold text-center">連結及影響力</h2>
                 </div>
-                <div class="col-12 col-lg-8">
-                    <h3 class="fs-4 fw-bold">
+                <div class="col-12 col-lg-6 py-2 d-flex flex-column justify-content-center">
+                    <h3 class="fs-4 fw-bold text-center">
                         企業導師的連結
-                        <span>(Mentor Network)</span>
+                        <span class="d-block fs-5">(Mentor Network)</span>
                     </h3>
-                    <p class="text">
+                    <p class="text text-center">
                         每一位在軟體開發上有實務經驗的企業導師，他們是各大企業的主管、資深軟體工程師或 CTO，其人際連結及資源將帶給同學更多更好的就業機會，你將比別人站得更高，看得更遠!
                     </p>
                 </div>
+            </div>
+        </section>
+
+        <section class="feature-training">
+            <div class="title-bgimg">
+                <h2 class="fs-4 title m-0 p-5 text-center">
+                    18 - 24週的實作及作品開發 - 從訓練、就業、到企業連結 
+                </h2>
+            </div>
+            <div class="container">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque saepe placeat, illum possimus perspiciatis quis ut, cum sint magni, quae quibusdam molestiae. Tenetur veniam excepturi voluptas harum voluptatem sit aliquam ratione ex qui quam labore debitis ut, dolorem, voluptatum iure itaque maxime, explicabo voluptate. Illum nemo hic atque sunt, sequi esse pariatur provident culpa corrupti magnam accusantium blanditiis assumenda, vitae ipsum reprehenderit placeat iure. Rerum animi, magnam est laborum earum perspiciatis! Dolor odio esse labore commodi dignissimos consequatur, at voluptates nemo itaque sed repudiandae saepe provident maxime consectetur exercitationem debitis aut? Quisquam consequuntur doloremque quo repellendus eius placeat accusantium amet?
+            </div>
+
+        </section>
+
+        <section>
+            <div class="title-bgimg">
+                <h2 class="fs-4 title m-0 p-5 text-center">
+                    在課程及作品實作中，將採用這些工具 - 熟悉實務上軟體開發團隊的運作、分工及真實專案的流程 
+                </h2>
+            </div>
+        </section>
+        <section>
+            <div class="title-bgimg">
+                <h2 class="fs-4 title m-0 p-5 text-center">
+                    我們的講師及企業導師擁有在這些公司的工作經歷、擔任主管或資深工程師 
+                </h2>
             </div>
         </section>
 
