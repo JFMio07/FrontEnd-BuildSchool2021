@@ -126,17 +126,18 @@ footer .copyright {
     display: block;
   }
 
-  .carousel-caption {
+  #BScarousel .carousel-caption {
     top: 20%;
-    bottom: 5%;
+    bottom: 6%;
     z-index: 2;
     /* margin: auto; */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    padding: 1rem 0;
   }
 
-  .carousel-indicators [data-bs-target] {
+  #BScarousel .carousel-indicators [data-bs-target] {
     height: 0.375rem;
     width: 0.375rem;
     border-radius: 50%;
