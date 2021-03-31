@@ -42,35 +42,45 @@
         }
 
         .carousel-indicators [data-bs-target] {
-            height: 6px;
-            width: 6px;
+            height: .375rem;
+            width: .375rem;
             border-radius: 50%;
-            margin: 0 6px;
+            margin: 0 .375rem;
             border: none;
         }
 
-        .title-bgimg{
+        .title-bgimg {
             background-image: url("images/bg-subtitle.webp");
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
         }
-        .title-banner{
+
+        .title-banner {
             color: #fff;
             background-color: rgba(11, 80, 120, 0.9);
-            /* padding: 10px; */
         }
 
+        ul.card-text {
+            list-style: outside;
+        }
+
+        .feature-teacher .row img {
+            max-width: 100%;
+            vertical-align: middle;
+        }
+
+        .feature-training
         /* .core-concept>div:nth-child(2) p {
             column-count: 2;
         } */
 
 
-        @media screen and (min-width:992px) {
+        /* @media screen and (min-width:992px) {
             .core-concept>div:nth-child(2) p {
                 column-count: 0;
             }
-        }
+        } */
     </style>
 </head>
 
@@ -196,7 +206,7 @@
             <div class="core-learning my-5 row flex-row-reverse justify-content-evenly align-center">
                 <div class="col-12 col-lg-6 py-2 d-flex  flex-column align-center">
                     <div class="pic m-auto">
-                        <img class="img-fluid" src="images/core-learning.webp" alt="core-learning">
+                        <img class="w-100" src="images/core-learning.webp" alt="core-learning">
                     </div>
                     <h2 class="fs-3 fw-bold text-center">動手實作才是真學習</h2>
                 </div>
@@ -214,7 +224,7 @@
             <div class="core-readiness my-5 row justify-content-evenly align-center">
                 <div class="col-12 col-lg-6 py-2 d-flex  flex-column align-center">
                     <div class="pic m-auto">
-                        <img class="img-fluid" src="images/core-readiness.webp" alt="core-learning">
+                        <img class="w-100" src="images/core-readiness.webp" alt="core-learning">
                     </div>
                     <h2 class="fs-3 fw-bold text-center">就業銜接</h2>
                 </div>
@@ -232,7 +242,7 @@
             <div class="core-Network my-5 row flex-row-reverse justify-content-evenly align-center">
                 <div class="col-12 col-lg-6 py-2 d-flex  flex-column align-center">
                     <div class="pic m-auto">
-                        <img class="img-fluid" src="images/core-network.webp" alt="core-learning">
+                        <img class="w-100" src="images/core-network.webp" alt="core-learning">
                     </div>
                     <h2 class="fs-3 fw-bold text-center">連結及影響力</h2>
                 </div>
@@ -251,63 +261,193 @@
         <section class="feature-training">
             <div class="title-bgimg">
                 <h2 class="fs-4 title-banner m-0 p-5 text-center">
-                    18 - 24週的實作及作品開發 - 從訓練、就業、到企業連結 
+                    18 - 24週的實作及作品開發 - 從訓練、就業、到企業連結
                 </h2>
             </div>
-            <div class="container">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque saepe placeat, illum possimus perspiciatis quis ut, cum sint magni, quae quibusdam molestiae. Tenetur veniam excepturi voluptas harum voluptatem sit aliquam ratione ex qui quam labore debitis ut, dolorem, voluptatum iure itaque maxime, explicabo voluptate. Illum nemo hic atque sunt, sequi esse pariatur provident culpa corrupti magnam accusantium blanditiis assumenda, vitae ipsum reprehenderit placeat iure. Rerum animi, magnam est laborum earum perspiciatis! Dolor odio esse labore commodi dignissimos consequatur, at voluptates nemo itaque sed repudiandae saepe provident maxime consectetur exercitationem debitis aut? Quisquam consequuntur doloremque quo repellendus eius placeat accusantium amet?
-            </div>
-
-        </section>
-
-        <section>
-            <div class="title-bgimg">
-                <h2 class="fs-4 title-banner m-0 p-5 text-center">
-                    在課程及作品實作中，將採用這些工具 - 熟悉實務上軟體開發團隊的運作、分工及真實專案的流程 
-                </h2>
-            </div>
-        </section>
-        <section>
-            <div class="title-bgimg">
-                <h2 class="fs-4 title-banner m-0 p-5 text-center">
-                    我們的講師及企業導師擁有在這些公司的工作經歷、擔任主管或資深工程師 
-                </h2>
-            </div>
-        </section>
-
-        <!-- <section class="feature-tools container-fluid">
-            <h2 class="row">
-                <div class="col-12">
-                    在課程及作品實作中，將採用這些工具 - 熟悉實務上軟體開發團隊的運作、分工及真實專案的流程
-                </div>
-            </h2>
-            <div class="row">
-                <div class="col-12 col-lg-3">
-                    <div class="card">
-                        <img src="images/logo-git-1.webp" class="card-img-top" alt="logo-git-1">
-                        <div class="card-body">
-                            <h5 class="card-title">版本控管及程式碼管理</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div class="container py-3">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card border-0">
+                            <h3 class="text-center fw-bold fs-5">第 1 - 4 個月</h3>
+                            <div class="icon w-50 m-auto">
+                                <svg preserveAspectRatio="xMidYMid meet" data-bbox="0 19.2 200 161.6"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="-1.0638297872340416 -1.0638297872340452 202.12765957446808 202.12765957446808"
+                                    role="img">
+                                    <g>
+                                        <path
+                                            d="M190.1 80.8h-5.5V31.4c0-7.4-4.9-12.2-12.5-12.2H14.8C7.6 19.2 0 23.5 0 31.4v103.4c0 7.6 7.3 15.1 14.8 15.1h56.9L66.8 173h-5.3c-2.1 0-3.8 1.7-3.8 3.8s1.7 3.8 3.8 3.8h61.6c2.1 0 3.8-1.7 3.8-3.8s-1.7-3.8-3.8-3.8H119l-5-23h32.1v20.9c0 5.4 4.4 9.9 9.9 9.9h34.1c5.4 0 9.9-4.4 9.9-9.9V90.6c0-5.4-4.4-9.8-9.9-9.8zm-36.3 23h38.5v53.8h-38.5v-53.8zm36.3-15.3c1.2 0 2.2 1 2.2 2.2v5.5h-38.5v-5.5c0-1.2 1-2.2 2.2-2.2h34.1zM156 80.8c-5.4 0-9.9 4.4-9.9 9.9v28.6H7.7v-77h169.2v38.5H156zM7.7 31.4c0-3.3 4.4-4.5 7.1-4.5h157.3c4.2 0 4.8 2.2 4.8 4.5v3.2H7.7v-3.2zm103.4 141.7H74.7l4.9-23.1h26.5l5 23.1zm-1.8-30.8H14.8c-3.2 0-7.1-4.1-7.1-7.5v-7.9h138.5v15.4h-36.9zm83 28.6c0 1.2-1 2.2-2.2 2.2H156c-1.2 0-2.2-1-2.2-2.2v-5.5h38.5v5.5z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="card-body d-flex flex-column align-items-center">
+                                <h4 class="card-title text-danger text-center fs-5">程式基礎教學</h4>
+                                <ul class="card-text">
+                                    <li>
+                                        業界實戰講師
+                                    </li>
+                                    <li>
+                                        企業主管/創業家/CTO 演講
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card border-0">
+                            <h3 class="text-center fw-bold fs-5">第 5 - 6 個月</h3>
+                            <div class="icon w-50 m-auto text-center">
+                                <svg class="w-50" preserveAspectRatio="xMidYMid meet" data-bbox="50 0 100 200"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="50 0 100 200" role="img">
+                                    <g>
+                                        <path d="M97 0h7v33h-7V0z"></path>
+                                        <path d="M75.2 36.9L66.6 22l6.5-3.6 8.5 14.8-6.4 3.7z"></path>
+                                        <path
+                                            d="M106 60.5v7.4c11 0 20.4 8.8 20.4 20.2 0 .1-.1 0-.1 0h7.4c.2-15-12-27.7-27.4-28-.1 0-.3.4-.3.4z">
+                                        </path>
+                                        <path
+                                            d="M100 42.1c-27.6 0-50 22.3-50 49.9 0 8 1.9 15.9 5.6 23 2.5 5.7 5.8 11.2 9.3 16.3C69.3 138 73 143.6 73 150v33c0 2 1.6 2.2 3.7 2.2h7.5c.6 7 7.4 14.8 15.8 14.8s15.2-7.8 15.8-14.8h7.5c2.1 0 3.7 0 3.7-2.2v-33c0-6.4 3.8-12.1 8.2-18.7 3.7-5.3 6.9-10.9 9.4-16.8 3.5-7 5.4-14.7 5.4-22.5 0-27.5-22.4-49.9-50-49.9zm0 150.5c-4.3 0-7.8-4.4-8.3-7.4h16.7c-.6 3-4.1 7.4-8.4 7.4zm20-14.4H81v-10h39v10zm0-12H81v-7h39v7zm0-9H81v-6h39v6zm17.9-47.1h-.9v1.4c-2 5.6-4.9 10.7-8.3 15.7-4.7 7.1-8.4 13-8.7 22H80.7c-.3-9-4.5-14.9-9.1-22-3-4.7-6.5-9.4-8.5-15.2v-.3c-3-6-5.2-12.8-5.2-19.6 0-23.5 18.9-42.5 42.4-42.5s42.4 18.4 42.4 41.9c-.1 6.7-1.8 13.6-4.8 18.6z">
+                                        </path>
+                                        <path d="M125.3 36.9l-6.4-3.7 8.5-14.8 6.4 3.7-8.5 14.8z"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="card-body  d-flex flex-column align-items-center">
+                                <h4 class="card-title text-danger text-center fs-5">專案及作品導向實作</h4>
+                                <ul class="card-text">
+                                    <li>
+                                        Web / App 作品開發 - 企業導師指導
+                                    </li>
+                                    <li>
+                                        不只是 Demo - 真實可運作成果
+                                    </li>
+                                    <li>
+                                        團隊開發 - 真實軟體開發團隊的運作及分工 (Agile敏捷, kanban 看板, CI 自動化建置)
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card border-0">
+                            <h3 class="text-center fw-bold fs-5">第 6 - 7 月</h3>
+                            <div class="icon w-50 m-auto">
+                                <svg preserveAspectRatio="xMidYMid meet" data-bbox="16.6 0 166.7 200.1"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="-1.211666666666666 -1.1116666666666646 202.32333333333332 202.32333333333332"
+                                    role="img">
+                                    <g>
+                                        <path
+                                            d="M179.2 0H20.8c-2.3 0-4.2 1.9-4.2 4.2v191.7c0 2.3 1.9 4.2 4.2 4.2h158.3c2.3 0 4.2-1.9 4.2-4.2V4.2c0-2.3-1.8-4.2-4.1-4.2zM175 191.7H25V8.3h150v183.4zm-45-62c0-.1 0-.1 0 0 .4-2 .6-4.1.6-6.2 0-16.1-13.1-29.2-29.2-29.2s-29.2 13.1-29.2 29.2c0 2.1.2 4.1.7 6.1l-.1.1-25 41.7c-.9 1.5-.8 3.4.3 4.8s2.9 1.9 4.6 1.3l22.6-7.5 14.8 14.8c.8.8 1.9 1.2 2.9 1.2.4 0 .7 0 1.1-.2 1.4-.4 2.6-1.5 2.9-3l4.3-17.2 4.3 17.2c.4 1.5 1.5 2.6 2.9 3 .4.1.7.2 1.1.2 1.1 0 2.2-.4 2.9-1.2l14.8-14.8 22.6 7.5c1.7.5 3.5 0 4.6-1.3 1.1-1.4 1.2-3.3.3-4.8L130 129.7zm-28.6-27.1c11.5 0 20.8 9.3 20.8 20.8s-9.3 20.8-20.8 20.8-20.8-9.3-20.8-20.8c0-11.4 9.4-20.8 20.8-20.8zm-10.6 71.1l-11.5-11.5c-1.1-1.1-2.8-1.5-4.3-1L60.8 166l16.1-26.8c4.3 6.7 11.2 11.5 19.3 13l-5.4 21.5zm37-12.5c-1.5-.5-3.1-.1-4.3 1L112 173.7l-5.4-21.5c8.1-1.5 15-6.3 19.3-13L142 166l-14.2-4.8zm-65.3-132c0-2.3 1.9-4.2 4.2-4.2h66.7c2.3 0 4.2 1.9 4.2 4.2s-1.9 4.2-4.2 4.2H66.7c-2.3-.1-4.2-1.9-4.2-4.2zm4.2 54.1c-2.3 0-4.2-1.9-4.2-4.2s1.9-4.2 4.2-4.2h66.7c2.3 0 4.2 1.9 4.2 4.2s-1.9 4.2-4.2 4.2H66.7zM37.5 54.2c0-2.3 1.9-4.2 4.2-4.2h116.7c2.3 0 4.2 1.9 4.2 4.2s-1.9 4.2-4.2 4.2H41.7c-2.3-.1-4.2-1.9-4.2-4.2z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="card-body  d-flex flex-column align-items-center">
+                                <h4 class="card-title text-danger text-center fs-5">作品發表</h4>
+                                <ul class="card-text">
+                                    <li>
+                                        簡報 Demo 及溝通技巧
+                                    </li>
+                                    <li>
+                                        作品及程式碼講解
+                                    </li>
+                                    <li>
+                                        個人履歷準備 – GitHub, CodePen …
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card border-0">
+                            <h3 class="text-center fw-bold fs-5">未來及展望</h3>
+                            <div class="icon w-50 m-auto">
+                                <img class="w-100" src="images/training-HR.webp" alt="training-HR">
+                            </div>
+                            <div class="card-body  d-flex flex-column align-items-center">
+                                <h4 class="card-title text-danger text-center fs-5">就業及企業導師諮詢</h4>
+                                <ul class="card-text">
+                                    <li>
+                                        就業媒合或未來職涯諮詢
+                                    </li>
+                                    <li>
+                                        企業導師 -人際連結及資源
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-3">
 
+            </div>
+        </section>
+
+        <section class="feature-tools">
+            <div class="title-bgimg">
+                <h2 class="fs-4 title-banner m-0 p-5 text-center">
+                    在課程及作品實作中，將採用這些工具 - 熟悉實務上軟體開發團隊的運作、分工及真實專案的流程
+                </h2>
+            </div>
+        </section>
+        <section class="feature-teacher">
+            <div class="title-bgimg">
+                <h2 class="fs-4 title-banner m-0 p-5 text-center">
+                    我們的講師及企業導師擁有在這些公司的工作經歷、擔任主管或資深工程師
+                </h2>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-3 gy-3 text-center">
+                        <img src="images/logo-microsoft.webp" alt="logo-microsoft">
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 gy-3 text-center">
+                        <img src="images/logo-kingston.webp" alt="logo-kingston">
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 gy-3 text-center">
+                        <img src="images/logo-kerry.webp" alt="logo-kerry">
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 gy-3 text-center">
+                        <img src="images/logo-skilltree.webp" alt="logo-skilltree">
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 gy-3 text-center">
+                        <img src="images/logo-twmvc.webp" alt="logo-twmvc">
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 gy-3 text-center">
+                        <img src="images/logo-trend.webp" alt="logo-trend">
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 gy-3 text-center">
+                        <img src="images/logo-gamania.webp" alt="logo-gamania">
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 gy-3 text-center">
+                        <img src="images/logo-leo.webp" alt="logo-leo">
+                    </div>
                 </div>
-                <div class="col-12 col-lg-3">
-
-                </div>
-                <div class="col-12 col-lg-3">
-
-                </div>
-            </div> -->
-
-
+            </div>
         </section>
     </main>
 
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-5 m-auto">
+                    <h2>合作及接洽</h2>
+                    <p>若為企業欲徵才、或非營利組織或公益團體希望參加我們的培訓或公益合作、或成為我們的講師或擔任指導學生的企業導師 (Inspire Mentor)，請與我們連絡</p>
+                </div>
+                <div class="col-12 col-md-5 m-auto">
+                    <address>
+                        Build School​ 青杉人才有限公司<br>
+                        社團法人台灣青築未來協會 Build the Future<br>
+                        (內政部立案 : 台內團字第 1090033261 號)<br>
+                        email：<a href="mailto:contact@build-school.com">contact@build-school.com</a><br>
+                        電話：<a href="tel:02-66057606">02-66057606</a><br>
+                        ​台北市忠孝東路三段96號11F-1 (台北科大對面/忠孝新生站3號出口)​
+                    </address>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 
 
