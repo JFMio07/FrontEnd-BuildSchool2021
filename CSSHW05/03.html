@@ -65,22 +65,71 @@
             list-style: outside;
         }
 
-        .feature-teacher .row img {
+        .feature-core img,
+        .feature-teacher .row img,
+        .feature-training .icon img,
+        .feature-tools img,
+        .footer .community .icon img {
             max-width: 100%;
-            vertical-align: middle;
+
         }
 
-        .feature-training
-        /* .core-concept>div:nth-child(2) p {
-            column-count: 2;
-        } */
+        .feature-tools .icon,
+        .feature-training .icon {
+            width: 50%;
+            height: 0;
+            padding-bottom: 50%;
+            margin: auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .feature-training .icon .icon-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .feature-training .icon .icon-svg,
+        .feature-training .icon img,
+        .feature-tools .icon img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+        }
+
+        .feature-tools .icon {
+            width: 45%;
+            height: 0;
+            padding-bottom: 37%;
+            margin: auto;
+            text-align: center;
+            position: relative;
+        }
 
 
-        /* @media screen and (min-width:992px) {
-            .core-concept>div:nth-child(2) p {
-                column-count: 0;
-            }
-        } */
+
+        footer {
+            background-color: #eeeeee;
+            border-top: 5px solid #605e5e;
+        }
+
+        footer .community {
+            display: flex;
+            justify-content: center;
+        }
+
+        footer .community .icon {
+            width: 35px;
+            height: 35px;
+            margin: 0 .2rem;
+        }
+
+        footer .copyright {
+            font-size: 0.5rem;
+        }
     </style>
 </head>
 
@@ -205,8 +254,8 @@
             </div>
             <div class="core-learning my-5 row flex-row-reverse justify-content-evenly align-center">
                 <div class="col-12 col-lg-6 py-2 d-flex  flex-column align-center">
-                    <div class="pic m-auto">
-                        <img class="w-100" src="images/core-learning.webp" alt="core-learning">
+                    <div class="pic mb-2 mx-auto">
+                        <img class="" src="images/core-learning.webp" alt="core-learning">
                     </div>
                     <h2 class="fs-3 fw-bold text-center">動手實作才是真學習</h2>
                 </div>
@@ -223,8 +272,8 @@
             </div>
             <div class="core-readiness my-5 row justify-content-evenly align-center">
                 <div class="col-12 col-lg-6 py-2 d-flex  flex-column align-center">
-                    <div class="pic m-auto">
-                        <img class="w-100" src="images/core-readiness.webp" alt="core-learning">
+                    <div class="pic mb-2 mx-auto">
+                        <img class="" src="images/core-readiness.webp" alt="core-learning">
                     </div>
                     <h2 class="fs-3 fw-bold text-center">就業銜接</h2>
                 </div>
@@ -241,8 +290,8 @@
             </div>
             <div class="core-Network my-5 row flex-row-reverse justify-content-evenly align-center">
                 <div class="col-12 col-lg-6 py-2 d-flex  flex-column align-center">
-                    <div class="pic m-auto">
-                        <img class="w-100" src="images/core-network.webp" alt="core-learning">
+                    <div class="pic mb-2 mx-auto">
+                        <img class="" src="images/core-network.webp" alt="core-learning">
                     </div>
                     <h2 class="fs-3 fw-bold text-center">連結及影響力</h2>
                 </div>
@@ -269,8 +318,8 @@
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="card border-0">
                             <h3 class="text-center fw-bold fs-5">第 1 - 4 個月</h3>
-                            <div class="icon w-50 m-auto">
-                                <svg preserveAspectRatio="xMidYMid meet" data-bbox="0 19.2 200 161.6"
+                            <div class="icon">
+                                <svg class="icon-svg" preserveAspectRatio="xMidYMid meet" data-bbox="0 19.2 200 161.6"
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="-1.0638297872340416 -1.0638297872340452 202.12765957446808 202.12765957446808"
                                     role="img">
@@ -297,8 +346,8 @@
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="card border-0">
                             <h3 class="text-center fw-bold fs-5">第 5 - 6 個月</h3>
-                            <div class="icon w-50 m-auto text-center">
-                                <svg class="w-50" preserveAspectRatio="xMidYMid meet" data-bbox="50 0 100 200"
+                            <div class="icon">
+                                <svg class="icon-svg" preserveAspectRatio="xMidYMid meet" data-bbox="50 0 100 200"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="50 0 100 200" role="img">
                                     <g>
                                         <path d="M97 0h7v33h-7V0z"></path>
@@ -332,8 +381,8 @@
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="card border-0">
                             <h3 class="text-center fw-bold fs-5">第 6 - 7 月</h3>
-                            <div class="icon w-50 m-auto">
-                                <svg preserveAspectRatio="xMidYMid meet" data-bbox="16.6 0 166.7 200.1"
+                            <div class="icon">
+                                <svg class="icon-svg" preserveAspectRatio="xMidYMid meet" data-bbox="16.6 0 166.7 200.1"
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="-1.211666666666666 -1.1116666666666646 202.32333333333332 202.32333333333332"
                                     role="img">
@@ -363,8 +412,9 @@
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="card border-0">
                             <h3 class="text-center fw-bold fs-5">未來及展望</h3>
-                            <div class="icon w-50 m-auto">
-                                <img class="w-100" src="images/training-HR.webp" alt="training-HR">
+                            <div class="icon">
+                                <!-- <div class="icon w-50 h-0 pb-50 m-auto"></div> -->
+                                <img class="" src="images/training-HR.webp" alt="training-HR">
                             </div>
                             <div class="card-body  d-flex flex-column align-items-center">
                                 <h4 class="card-title text-danger text-center fs-5">就業及企業導師諮詢</h4>
@@ -390,6 +440,98 @@
                     在課程及作品實作中，將採用這些工具 - 熟悉實務上軟體開發團隊的運作、分工及真實專案的流程
                 </h2>
             </div>
+            <div class="container py-3">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card border-0">
+                            <div class="icons">
+                                <div class="icon">
+                                    <img class="" src="images/logo-git-1.webp" alt="logo-git-1">
+                                </div>
+                                <div class="icon">
+                                    <img class="" src="images/logo-git-2.webp" alt="logo-git-2">
+                                </div>
+                            </div>
+                            <div class="card-body d-flex flex-column align-items-center">
+                                <h3 class="card-title text-center fs-5">版本控管及程式碼管理</h3>
+                                <ul class="card-text">
+                                    <li>
+                                        學員之練習及作品之程式碼，皆採用主流的 Git 當版本控管，熟悉版控的各種操作及實務專案運用; 課程中公開之練習程式碼，提交至 GitHub
+                                        上，其它學員可參考或供講師 Code Review 檢閱，並熟悉 Open Source 生態及工具
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card border-0">
+                            <div class="icons">
+                                <div class="icon">
+                                    <img class="" src="images/logo-vs.webp" alt="logo-vs">
+                                </div>
+                                <div class="icon">
+                                    <img class="" src="images/logo-trello.webp" alt="logo-trello">
+                                </div>
+                            </div>
+                            <div class="card-body  d-flex flex-column align-items-center">
+                                <h3 class="card-title text-center fs-5">作品開發及團隊管理</h3>
+                                <ul class="card-text">
+                                    <li>
+                                        除了使用 GitHub 外，專題開發階段也將使用 Microsoft Azure DevOps Services
+                                        進行團隊開發、包括程式碼管理、工作項目追蹤、自動化建置等，熟悉一個軟體開發專案之流程、分工及日常工作。
+                                    </li>
+                                    <li>
+                                        也可透過目前許多開發團隊常用的專案管理及看板工具 - Trello 進行工作分派、追蹤、或整個班的工作事項管理
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card border-0">
+                            <div class="icon">
+                                <img class="" src="images/logo-azure.webp" alt="logo-azure">
+                            </div>
+                            <div class="icon">
+                                <img class="" src="images/logo-SQL.webp" alt="logo-SQL">
+                            </div>
+                            <div class="card-body  d-flex flex-column align-items-center">
+                                <h3 class="card-title text-center fs-5">雲端平台及服務</h3>
+                                <ul class="card-text">
+                                    <li>
+                                        雲端平台的使用已逐漸成為一個成熟軟體開發團隊之基礎，並讓開發、測試、佈署工作更加的便利及自動化。因此學員將使用 Microsoft Azure
+                                        當成作品及專案應用系統執行的雲端平台，包括 Azure App Service 建立網站服務、Azure SQL Database 建立資料庫服務
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card border-0">
+                            <div class="icon">
+                                <img class="" src="images/logo-teams.webp" alt="logo-teams">
+                            </div>
+                            <div class="icon">
+                                <img class="" src="images/logo-slack.webp" alt="logo-slack">
+                            </div>
+                            <div class="card-body  d-flex flex-column align-items-center">
+                                <h3 class="card-title text-center fs-5">團隊溝通協作及通知</h3>
+                                <ul class="card-text">
+                                    <li>
+                                        課程過程中的線上討論、遠端溝通、或技術分享，將可透過 Microsoft Teams 或Slack 工具。另外練習的程式碼提交至 GitHub、或是
+                                        Trello 上的工作狀態更新，或是 Azure DevOps 上自動化建置的狀態，皆可發通知至 Microsoft Teams 或
+                                        Slack，透過自動化提升工作效率，並熟悉一個軟體開發團隊的協同合作
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
         </section>
         <section class="feature-teacher">
             <div class="title-bgimg">
@@ -429,7 +571,7 @@
     </main>
 
     <footer>
-        <div class="container">
+        <div class="container my-3">
             <div class="row">
                 <div class="col-12 col-md-5 m-auto">
                     <h2>合作及接洽</h2>
@@ -440,12 +582,23 @@
                         Build School​ 青杉人才有限公司<br>
                         社團法人台灣青築未來協會 Build the Future<br>
                         (內政部立案 : 台內團字第 1090033261 號)<br>
-                        email：<a href="mailto:contact@build-school.com">contact@build-school.com</a><br>
-                        電話：<a href="tel:02-66057606">02-66057606</a><br>
+                        email：<a class="text-dark"
+                            href="mailto:contact@build-school.com">contact@build-school.com</a><br>
+                        電話：<a class="text-dark" href="tel:02-66057606">02-66057606</a><br>
                         ​台北市忠孝東路三段96號11F-1 (台北科大對面/忠孝新生站3號出口)​
                     </address>
                 </div>
             </div>
+            <div class="community">
+                <div class="icon">
+                    <img src="images/logo-facebook.webp" alt="logo-facebook">
+                </div>
+                <div class="icon">
+                    <img src="images/logo-youtube.webp" alt="logo-youtube">
+                </div>
+            </div>
+            <p class="copyright text-center"><a class="text-dark" href="javascript:;">隱私權宣告</a>&nbsp;&nbsp;© 2020 by
+                Build School</p>
         </div>
     </footer>
 
