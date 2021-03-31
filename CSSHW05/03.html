@@ -158,11 +158,6 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: space-around;
-                font-size: .5rem;
-            }
-
-            .carousel-caption p {
-                font-weight: bold;
             }
 
             .carousel-indicators [data-bs-target] {
@@ -173,24 +168,34 @@
                 border: none;
             }
 
-            .carousel-caption p:nth-child(1) {
+            .carousel-caption span {
+                font-weight: bold;
+            }
+
+            .carousel-caption span:nth-child(1) {
                 font-size: 2rem;
             }
 
-            .carousel-caption p:nth-child(2) {
+            .carousel-caption span:nth-child(2) {
                 font-size: .8rem;
             }
 
-            .carousel-caption div {
+            .carousel-caption .caption-label {
                 display: flex;
-                justify-content: space-evenly;
+                flex-direction: column;
             }
 
-            .carousel-caption div a {
+            .carousel-caption .caption-btn {
+                display: flex;
+                justify-content: space-around;
+            }
+
+            .carousel-caption .caption-btn a {
                 text-decoration: none;
                 color: #fff;
                 background-color: rgba(13, 100, 199, 0.6);
-                padding: 0.5rem 1rem;
+                padding: 0.5rem;
+                font-size: .5rem;
 
             }
 
@@ -230,16 +235,17 @@
                 align-items: center;
             }
 
-            .carousel-caption{
-                font-size: 1rem;
-            }
-            .carousel-caption p:nth-child(1) {
+            .carousel-caption span:nth-child(1) {
                 font-size: 3rem;
             }
 
-            .carousel-caption p:nth-child(2) {
+            .carousel-caption span:nth-child(2) {
                 font-size: 1rem;
-            }            
+            }
+
+            .carousel-caption .caption-btn a {
+                font-size: 1rem;
+            }
 
         }
     </style>
@@ -325,10 +331,10 @@
                     <img src="images/header-background02.webp" class="d-block w-100" alt="background02">
                     <div class="carousel-caption">
                         <div class="caption-label">
-                            <p>動手做出東西<br>才能解決問題</p>
-                            <p>BUILD SOMETHING AND SOLVE THE PROBLEM, THAT'S MY STYLE</p>
+                            <span>動手做出東西<br>才能解決問題</span>
+                            <span>BUILD SOMETHING AND SOLVE THE PROBLEM, THAT'S MY STYLE</span>
                         </div>
-                        <div> class="caption-btn"
+                        <div class="caption-btn">
                             <a href="javascript:;">台北班簡介及報名(2021/4/28開課)</a>
                             <a href="javascript:;">新竹班簡介(2021/11月後)</a>
                             <a href="javascript:;">招生說明會報名</a>
@@ -339,8 +345,8 @@
                     <img src="images/header-background03.webp" class="d-block w-100" alt="background03">
                     <div class="carousel-caption">
                         <div class="caption-label">
-                            <p>這裏沒有考試<br>只有滿滿的程式碼</p>
-                            <p>NO TEST BUT YOUR CODES</p>
+                            <span>這裏沒有考試<br>只有滿滿的程式碼</span>
+                            <span>NO TEST BUT YOUR CODES</span>
                         </div>
                         <div class="caption-btn">
                             <a href="javascript:;">台北班簡介及報名(2021/4/28開課)</a>
@@ -354,8 +360,8 @@
                     <img src="images/header-background04.webp" class="d-block w-100" alt="background04">
                     <div class="carousel-caption">
                         <div class="caption-label">
-                            <p>BUILD SCHOOL</p>
-                            <p>Build School 是軟體開發教育的先鋒 為您打造更有競爭力的職涯</p>
+                            <span>BUILD SCHOOL</span>
+                            <span>Build School 是軟體開發教育的先鋒 為您打造更有競爭力的職涯</span>
                         </div>
                         <div class="caption-btn">
                             <a href="javascript:;">台北班簡介及報名(2021/4/28開課)</a>
@@ -369,8 +375,8 @@
                     <img src="images/header-background05.webp" class="d-block w-100" alt="background05">
                     <div class="carousel-caption">
                         <div class="caption-label">
-                            <p>前往峰頂的路上<br>有人帶!</p>
-                            <p>START CODING AND GET COACHED FROM MENTORS</p>
+                            <span>前往峰頂的路上<br>有人帶!</span>
+                            <span>START CODING AND GET COACHED FROM MENTORS</span>
                         </div>
                         <div class="caption-btn">
                             <a href="javascript:;">台北班簡介及報名(2021/4/28開課)</a>
@@ -384,9 +390,10 @@
                     <img src="images/header-background06.webp" class="d-block w-100" alt="background06">
                     <div class="carousel-caption">
                         <div class="caption-label">
-                            <p>BUILD SCHOOL</p>
-                            <p>Build School is a pioneer of software developer education and career builder for engineers
-                            </p>
+                            <span>BUILD SCHOOL</span>
+                            <span>Build School is a pioneer of software developer education and career builder for
+                                engineers
+                            </span>
                         </div>
                         <div class="caption-btn">
                             <a href="javascript:;">台北班簡介及報名(2021/4/28開課)</a>
@@ -788,9 +795,9 @@
 
 
     <!-- JavaScript Bundle with Popper -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-        crossorigin="anonymous"></script> -->
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
