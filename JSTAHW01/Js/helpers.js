@@ -7,4 +7,10 @@ function $g(value) {
   }
 }
 
-export { $g };
+function $Orderby_num(a,b){
+  return a-b;
+}
+
+
+
+export { $g,$Orderby_num };

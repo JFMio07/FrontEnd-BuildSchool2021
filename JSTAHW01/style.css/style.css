@@ -7,13 +7,15 @@ body {
 
 /* Common */
 /* selected state */
-.selected:focus ~ label {
+/* .selected:focus ~ label { */
+.selector:focus ~ label {
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
 }
 
-.selected:checked ~ label {
-  border: 3px solid #0d6efd;
+/* .selected:checked ~ label { */
+.selector:checked ~ label {
+  border: 2px solid #0d6efd;
 }
 
 /* selector */
@@ -23,15 +25,22 @@ body {
   opacity: 0;
 }
 
+.selector-label {
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  align-items: center;
+}
+
 /* block area */
 
 /*  */
 .product {
   max-width: 1200px;
   margin: auto;
-}
-#pd-pic img {
-  vertical-align: middle;
 }
 
 /* buy-title */
@@ -50,18 +59,13 @@ body {
 }
 
 /* choicModel */
-.choiceModel {
+div.choiceModel {
+  padding: 0;
 }
 
 .choiceModel-label {
   padding: 10px 10px;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  border: 1px solid #ccc;
-  border-radius: 5px;
 }
 
 .choiceModel-label-name span {
@@ -72,9 +76,87 @@ body {
   font-weight: 500;
 }
 .choiceModel-label-name span:nth-child(2) {
-  font-weight: 100;
-  font-size: 13px;
+  /* font-weight: 100; */
+  font-size: 12px;
 }
 
 .choiceModel-label-price {
+}
+
+/* choicColor */
+.color > .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+div.choiceColor {
+  width: 50%;
+}
+
+div.choiceColor:nth-child(odd) {
+  padding: 0 5px 0 0;
+}
+div.choiceColor:nth-child(even) {
+  padding: 0 0 0 5px;
+}
+
+.choiceColor-label {
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+}
+
+.choiceColor-label .pic {
+  width: 32px;
+  height: 32px;
+}
+
+.choiceColor-label .pic img {
+  width: 100%;
+}
+
+.choiceColor-label figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+/* choicStorage */
+.storage > .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+div.choiceStorage {
+  width: 50%;
+}
+
+div.choiceStorage:nth-child(odd) {
+  padding: 0 5px 0 0;
+}
+div.choiceStorage:nth-child(even) {
+  padding: 0 0 0 5px;
+}
+
+.choiceStorage-label {
+  padding: 10px 10px;
+  flex-direction: column;
+}
+
+.choiceStorage-label .size span {
+  font-weight: 500;
+
+}
+
+.choiceStorage-label>.size>span:nth-child(1) {
+  font-size: 30px;
+}
+.choiceStorage-label>.size>span:nth-child(2) {
+    font-size: 20PX;
+}
+.choiceStorage-label>.price {
+  /* font-weight: 100; */
+  font-size: 12px;
 }
