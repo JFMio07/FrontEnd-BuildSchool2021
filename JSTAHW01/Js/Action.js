@@ -1,28 +1,44 @@
-let pdAction = document.getElementById("pd-action");
-let pdPic = document.getElementById("pd-pic");
+import { $g } from "./helpers.js";
 
-let product = [
+const imgFolder = "./images";
+const imgExtension = ".png";
+let pdAction = $g("#pd-action");
+let pdPic = $g("#pd-pic");
+
+// function productInfo(type,pdInfo){
+//   this.name
+// }
+
+// 產品資料
+let products = [
   {
-    type: "iphone",
-    nameInfo: {
-      name: "iphone-12",
+    type: "iPhone",
+    pdInfo: {
+      catelog:"iPhone 12",
+      ver: "12",
+      series: "",
     },
     specInfo: {
       colorInfo: [
         {
           pdColor: "white",
+          btnImg: "btn-white.png",
         },
         {
           pdColor: "black",
+          btnImg: "btn-black.png",
         },
         {
           pdColor: "blue",
+          btnImg: "btn-blue.png",
         },
         {
           pdColor: "green",
+          btnImg: "btn-green.png",
         },
         {
           pdColor: "red",
+          btnImg: "btn-red.png",
         },
       ],
       sellPrice: [
@@ -33,24 +49,33 @@ let product = [
     },
   },
   {
-    type: "iphone",
-    nameInfo: { name: "iphone-12-mini" },
+    type: "iPhone",
+    pdInfo: {
+      catelog:"iPhone 12",
+      ver: "12",
+      series: "mini",
+    },
     specInfo: {
       colorInfo: [
         {
           pdColor: "white",
+          btnImg: "btn-white.png",
         },
         {
           pdColor: "black",
+          btnImg: "btn-black.png",
         },
         {
           pdColor: "blue",
+          btnImg: "btn-blue.png",
         },
         {
           pdColor: "green",
+          btnImg: "btn-green.png",
         },
         {
           pdColor: "red",
+          btnImg: "btn-red.png",
         },
       ],
       sellPrice: [
@@ -61,8 +86,11 @@ let product = [
     },
   },
   {
-    type: "ipad",
-    nameInfo: { name: "ipad" },
+    type: "iPad",
+    pdInfo: {
+      catelog:"iPad",
+      series: "",
+    },
     specInfo: {
       colorInfo: [
         {
@@ -101,30 +129,71 @@ let product = [
   },
 ];
 
-console.log(product);
-
-// let data = JSON.stringify(iphoneData);
-// console.log(data);
-
 window.onload = function () {
   let btnIphone = document.getElementById("btn-iphone");
-  btnIphone.addEventListener("click", GetIphoneData);
+  btnIphone.addEventListener("click", ShowIphoneData);
 
   let btnIpad = document.getElementById("btn-ipad");
-  //   btnIpad.addEventListener("click", GetIpadData);
-
-  InitContent();
+  btnIpad.addEventListener("click", ShowIpadData);
 };
 
-function GetIphoneData() {
-  InitContent();
+function ShowIphoneData() {
+  EraseContent();
+  CreateTypeContent("iPhone");
 }
 
-// function GetIpadData(){
-//     console.log("456");
-// }
+function ShowIpadData() {
+  EraseContent();
+  CreateTypeContent("iPad");
+}
 
-function InitContent() {
+function EraseContent() {
   pdAction.innerHTML = "";
   pdPic.innerHTML = "";
 }
+
+function CreateTypeContent(type) {
+  let selproducts = products.filter((product) => product.type == type);
+
+  // pd select area
+  let title = document.createElement("h2");
+  title.innerHTML = `<span>全新</span> 購買 ${selproducts[0].pdInfo.catelog}`;
+  title.classList.add("buy-title");
+  pdAction.appendChild(title);
+  
+
+  let decisionType = document.createElement("div");
+  decisionType = ``;
+  
+  
+  
+  
+  
+  // pic area
+  // let typepic = document.createElement("img");
+  // imgfoler/typefolder/namefolder.imgFileName.extenssion
+  // let picUrl = `${BuildPDFolderPath(type,selproducts[0].pdInfo)}/${BuildPdFullName(type, selproducts[0].pdInfo)}${imgExtension}`;
+  // typepic.setAttribute("src", picUrl);
+  // typepic.classList.add("w-100");
+  // pdPic.appendChild(typepic);
+
+
+
+}
+
+function CreatePDDetail(type,pdInfo,){
+
+}
+
+function BuildPDFolderPath(type, pdInfo) {
+  return `${imgFolder}/${type}/${BuildPdFullName(type, pdInfo)}`;
+}
+
+function BuildPdFullName(type, pdInfo) {
+  let ver = pdInfo.hasOwnProperty("ver") ? pdInfo.ver: "";
+  ver = ver.length == 0 ? "" : ` ${ver}`;
+  let series = pdInfo.series;
+  series = series.length == 0 ? "" : ` ${series}`;
+  return `${type}${ver}${series}`;
+}
+
