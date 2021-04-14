@@ -14,7 +14,7 @@ let products = [
   {
     type: "iPhone",
     pdInfo: {
-      catelog:"iPhone 12",
+      catelog: "iPhone 12",
       ver: "12",
       series: "",
     },
@@ -51,7 +51,7 @@ let products = [
   {
     type: "iPhone",
     pdInfo: {
-      catelog:"iPhone 12",
+      catelog: "iPhone 12",
       ver: "12",
       series: "mini",
     },
@@ -88,7 +88,7 @@ let products = [
   {
     type: "iPad",
     pdInfo: {
-      catelog:"iPad",
+      catelog: "iPad",
       series: "",
     },
     specInfo: {
@@ -153,47 +153,79 @@ function EraseContent() {
 }
 
 function CreateTypeContent(type) {
-  let selproducts = products.filter((product) => product.type == type);
+  let selProducts = products.filter((product) => product.type == type);
 
-  // pd select area
+  // choice Product : title
   let title = document.createElement("h2");
-  title.innerHTML = `<span>全新</span> 購買 ${selproducts[0].pdInfo.catelog}`;
+  title.innerHTML = `<span>全新</span>`;
+  title.appendChild(
+    document.createTextNode(`購買 ${selProducts[0].pdInfo.catelog}`)
+  );
   title.classList.add("buy-title");
   pdAction.appendChild(title);
-  
 
-  let decisionType = document.createElement("div");
-  decisionType = ``;
-  
-  
-  
-  
-  
+  // choice Product : model
+  let model = document.createElement("div");
+  model.classList.add("model");
+  model.innerHTML = `<p>
+                          <span>選擇機型</span>
+                          <a href="javascript:;">那一款最適合你?</a>
+                      </p>`;
+  selProducts.forEach((item, index) => {
+    model.insertAdjacentHTML(
+      "beforeend",
+      template_choiceModel("choiceModel", `model${index}`)
+    );
+    pdAction.appendChild(model);
+    // $g(".choiceModel-label-name>:nth-child(1)").textContent=;
+    
+  });
+
   // pic area
-  // let typepic = document.createElement("img");
+  let typepic = document.createElement("img");
   // imgfoler/typefolder/namefolder.imgFileName.extenssion
-  // let picUrl = `${BuildPDFolderPath(type,selproducts[0].pdInfo)}/${BuildPdFullName(type, selproducts[0].pdInfo)}${imgExtension}`;
-  // typepic.setAttribute("src", picUrl);
-  // typepic.classList.add("w-100");
-  // pdPic.appendChild(typepic);
-
-
-
+  let picUrl = `${BuildPDFolderPath(type,selProducts[0].pdInfo)}/${BuildPdFullName(type, selProducts[0].pdInfo,"-")}${imgExtension}`;
+  console.log(picUrl);
+  typepic.setAttribute("src", picUrl);
+  typepic.classList.add("w-100");
+  pdPic.appendChild(typepic);
 }
 
-function CreatePDDetail(type,pdInfo,){
-
-}
+function CreatePDDetail(type, pdInfo) {}
 
 function BuildPDFolderPath(type, pdInfo) {
-  return `${imgFolder}/${type}/${BuildPdFullName(type, pdInfo)}`;
+  return `${imgFolder}/${type}/${BuildPdFullName(type, pdInfo,"-")}`;
 }
 
-function BuildPdFullName(type, pdInfo) {
-  let ver = pdInfo.hasOwnProperty("ver") ? pdInfo.ver: "";
-  ver = ver.length == 0 ? "" : ` ${ver}`;
-  let series = pdInfo.series;
-  series = series.length == 0 ? "" : ` ${series}`;
-  return `${type}${ver}${series}`;
+function BuildPdFullName(type, pdInfo,delimter) {
+  // let ver = pdInfo.hasOwnProperty("ver") ? pdInfo.ver : "";
+  // ver = ver.length == 0 ? "" : ` ${ver}`;
+  // let series = pdInfo.series;
+  // series = series.length == 0 ? "" : ` ${series}`;
+  // return `${type}${ver}${series}`;
+  
+  let tmp = [
+    type,
+    pdInfo.hasOwnProperty("ver") ? pdInfo.ver : "",
+    pdInfo.hasOwnProperty("series") ? pdInfo.series : "",
+  ];
+
+  return tmp.filter(x=>x!=="").join(delimter);
+
 }
 
+// template string
+
+function template_choiceModel(name, id) {
+  return `<div class="choiceModel form-check">
+            <input class="selector form-check-input" type="radio" name=${name} id=${id}>
+            <label class="choiceModel-label form-check-label" for=id=${id}>
+              <span class="choiceModel-label-name">
+                <span></span>
+                <span></span>
+              </span>
+              <span class="choiceModel-label-price">
+              </span>
+            </label>
+          </div>`;
+}
