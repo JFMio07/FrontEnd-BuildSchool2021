@@ -1,6 +1,7 @@
 
 const cityDistrictUrl = "https://raw.githubusercontent.com/taihochan/JsonData/main/%E5%8F%B0%E7%81%A3%E8%A1%8C%E6%94%BF%E5%9C%B0%E5%8D%80.json";
-const waterDataUrl = "https://raw.githubusercontent.com/taihochan/JsonData/main/%E5%8F%B0%E7%81%A3%E8%87%AA%E4%BE%86%E6%B0%B4%E7%94%A8%E9%87%8F.json";
+// const waterDataUrl = "https://raw.githubusercontent.com/taihochan/JsonData/main/%E5%8F%B0%E7%81%A3%E8%87%AA%E4%BE%86%E6%B0%B4%E7%94%A8%E9%87%8F.json";
+const waterDataUrl = "https://raw.githubusercontent.com/JFMio07/FileStorage/main/%E5%8F%B0%E7%81%A3%E6%AF%8F%E6%97%A5%E8%87%AA%E4%BE%86%E6%B0%B4%E7%94%A8%E9%87%8F.json";
 
 let map;
 let dataMap = new Map();
@@ -42,14 +43,64 @@ function UIInitialzie() {
     // let yearList = dataMap.get("waterData");
     // console.log(yearList);
 
-    let yearList = dataMap.get("waterData").TaiwanWaterExchangingData
-        .StatisticofWaterResourcesClass.StatisticofWaterUsageClass.TheConsumptionOfWater
-        .map((item) => {
-            console.log(item.Year);
-            // item.Year;
-        });
+    let wdata = dataMap.get("WaterData").TaiwanWaterExchangingData
+        .StatisticofWaterResourcesClass.StatisticofWaterUsageClass.TheConsumptionOfWater;
+    let cdata = dataMap.get("CityDistrict");
+
+    console.log(dataMap);
+    let yearList = new Set(wdata.map((item) => item.Year));
     console.log(yearList);
 
+
+    // let wdataM = wdata.filter(x => x.Year === "104");
+
+    // let listdata = cdata.filter((x) => {
+    //     return x === 
+
+    // });
+
+
+    // wdata.filter(x => x.Year === "104").map(x => {
+    //     let data1 = cdata.filter(y => y.District === x.Town);
+
+
+    //     let dataset = new Map([
+    //         [],
+    //     ]);
+
+    // });
+
+
+    // let listdata = wdata.filter(x=>x.Year ==="104").map((x)=>{
+    //     let data1 = cdata.filter(y=>y.District === x.Town);
+
+    //     return data1.map((x)=>{
+    //         []
+    //     });
+
+    //     let dataset = new Map([
+    //         [],
+    //     ]);
+
+    // });
+
+    let listdata0 = new Set(cdata.map(x=>x.City));
+    let listdata01 = new Set(cdata.map(x=>x.City ==="臺北市"?"台北市":x.City));
+    let listdata = new Set(wdata.filter(x=>x.Year ==="104").map(x=>x.County));
+    let listdata1 = new Set(wdata.filter(x=>x.Year ==="105").map(x=>x.County));
+    let listdata2 = new Set(wdata.filter(x=>x.Year ==="106").map(x=>x.County));
+    let listdata3 = new Set(wdata.filter(x=>x.Year ==="107").map(x=>x.County));
+    let listdata4 = new Set(wdata.filter(x=>x.Year ==="108").map(x=>x.County));
+    let listdata5 = new Set(wdata.filter(x=>x.Year ==="109").map(x=>x.County));
+
+    console.log(listdata0);
+    console.log(listdata01);
+    console.log(listdata);
+    console.log(listdata1);
+    console.log(listdata2);
+    console.log(listdata3);
+    console.log(listdata4);
+    console.log(listdata5);
 
     // let tplselectopt = yearSelect.getElementById("tpl-yearSelect-option");
     // let yearSelect = tplyearSelect.content.cloneNode(true);
@@ -59,7 +110,6 @@ function UIInitialzie() {
 
     // let 
 
-    console.log(dataMap);
 
     initDataLoading = document.querySelector(".initDataLoading");
     for (let i = 0; i <= 10; i++) {
@@ -100,7 +150,7 @@ function LoadCityDistrict(checkfinished) {
 
 // LoadWaterData
 function LoadWaterData(checkfinished) {
-    LoadDataByXHR("waterData", waterDataUrl, dataMap, checkfinished);
+    LoadDataByXHR("WaterData", waterDataUrl, dataMap, checkfinished);
 }
 
 
@@ -111,6 +161,7 @@ function LoadDataByXHR(name, url, dataMap, callback) {
         if (this.readyState == 4 && this.status == 200) {
 
             dataMap.set(name, JSON.parse(this.responseText));
+            // dataMap.set(name, this.responseText);
 
             if (typeof callback === "function") {
                 callback();
