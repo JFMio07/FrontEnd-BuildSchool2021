@@ -64,7 +64,7 @@ function UIInitialzie() {
             if (i === 10) {
                 body.removeChild(initDataLoading);
             }
-        }, 100 * i);
+        }, 70 * i);
     }
 }
 
@@ -140,9 +140,9 @@ function AddMarkerWithInfo(position, icon,title,infoContent) {
     let info = new google.maps.InfoWindow({ content: infoContent });
 
     //  add marker infowindow
-    marker.addListener("click", () => {
-        ClearInfo();
-        info.open(map, marker)
+    marker.addListener("click", function(){        
+        console.log(this);
+        MarkerClick(this,info);
     });
 
     // add marker click event
@@ -159,12 +159,12 @@ function AddMarkerWithInfo(position, icon,title,infoContent) {
     infos.push(info);
     markers.push(marker);
 }
-// function MarkerClick(){
-//     ClearInfo();
-//     this.map.center = this.position,
-//     this.map.zoom = 17;
-//     info.open(map, marker)
-// }
+function MarkerClick(marker,infoWindow){
+    ClearInfo();
+    marker.map.center = marker.position,
+    marker.map.zoom = 12;
+    infoWindow.open(marker.map, marker);
+}
 function DeleteMarkers() {
 
     markers.forEach(item => {
