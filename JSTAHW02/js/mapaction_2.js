@@ -27,27 +27,10 @@ window.onload = () => {
 
 function UIInitialzie() {
 
-    // tpl-yearSelect-option
-    // let col = container.querySelector(".row:nth-child(1)>div[class^='col']");
-
-    // let tplyearSelect = document.getElementById("tpl-yearSelect").content.cloneNode(true);
-    // let ys = tplyearSelect.querySelector(".yearSelect");
-    // let tplselectopt = tplyearSelect.getElementById("tpl-yearSelect-option").content.cloneNode(true);
-    // let opt = tplselectopt.querySelector("option");
-    // opt.value=2;
-    // opt.textContent="123";
-
-    // ys.appendChild(tplselectopt);
-    // ys.appendChild(tplselectopt);
-
-    // let yearList = dataMap.get("waterData");
-    // console.log(yearList);
-
-    let wdata = dataMap.get("WaterData").TaiwanWaterExchangingData
+    let waterData = dataMap.get("WaterData").TaiwanWaterExchangingData
         .StatisticofWaterResourcesClass.StatisticofWaterUsageClass.TheConsumptionOfWater;
-    let cdata = dataMap.get("CityDistrict");
-    let cdata1 = dataMap.get("CityDistrict").map((x) => {
 
+    let cityDistrict = dataMap.get("CityDistrict").map((x) => {
         return {
             City: x.City === "臺北市" ? "台北市" : x.City,
             District: x.District,
@@ -55,14 +38,43 @@ function UIInitialzie() {
             Lng: x.Lng
         }
     });
+    
+        
+    // tpl-yearSelect-option
+    let row = container.querySelector(".row:nth-child(1)");
+    let tplyearSelect = document.getElementById("tpl-yearSelect").content.cloneNode(true);
+    let yearSelect = tplyearSelect.querySelector("#yearSelect");
+
+    let yearList = new Set(waterData.map((item) => item.Year));
+
+    yearList.forEach((value)=>{
+        let tplselectopt = tplyearSelect.getElementById("tpl-yearSelect-option").content.cloneNode(true);
+        let opt = tplselectopt.querySelector("option");
+        opt.value=value;
+        opt.textContent=value.toString();
+        yearSelect.appendChild(tplselectopt);
+    });
+
+    row.appendChild(tplyearSelect);
+
+
+// yearSelect
+
+
+
+    // ys.appendChild(tplselectopt);
+    // ys.appendChild(tplselectopt);
+
+    // let yearList = dataMap.get("waterData");
+    // console.log(yearList);
+
 
     // {City: "台北市", District: "中正區", Lat: 25.0324039, Lng: 121.519882}
 
-    console.log(cdata1);
+    // console.log(cdata1);
 
-    console.log(dataMap);
-    let yearList = new Set(wdata.map((item) => item.Year));
-    console.log(yearList);
+    // console.log(dataMap);
+    // console.log(yearList);
 
 
     // let wdataM = wdata.filter(x => x.Year === "104");
@@ -100,49 +112,49 @@ function UIInitialzie() {
 
 
 
-    let listdata0 = new Set(cdata.map(x => x.City));
-    let listdata01 = new Set(cdata.map(x => x.City === "臺北市" ? "台北市" : x.City));
-    let listdata = new Set(wdata.filter(x => x.Year === "104").map(x => x.County));
-    let listdata1 = new Set(wdata.filter(x => x.Year === "105").map(x => x.County));
-    let listdata2 = new Set(wdata.filter(x => x.Year === "106").map(x => x.County));
-    let listdata3 = new Set(wdata.filter(x => x.Year === "107").map(x => x.County));
-    let listdata4 = new Set(wdata.filter(x => x.Year === "108").map(x => x.County));
-    let listdata5 = new Set(wdata.filter(x => x.Year === "109").map(x => x.County));
+    // let listdata0 = new Set(cdata.map(x => x.City));
+    // let listdata01 = new Set(cdata.map(x => x.City === "臺北市" ? "台北市" : x.City));
+    // let listdata = new Set(wdata.filter(x => x.Year === "104").map(x => x.County));
+    // let listdata1 = new Set(wdata.filter(x => x.Year === "105").map(x => x.County));
+    // let listdata2 = new Set(wdata.filter(x => x.Year === "106").map(x => x.County));
+    // let listdata3 = new Set(wdata.filter(x => x.Year === "107").map(x => x.County));
+    // let listdata4 = new Set(wdata.filter(x => x.Year === "108").map(x => x.County));
+    // let listdata5 = new Set(wdata.filter(x => x.Year === "109").map(x => x.County));
 
-    console.log(listdata0);
-    console.log(listdata01);
-    console.log(listdata);
-    console.log(listdata1);
-    console.log(listdata2);
-    console.log(listdata3);
-    console.log(listdata4);
-    console.log(listdata5);
-
-
-    let step1 = wdata.filter(x => x.Year === "105");
-    let step2 = cdata1.filter((x) => step1.find(y => x.City == y.County && x.District == y.Town) !== undefined);
-    let step3 = step2.map((citydistrict) => {
-        return {
-            City: citydistrict.City,
-            District: citydistrict.District,
-            Lat: citydistrict.Lat,
-            Lat: citydistrict.Lat,
-            Lng: citydistrict.Lng,
-            ConsumptionOfwater: step1.filter((waterData) => waterData.County == citydistrict.City && waterData.Town == citydistrict.District)
-                .sort((a,b)=>a.Month-b.Month).map((item) => {
-                return {
-                    Year:item.Year,
-                    Month: item.Month,
-                    TheDailyDomesticConsumptionOfWaterPerPerson: item.TheDailyDomesticConsumptionOfWaterPerPerson,
-                };
-            })
-        };
-
-    });
+    // console.log(listdata0);
+    // console.log(listdata01);
+    // console.log(listdata);
+    // console.log(listdata1);
+    // console.log(listdata2);
+    // console.log(listdata3);
+    // console.log(listdata4);
+    // console.log(listdata5);
 
 
+    // let step1 = wdata.filter(x => x.Year === "105");
+    // let step2 = cdata1.filter((x) => step1.find(y => x.City == y.County && x.District == y.Town) !== undefined);
+    // let step3 = step2.map((citydistrict) => {
+    //     return {
+    //         City: citydistrict.City,
+    //         District: citydistrict.District,
+    //         Lat: citydistrict.Lat,
+    //         Lat: citydistrict.Lat,
+    //         Lng: citydistrict.Lng,
+    //         ConsumptionOfwater: step1.filter((waterData) => waterData.County == citydistrict.City && waterData.Town == citydistrict.District)
+    //             .sort((a,b)=>a.Month-b.Month).map((item) => {
+    //             return {
+    //                 Year:item.Year,
+    //                 Month: item.Month,
+    //                 TheDailyDomesticConsumptionOfWaterPerPerson: item.TheDailyDomesticConsumptionOfWaterPerPerson,
+    //             };
+    //         })
+    //     };
 
-    console.log(step3);
+    // });
+
+
+
+    // console.log(step3);
 
 
 
