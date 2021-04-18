@@ -64,7 +64,7 @@ function UIInitialzie() {
             if (i === 10) {
                 body.removeChild(initDataLoading);
             }
-        }, 50 * i);
+        }, 100 * i);
     }
 }
 
