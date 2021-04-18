@@ -46,6 +46,19 @@ function UIInitialzie() {
     let wdata = dataMap.get("WaterData").TaiwanWaterExchangingData
         .StatisticofWaterResourcesClass.StatisticofWaterUsageClass.TheConsumptionOfWater;
     let cdata = dataMap.get("CityDistrict");
+    let cdata1 = dataMap.get("CityDistrict").map((x) => {
+
+        return {
+            City: x.City === "臺北市" ? "台北市" : x.City,
+            District: x.District,
+            Lat: x.Lat,
+            Lng: x.Lng
+        }
+    });
+
+    // {City: "台北市", District: "中正區", Lat: 25.0324039, Lng: 121.519882}
+
+    console.log(cdata1);
 
     console.log(dataMap);
     let yearList = new Set(wdata.map((item) => item.Year));
@@ -84,14 +97,17 @@ function UIInitialzie() {
 
     // });
 
-    let listdata0 = new Set(cdata.map(x=>x.City));
-    let listdata01 = new Set(cdata.map(x=>x.City ==="臺北市"?"台北市":x.City));
-    let listdata = new Set(wdata.filter(x=>x.Year ==="104").map(x=>x.County));
-    let listdata1 = new Set(wdata.filter(x=>x.Year ==="105").map(x=>x.County));
-    let listdata2 = new Set(wdata.filter(x=>x.Year ==="106").map(x=>x.County));
-    let listdata3 = new Set(wdata.filter(x=>x.Year ==="107").map(x=>x.County));
-    let listdata4 = new Set(wdata.filter(x=>x.Year ==="108").map(x=>x.County));
-    let listdata5 = new Set(wdata.filter(x=>x.Year ==="109").map(x=>x.County));
+
+
+
+    let listdata0 = new Set(cdata.map(x => x.City));
+    let listdata01 = new Set(cdata.map(x => x.City === "臺北市" ? "台北市" : x.City));
+    let listdata = new Set(wdata.filter(x => x.Year === "104").map(x => x.County));
+    let listdata1 = new Set(wdata.filter(x => x.Year === "105").map(x => x.County));
+    let listdata2 = new Set(wdata.filter(x => x.Year === "106").map(x => x.County));
+    let listdata3 = new Set(wdata.filter(x => x.Year === "107").map(x => x.County));
+    let listdata4 = new Set(wdata.filter(x => x.Year === "108").map(x => x.County));
+    let listdata5 = new Set(wdata.filter(x => x.Year === "109").map(x => x.County));
 
     console.log(listdata0);
     console.log(listdata01);
@@ -101,6 +117,41 @@ function UIInitialzie() {
     console.log(listdata3);
     console.log(listdata4);
     console.log(listdata5);
+
+
+    let step1 = wdata.filter(x => x.Year === "105");
+    let step2 = cdata1.filter((x) => step1.find(y => x.City == y.County && x.District == y.Town) !== undefined);
+    let step3 = step2.map((citydistrict) => {
+        return {
+            City: citydistrict.City,
+            District: citydistrict.District,
+            Lat: citydistrict.Lat,
+            Lat: citydistrict.Lat,
+            Lng: citydistrict.Lng,
+            ConsumptionOfwater: step1.filter((waterData) => waterData.County == citydistrict.City && waterData.Town == citydistrict.District)
+                .sort((a,b)=>a.Month-b.Month).map((item) => {
+                return {
+                    Year:item.Year,
+                    Month: item.Month,
+                    TheDailyDomesticConsumptionOfWaterPerPerson: item.TheDailyDomesticConsumptionOfWaterPerPerson,
+                };
+            })
+        };
+
+    });
+
+
+
+    console.log(step3);
+
+
+
+    // let test02 = wdata.filter(x=>x.Year=="104");
+    // console.log(test02);
+
+    // let test03 = wdata.find(x => x.Year === "110");
+    // console.log(test03);
+
 
     // let tplselectopt = yearSelect.getElementById("tpl-yearSelect-option");
     // let yearSelect = tplyearSelect.content.cloneNode(true);
