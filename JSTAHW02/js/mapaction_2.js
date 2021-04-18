@@ -4,33 +4,31 @@ const cityDistrictUrl = "https://raw.githubusercontent.com/taihochan/JsonData/ma
 const waterDataUrl = "https://raw.githubusercontent.com/JFMio07/FileStorage/main/%E5%8F%B0%E7%81%A3%E6%AF%8F%E6%97%A5%E8%87%AA%E4%BE%86%E6%B0%B4%E7%94%A8%E9%87%8F.json";
 
 let map;
-let dataMap = new Map();
-let body;
-let container;
+let markers = [];
+let infos = [];
+let dataMap;
+let container, body, cityDistrict, waterData;
+const iconPath = "./images/icons/"
+const Taiwan = { lat: 23.885536351487243, lng: 120.2807758002728 };
+
+
 
 window.onload = () => {
+    dataMap = new Map();
     let tplInitDataLoading = document.getElementById("tpl-initDataLoading").content.cloneNode(true);
     container = document.querySelector(".container");
     body = document.getElementsByTagName("body")[0];
     body.insertBefore(tplInitDataLoading, container);
     WaitasyncTasks([LoadCityDistrict, LoadWaterData], UIInitialzie);
-
-
-    let btn1 = document.getElementById("btn1");
-    btn1.addEventListener("click", function () {
-        let opt = document.querySelector(".yearSelect");
-        console.log(opt.value);
-        console.log(opt.options);
-    });
 }
 
 
 function UIInitialzie() {
 
-    let waterData = dataMap.get("WaterData").TaiwanWaterExchangingData
+    waterData = dataMap.get("WaterData").TaiwanWaterExchangingData
         .StatisticofWaterResourcesClass.StatisticofWaterUsageClass.TheConsumptionOfWater;
 
-    let cityDistrict = dataMap.get("CityDistrict").map((x) => {
+    cityDistrict = dataMap.get("CityDistrict").map((x) => {
         return {
             City: x.City === "臺北市" ? "台北市" : x.City,
             District: x.District,
@@ -38,141 +36,24 @@ function UIInitialzie() {
             Lng: x.Lng
         }
     });
-    
-        
+
+
     // tpl-yearSelect-option
     let row = container.querySelector(".row:nth-child(1)");
     let tplyearSelect = document.getElementById("tpl-yearSelect").content.cloneNode(true);
     let yearSelect = tplyearSelect.querySelector("#yearSelect");
 
     let yearList = new Set(waterData.map((item) => item.Year));
-
-    yearList.forEach((value)=>{
+    yearList.forEach((value) => {
         let tplselectopt = tplyearSelect.getElementById("tpl-yearSelect-option").content.cloneNode(true);
         let opt = tplselectopt.querySelector("option");
-        opt.value=value;
-        opt.textContent=value.toString();
+        opt.value = value;
+        opt.textContent = `${value.toString()}${"年"}`;
         yearSelect.appendChild(tplselectopt);
     });
 
+    tplyearSelect.querySelector("button").addEventListener("click", Process);
     row.appendChild(tplyearSelect);
-
-
-// yearSelect
-
-
-
-    // ys.appendChild(tplselectopt);
-    // ys.appendChild(tplselectopt);
-
-    // let yearList = dataMap.get("waterData");
-    // console.log(yearList);
-
-
-    // {City: "台北市", District: "中正區", Lat: 25.0324039, Lng: 121.519882}
-
-    // console.log(cdata1);
-
-    // console.log(dataMap);
-    // console.log(yearList);
-
-
-    // let wdataM = wdata.filter(x => x.Year === "104");
-
-    // let listdata = cdata.filter((x) => {
-    //     return x === 
-
-    // });
-
-
-    // wdata.filter(x => x.Year === "104").map(x => {
-    //     let data1 = cdata.filter(y => y.District === x.Town);
-
-
-    //     let dataset = new Map([
-    //         [],
-    //     ]);
-
-    // });
-
-
-    // let listdata = wdata.filter(x=>x.Year ==="104").map((x)=>{
-    //     let data1 = cdata.filter(y=>y.District === x.Town);
-
-    //     return data1.map((x)=>{
-    //         []
-    //     });
-
-    //     let dataset = new Map([
-    //         [],
-    //     ]);
-
-    // });
-
-
-
-
-    // let listdata0 = new Set(cdata.map(x => x.City));
-    // let listdata01 = new Set(cdata.map(x => x.City === "臺北市" ? "台北市" : x.City));
-    // let listdata = new Set(wdata.filter(x => x.Year === "104").map(x => x.County));
-    // let listdata1 = new Set(wdata.filter(x => x.Year === "105").map(x => x.County));
-    // let listdata2 = new Set(wdata.filter(x => x.Year === "106").map(x => x.County));
-    // let listdata3 = new Set(wdata.filter(x => x.Year === "107").map(x => x.County));
-    // let listdata4 = new Set(wdata.filter(x => x.Year === "108").map(x => x.County));
-    // let listdata5 = new Set(wdata.filter(x => x.Year === "109").map(x => x.County));
-
-    // console.log(listdata0);
-    // console.log(listdata01);
-    // console.log(listdata);
-    // console.log(listdata1);
-    // console.log(listdata2);
-    // console.log(listdata3);
-    // console.log(listdata4);
-    // console.log(listdata5);
-
-
-    // let step1 = wdata.filter(x => x.Year === "105");
-    // let step2 = cdata1.filter((x) => step1.find(y => x.City == y.County && x.District == y.Town) !== undefined);
-    // let step3 = step2.map((citydistrict) => {
-    //     return {
-    //         City: citydistrict.City,
-    //         District: citydistrict.District,
-    //         Lat: citydistrict.Lat,
-    //         Lat: citydistrict.Lat,
-    //         Lng: citydistrict.Lng,
-    //         ConsumptionOfwater: step1.filter((waterData) => waterData.County == citydistrict.City && waterData.Town == citydistrict.District)
-    //             .sort((a,b)=>a.Month-b.Month).map((item) => {
-    //             return {
-    //                 Year:item.Year,
-    //                 Month: item.Month,
-    //                 TheDailyDomesticConsumptionOfWaterPerPerson: item.TheDailyDomesticConsumptionOfWaterPerPerson,
-    //             };
-    //         })
-    //     };
-
-    // });
-
-
-
-    // console.log(step3);
-
-
-
-    // let test02 = wdata.filter(x=>x.Year=="104");
-    // console.log(test02);
-
-    // let test03 = wdata.find(x => x.Year === "110");
-    // console.log(test03);
-
-
-    // let tplselectopt = yearSelect.getElementById("tpl-yearSelect-option");
-    // let yearSelect = tplyearSelect.content.cloneNode(true);
-    // col.appendChild(tplyearSelect);
-    // tplselectopt.
-    // yearSelect.appendChild(tplselectopt);
-
-    // let 
-
 
     initDataLoading = document.querySelector(".initDataLoading");
     for (let i = 0; i <= 10; i++) {
@@ -185,7 +66,6 @@ function UIInitialzie() {
             }
         }, 50 * i);
     }
-
 }
 
 
@@ -205,7 +85,6 @@ function WaitasyncTasks(asyncTasks, callback) {
     });
 }
 
-
 // LoadCityDistrict
 function LoadCityDistrict(checkfinished) {
     LoadDataByXHR("CityDistrict", cityDistrictUrl, dataMap, checkfinished);
@@ -215,7 +94,6 @@ function LoadCityDistrict(checkfinished) {
 function LoadWaterData(checkfinished) {
     LoadDataByXHR("WaterData", waterDataUrl, dataMap, checkfinished);
 }
-
 
 // LoadDataByXHR
 function LoadDataByXHR(name, url, dataMap, callback) {
@@ -238,66 +116,125 @@ function LoadDataByXHR(name, url, dataMap, callback) {
     xhr.send();
 }
 
-// console.log(adminArea);
-// console.log(waterData);
-// let yearList = [];
-// let monthList = [];
-
-
-
-const CHU = { lat: 24.760049283988955, lng: 120.9529990274559 };
-const test = [
-    { lat: 24.770049283988955, lng: 120.9529990274559 },
-    { lat: 24.780049283988955, lng: 120.9529990274559 },
-    { lat: 24.790049283988955, lng: 120.9529990274559 }
-];
-const iconBase =
-    "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
-
-const msgString = "123456789";
+// Init Google Map
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
-        //   center: { lat: -34.397, lng: 150.644 },
-        // 24.756944196132864, 120.95241868853984
-        center: CHU,
-        zoom: 15,
+        center: Taiwan,
+        zoom: 8,
     });
+}
 
-    new google.maps.Marker({
-        position: CHU,
+function AddMarkerWithInfo(position, icon,title,infoContent) {
+
+
+    let marker = new google.maps.Marker({
+        // position : {lat:value , lng:value}
+        position: position,
         map,
-        title: "中華大學",
-        icon: iconBase + "info-i_maps.png",
-
+        title: title,
+        icon: icon,
+        animation: google.maps.Animation.DROP,
     });
 
-    let infos = new Set();
-    test.forEach((item, index) => {
-        const marker = new google.maps.Marker({
-            position: item,
-            map,
-            draggable: true,
-            title: index.toString(),
+    // create infoWindow
+    let info = new google.maps.InfoWindow({ content: infoContent });
 
-        });
-
-        const info = new google.maps.InfoWindow(
-            { content: msgString }
-        );
-
-        infos.add(info);
-        // console.log(info);
-
-        marker.addListener("click", () => {
-            infos.forEach((x) => {
-                x.close();
-            });
-            info.open(map, marker);
-        });
-
-
-
+    // add marker infowindow
+    marker.addListener("click", () => {
+        ClearInfo();
+        info.open(map, marker)
     });
 
+    // add marker click event
+    // marker.addListener("click", toogleBounce);
+    // function toogleBounce() {
+    //     if (marker.getAnimation() !== null) {
+    //         marker.setAnimation(null);
+    //     }
+    //     else {
+    //         marker.setAnimation(google.maps.Animation.BOUNCE);
+    //     }
+    // }
 
+    infos.push(info);
+    markers.push(marker);
+}
+
+function DeleteMarkers() {
+
+    markers.forEach(item => {
+        // google.maps.Marker.setMap(target)
+        item.setMap(null);
+    });
+    markers = [];
+    infos = [];
+
+
+}
+
+function ClearInfo() {
+    infos.forEach((item) => {
+        item.close();
+    });
+}
+
+
+// main process
+function Process() {
+    let yearSelect = document.querySelector("#yearSelect");
+    if (yearSelect.selectedIndex == 0) {
+        alert("請選擇年份");
+        return
+    }
+
+    DeleteMarkers();
+
+    setTimeout(() => {
+        let data = CreateData(yearSelect.value.toString());
+
+        data.forEach((item, index) => {
+            let indoConent = CreateInfoContent(item);
+
+            setTimeout(() => {
+                AddMarkerWithInfo(
+                    { lat: item.Lat, lng: item.Lng },
+                    iconPath + "water-48px.png",
+                    `${item.City} ${item.District}`,
+                    indoConent
+                );
+            }, 20 * index
+            );
+        });
+
+    }, 100);
+}
+
+// CreateData By Year
+function CreateData(year) {
+    // let waterDataYear = waterData.filter(x => x.Year === year && x.County === "台北市");
+    let waterDataYear = waterData.filter(x => x.Year === year);
+    let DistrictIntersection = cityDistrict.filter((x) => waterDataYear.find(y => x.City == y.County && x.District == y.Town) !== undefined);
+
+    return DistrictIntersection.map((citydistrict) => {
+        return {
+            City: citydistrict.City,
+            District: citydistrict.District,
+            Lat: citydistrict.Lat,
+            Lat: citydistrict.Lat,
+            Lng: citydistrict.Lng,
+            ConsumptionOfwater: waterDataYear.filter((waterData) => waterData.County == citydistrict.City && waterData.Town == citydistrict.District)
+                .sort((a, b) => a.Month - b.Month).map((item) => {
+                    return {
+                        Year: item.Year,
+                        Month: item.Month,
+                        TheDailyDomesticConsumptionOfWaterPerPerson: item.TheDailyDomesticConsumptionOfWaterPerPerson,
+                    };
+                })
+        };
+    });
+}
+
+// CreateInoContent
+function CreateInfoContent(item){
+    return `${item.City} ${item.District}111`;
 }

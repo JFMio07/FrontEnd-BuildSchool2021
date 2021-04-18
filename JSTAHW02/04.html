@@ -18,7 +18,7 @@
 
 <body>
 
-    <div class="container pt-5">
+    <div class="container">
         <div class="row">
 
         </div>
@@ -29,13 +29,6 @@
         </div>
     </div>
 
-
-
-    <button id="btn1">test</button>
-
-
-
-
     <!-- #region template  -->
     <template id="tpl-initDataLoading">
         <div class="initDataLoading">
@@ -44,21 +37,19 @@
     </template>
     <template id="tpl-yearSelect">
         <div class="col-12">
-            <label for="yearSelect">請選擇年分</label>
+            <label for="yearSelect">資料區間</label>
 
 
-            <div class="col-12 d-flex  g-0">
+            <div class="d-flex">
                 <select class="form-select" aria-label="" id="yearSelect">
-                    <option value="-1" selected>請選擇</option>
+                    <option value="-1" selected>請選擇年份</option>
                     <template id="tpl-yearSelect-option">
                         <option value=""></option>
                     </template>
                 </select>
-                <button class="btn btn-primary">送出</button>
+                <button class="btn btn-primary ms-1">送出</button>
             </div>
         </div>
-        <!-- <div class="col-auto">
-        </div> -->
     </template>
 
 

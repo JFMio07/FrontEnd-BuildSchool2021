@@ -16,6 +16,15 @@ body {
 
 .container {
   height: 100%;
+  padding: 10px;
+}
+
+.container > .row{
+  margin-bottom: 10px;
+
+}
+.container > div:nth-child(2) {
+  height: 90%;
 }
 /* initDataLoading */
 .initDataLoading {
@@ -34,4 +43,9 @@ body {
 .initDataLoading > span {
   font-size: 60px;
   color: #fff;
+}
+
+#yearSelect {
+  width: auto;
+  flex: 1 0 auto;
 }
