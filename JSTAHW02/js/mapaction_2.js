@@ -139,7 +139,11 @@ function AddMarkerWithInfo(position, icon,title,infoContent) {
     // create infoWindow
     let info = new google.maps.InfoWindow({ content: infoContent });
 
-    marker.addListener("click", MarkerClick);
+    //  add marker infowindow
+    marker.addListener("click", () => {
+        ClearInfo();
+        info.open(map, marker)
+    });
 
     // add marker click event
     // marker.addListener("click", toogleBounce);
@@ -155,12 +159,12 @@ function AddMarkerWithInfo(position, icon,title,infoContent) {
     infos.push(info);
     markers.push(marker);
 }
-function MarkerClick(){
-    ClearInfo();
-    this.map.center = this.position,
-    this.map.zoom = 17;
-    info.open(map, marker)
-}
+// function MarkerClick(){
+//     ClearInfo();
+//     this.map.center = this.position,
+//     this.map.zoom = 17;
+//     info.open(map, marker)
+// }
 function DeleteMarkers() {
 
     markers.forEach(item => {
