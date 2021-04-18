@@ -220,7 +220,6 @@ function CreateData(year) {
             City: citydistrict.City,
             District: citydistrict.District,
             Lat: citydistrict.Lat,
-            Lat: citydistrict.Lat,
             Lng: citydistrict.Lng,
             ConsumptionOfwater: waterDataYear.filter((waterData) => waterData.County == citydistrict.City && waterData.Town == citydistrict.District)
                 .sort((a, b) => a.Month - b.Month).map((item) => {
@@ -235,6 +234,31 @@ function CreateData(year) {
 }
 
 // CreateInoContent
-function CreateInfoContent(item){
-    return `${item.City} ${item.District}111`;
+function CreateInfoContent(data){        
+    let yearData;
+    data.ConsumptionOfwater.forEach((water)=>{
+        yearData = yearData || "";        
+        yearData +=`
+        <tr>
+            <th scope="row">${water.Month}</th>
+            <td>${water.TheDailyDomesticConsumptionOfWaterPerPerson}</td>
+        </tr>
+        `;        
+    });
+    
+    return `
+        <div class="text-center">
+            <h2>${data.City} ${data.District} ${data.ConsumptionOfwater[0].Year}年度<span class="d-block">每人每日用水量<span></h2>
+            <table class="table table-info table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">月份</th>
+                        <th scope="col">每人每日用水量</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${yearData}
+                </tbody>
+            </table>
+        </div>`;
 }
