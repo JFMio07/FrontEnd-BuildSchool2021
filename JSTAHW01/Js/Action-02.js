@@ -178,11 +178,15 @@ function CreatePDTitle(selProduct) {
   // choice Product : title
   let title = document.createElement("h2");
   title.innerHTML = `<span>全新</span>`;
+  title.classList.add("buy-title");
+  pdAction.appendChild(title);
+  
+  
+  let title = $g("#tpl-buyTitle");
   title.appendChild(
     document.createTextNode(`購買 ${selProduct.pdInfo.catelog}`)
   );
-  title.classList.add("buy-title");
-  pdAction.appendChild(title);
+  
 
 }
 
