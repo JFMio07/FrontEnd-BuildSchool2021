@@ -102,7 +102,7 @@ body {
 }
 .calendar-days div {
   padding: 5px;
-  height: 20%;
+  height: 16.6666666%;
   border-right: 1px solid #dadce0;
   border-bottom: 1px solid #dadce0;
 }
@@ -114,7 +114,7 @@ body {
   border-left: 1px solid #dadce0;
 }
 
-.dayInfo {
+.dayTitle {
   margin-bottom: 2px;
   display: flex;
   justify-content: center;
@@ -127,6 +127,6 @@ body {
 
   background-color: #1a73e8;
   border-radius: 50%;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: #fff;
 }
