@@ -1,8 +1,11 @@
 let currentDate, targetDate;
 const monuthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Septemper", "October", "November", "December"];
+const dayOfWeek = 7;
+
 window.onload = function () {
-    currentDate = new Date(2021,03);
+    currentDate = new Date();
     console.log(currentDate);
+
     let dates = CreateDays(currentDate.getFullYear(), currentDate.getMonth());
     console.log(dates);
 
@@ -14,23 +17,26 @@ function CreateDays(year, month) {
 
     // get the first day of the month
     let startdate = new Date(year, month);
+    // get the last day of the month
+    let enddate = new Date(year, month + 1, 0);
     // get the day of week at the first day
     let startday = startdate.getDay();
+    let totalDays = enddate.getDate() - startdate.getDate() + 1;
+    let days = startday + enddate.getDate() - startdate.getDate() + 1;
+
+    let count = Math.floor(days / dayOfWeek);
+    count = (days % dayOfWeek) === 0 ? count : count + 1;
+    let loopCount = count * dayOfWeek;
+
     let dates = [];
     startdate.setDate(startdate.getDate() - startday);
 
     // generate dates
-    for (let i = 0; i < 42; i++) {
+    for (let i = 0; i < loopCount; i++) {
         if (i !== 0) { startdate.setDate(startdate.getDate() + 1); }
-        dates.push({
-            year: startdate.getFullYear(),
-            month: startdate.getMonth(),
-            date: startdate.getDate(),
-            days: startdate.getDay(),
-            isTarget: YM_Equal(startdate, currentDate),
-            isCurrentDay: YMD_Equal(startdate, currentDate)
-        });
+        dates.push(new Date(startdate));
     }
+
     return dates;
 }
 
@@ -50,30 +56,86 @@ function YM_Equal(dateA, dateB) {
     return true;
 }
 
+// function RenderCalendar(targetDate, dates) {
+//     let calendar = document.querySelector(".calendar");
+//     calendar.querySelector(".calendar-date :first-child").innerText = targetDate.getFullYear();
+//     calendar.querySelector(".calendar-date :last-child").innerText = monuthNames[targetDate.getMonth()];
+
+//     let dayInfo = document.querySelector("#tpl-dayInfo");
+//     let calendarDays = calendar.querySelector(".calendar-days");
+
+//     dates.forEach((item, index) => {
+
+//         let clonedayInfo = dayInfo.content.cloneNode(true);
+//         let dayinfo = clonedayInfo.querySelector(".dayInfo");
+//         // let daytitle = clonedayInfo.querySelector(".dayTitle");
+
+//         let isCurrentDate = YMD_Equal(item, currentDate);
+//         if (isCurrentDate) {
+//             dayinfo.classList.add("currentDay");
+//         }
+
+//         if (YM_Equal(item, targetDate)) {
+//             dayinfo.querySelector("span").innerText = item.getDate();
+//             if(isCurrentDate){dayinfo.classList.add("intarget")};
+//         } else {
+//             dayinfo.querySelector("span").innerText = `${monuthNames[item.getMonth()]} ${item.getDate()}`;
+//             if(isCurrentDate){dayinfo.classList.add("outtarget")};
+//         }
+//         calendarDays.appendChild(clonedayInfo);
+//     });
+// }
+
 function RenderCalendar(targetDate, dates) {
     let calendar = document.querySelector(".calendar");
     calendar.querySelector(".calendar-date :first-child").innerText = targetDate.getFullYear();
     calendar.querySelector(".calendar-date :last-child").innerText = monuthNames[targetDate.getMonth()];
+    let calendardaysWrap = document.querySelector(".calendar-daysWrap");
+
+    let existcalendarDays = document.querySelector(".calendar-days");
+    let calendarDays = CreateCalendardays(targetDate, dates);
+    if (existcalendarDays === null) {
+        calendardaysWrap.appendChild(calendarDays);
+    }
+    else {
+        alert("hi");
+    }
+
+
+    // calendardaysWrap.appendChild(CreateCalendardays(targetDate, dates));
+    // calendardaysWrap.appendChild(CreateCalendardays(targetDate, dates));
+
+
+}
+
+function CreateCalendardays(targetDate, dates) {
+    let calendarDays = document.createElement("div");
+    calendarDays.classList.add("calendar-days");
 
     let dayInfo = document.querySelector("#tpl-dayInfo");
-    console.log(dayInfo);
-    let calendarDays = calendar.querySelector(".calendar-days");
 
     dates.forEach((item, index) => {
 
         let clonedayInfo = dayInfo.content.cloneNode(true);
-        let daytitle = clonedayInfo.querySelector(".dayTitle");
+        let dayinfo = clonedayInfo.querySelector(".dayInfo");
+        // let daytitle = clonedayInfo.querySelector(".dayTitle");
 
-        if (item.isCurrentDay) {
-            daytitle.classList.add("currentDay");
+        let isCurrentDate = YMD_Equal(item, currentDate);
+        if (isCurrentDate) {
+            dayinfo.classList.add("currentDay");
         }
 
-        daytitle.querySelector("span").innerText = item.date;
-
+        if (YM_Equal(item, targetDate)) {
+            dayinfo.querySelector("span").innerText = item.getDate();
+            if (isCurrentDate) { dayinfo.classList.add("intarget") };
+        } else {
+            dayinfo.querySelector("span").innerText = `${monuthNames[item.getMonth()]} ${item.getDate()}`;
+            if (isCurrentDate) { dayinfo.classList.add("outtarget") };
+        }
         calendarDays.appendChild(clonedayInfo);
-
-
     });
+
+    return calendarDays;
 }
 
 
