@@ -1,15 +1,51 @@
-let currentDate, targetDate;
+let todayDate, currentDate;
 const monuthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Septemper", "October", "November", "December"];
 const dayOfWeek = 7;
 
 window.onload = function () {
-    currentDate = new Date();
+    todayDate = new Date();
+    currentDate = new Date(todayDate.getFullYear(), todayDate.getMonth());
     console.log(currentDate);
+    console.log(todayDate);
 
-    let dates = CreateDays(currentDate.getFullYear(), currentDate.getMonth());
+    let dates = CreateDays(todayDate.getFullYear(), todayDate.getMonth());
     console.log(dates);
 
-    RenderCalendar(currentDate, dates);
+    RenderCalendar(todayDate, dates);
+
+    // register btnPrev click event
+    document.querySelector(".calendar-btnPrev").addEventListener(
+        "click",
+        function () {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            let dates = CreateDays(currentDate.getFullYear(), currentDate.getMonth());
+            RenderCalendar(
+                new Date(currentDate.getFullYear(), currentDate.getMonth()),
+                dates
+            );
+        }
+    );
+
+    // register btnNext click event
+    document.querySelector(".calendar-btnNext").addEventListener(
+        "click",
+        function () {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            let dates = CreateDays(currentDate.getFullYear(), currentDate.getMonth());
+            RenderCalendar(
+                new Date(currentDate.getFullYear(), currentDate.getMonth()),
+                dates
+            );
+        }
+    );
+
+
+
+
+
+
+
+
 }
 
 
@@ -70,17 +106,17 @@ function YM_Equal(dateA, dateB) {
 //         let dayinfo = clonedayInfo.querySelector(".dayInfo");
 //         // let daytitle = clonedayInfo.querySelector(".dayTitle");
 
-//         let isCurrentDate = YMD_Equal(item, currentDate);
-//         if (isCurrentDate) {
+//         let istodayDate = YMD_Equal(item, todayDate);
+//         if (istodayDate) {
 //             dayinfo.classList.add("currentDay");
 //         }
 
 //         if (YM_Equal(item, targetDate)) {
 //             dayinfo.querySelector("span").innerText = item.getDate();
-//             if(isCurrentDate){dayinfo.classList.add("intarget")};
+//             if(istodayDate){dayinfo.classList.add("intarget")};
 //         } else {
 //             dayinfo.querySelector("span").innerText = `${monuthNames[item.getMonth()]} ${item.getDate()}`;
-//             if(isCurrentDate){dayinfo.classList.add("outtarget")};
+//             if(istodayDate){dayinfo.classList.add("outtarget")};
 //         }
 //         calendarDays.appendChild(clonedayInfo);
 //     });
@@ -98,7 +134,8 @@ function RenderCalendar(targetDate, dates) {
         calendardaysWrap.appendChild(calendarDays);
     }
     else {
-        alert("hi");
+        existcalendarDays.parentNode.removeChild(existcalendarDays);
+        calendardaysWrap.appendChild(calendarDays);
     }
 
 
@@ -120,17 +157,17 @@ function CreateCalendardays(targetDate, dates) {
         let dayinfo = clonedayInfo.querySelector(".dayInfo");
         // let daytitle = clonedayInfo.querySelector(".dayTitle");
 
-        let isCurrentDate = YMD_Equal(item, currentDate);
-        if (isCurrentDate) {
+        let istodayDate = YMD_Equal(item, todayDate);
+        if (istodayDate) {
             dayinfo.classList.add("currentDay");
         }
 
         if (YM_Equal(item, targetDate)) {
             dayinfo.querySelector("span").innerText = item.getDate();
-            if (isCurrentDate) { dayinfo.classList.add("intarget") };
+            if (istodayDate) { dayinfo.classList.add("intarget"); }
         } else {
             dayinfo.querySelector("span").innerText = `${monuthNames[item.getMonth()]} ${item.getDate()}`;
-            if (isCurrentDate) { dayinfo.classList.add("outtarget") };
+            dayinfo.classList.add("outtarget");
         }
         calendarDays.appendChild(clonedayInfo);
     });
