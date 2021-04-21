@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700&display=swap");
+
+/* layout */
+html,
+body {
+  height: 100%;
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+.container-fluid {
+  height: 100%;
+}
+
+.calendar {
+  padding-top: 10px;
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.calendar-title .calendar-date {
+  margin: 0 10px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.calendar-date {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.calendar-date span {
+  padding: 0 5px;
+}
+.calendar-date span:first-child {
+  color: rgb(169, 157, 194);
+}
+.calendar-date span:last-child {
+  font-weight: bold;
+  color: rgb(155, 214, 5);
+}
+
+.calendar-title button {
+  outline: none;
+  border: none;
+  background-color: #fff;
+  box-sizing: border-box;
+  color: gray;
+  min-width: 1.5rem;
+  opacity: 0.5;
+}
+.calendar-title button:hover {
+  opacity: 1;
+}
+.calendar-title .calendar-btnPrev {
+  order: -1;
+}
+
+.calendar-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-weeklabel div,
+.calendar-days div {
+  width: 14.2857142%;
+  box-sizing: border-box;
+}
+
+.calendar-weeklabel {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 5px;
+}
+.calendar-weeklabel div {
+  text-align: center;
+  color: gray;
+  font-weight: bold;
+}
+
+.calendar-days h2 {
+  font-size: 16px;
+  text-align: center;
+}
+
+.calendar-days {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+.calendar-days div {
+  padding: 5px;
+  height: 20%;
+  border-right: 1px solid #dadce0;
+  border-bottom: 1px solid #dadce0;
+}
+
+.calendar-days div:nth-child(-n + 7) {
+  border-top: 1px solid #dadce0;
+}
+.calendar-days div:nth-child(7n + 1) {
+  border-left: 1px solid #dadce0;
+}
+
+.dayInfo {
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: center;
+}
+
+/* State */
+.currentDay span {
+  width: 22px;
+  line-height: 22px;
+
+  background-color: #1a73e8;
+  border-radius: 50%;
+  font-weight: bold;
+  color: #fff;
+}
