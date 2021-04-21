@@ -21,7 +21,7 @@ window.onload = function () {
             let dates = CreateDays(currentDate.getFullYear(), currentDate.getMonth());
             RenderCalendar(
                 new Date(currentDate.getFullYear(), currentDate.getMonth()),
-                dates
+                dates,
             );
         }
     );
@@ -131,13 +131,53 @@ function RenderCalendar(targetDate, dates) {
     let existcalendarDays = document.querySelector(".calendar-days");
     let calendarDays = CreateCalendardays(targetDate, dates);
     if (existcalendarDays === null) {
+        // console.log(calendarDays);
         calendardaysWrap.appendChild(calendarDays);
+        // console.log(calendarDays);
+
+        // (function (existcalendarDays,calendarDays) {
+        //     setTimeout((function (a, b) {
+        //         console.log(a);
+        //         console.log(b);
+        //         a.style.cssText = "opacity:0; transition: all 1000ms";
+        //         b.style.cssText = "opacity:1; transition: all 1000ms";
+        //     }), 1000);
+        // })();
+
+
+
     }
     else {
-        existcalendarDays.parentNode.removeChild(existcalendarDays);
+        // existcalendarDays.parentNode.removeChild(existcalendarDays);
+        // console.log(calendarDays);
         calendardaysWrap.appendChild(calendarDays);
+        // console.log(calendarDays);
     }
 
+    console.log(calendarDays);
+    setTimeout(() => {
+        // console.log(calendarDays);
+
+        existcalendarDays.style.cssText = "opacity:0; transition: all 200ms";
+        calendarDays.style.cssText = "opacity:1; transform:translate(50px,0);";
+        setTimeout(() => {
+            calendarDays.style.cssText = "opacity:1; transform:translate(0,0);transition: all 200ms;";
+
+            setTimeout(() => {
+                existcalendarDays.parentNode.removeChild(existcalendarDays);
+            }, 200);
+        });
+    }, 200);
+
+
+
+    // setTimeout(function (existcalendarDays,calendarDays) {
+    //     console.log(calendarDays);
+    //     console.log(existcalendarDays);
+    //     existcalendarDays.style.cssText = "opacity:0; transition: all 1000ms";
+    //     calendarDays.style.cssText = "opacity:1; transition: all 1000ms";
+    // }, 5000);
+    // console.log(calendarDays);
 
     // calendardaysWrap.appendChild(CreateCalendardays(targetDate, dates));
     // calendardaysWrap.appendChild(CreateCalendardays(targetDate, dates));
@@ -148,6 +188,8 @@ function RenderCalendar(targetDate, dates) {
 function CreateCalendardays(targetDate, dates) {
     let calendarDays = document.createElement("div");
     calendarDays.classList.add("calendar-days");
+    calendarDays.style.cssText = "opacity:0";
+
 
     let dayInfo = document.querySelector("#tpl-dayInfo");
 
@@ -171,6 +213,7 @@ function CreateCalendardays(targetDate, dates) {
         }
         calendarDays.appendChild(clonedayInfo);
     });
+
 
     return calendarDays;
 }
