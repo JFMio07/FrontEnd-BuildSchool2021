@@ -38,14 +38,6 @@ window.onload = function () {
             );
         }
     );
-
-
-
-
-
-
-
-
 }
 
 
@@ -92,36 +84,6 @@ function YM_Equal(dateA, dateB) {
     return true;
 }
 
-// function RenderCalendar(targetDate, dates) {
-//     let calendar = document.querySelector(".calendar");
-//     calendar.querySelector(".calendar-date :first-child").innerText = targetDate.getFullYear();
-//     calendar.querySelector(".calendar-date :last-child").innerText = monuthNames[targetDate.getMonth()];
-
-//     let dayInfo = document.querySelector("#tpl-dayInfo");
-//     let calendarDays = calendar.querySelector(".calendar-days");
-
-//     dates.forEach((item, index) => {
-
-//         let clonedayInfo = dayInfo.content.cloneNode(true);
-//         let dayinfo = clonedayInfo.querySelector(".dayInfo");
-//         // let daytitle = clonedayInfo.querySelector(".dayTitle");
-
-//         let istodayDate = YMD_Equal(item, todayDate);
-//         if (istodayDate) {
-//             dayinfo.classList.add("currentDay");
-//         }
-
-//         if (YM_Equal(item, targetDate)) {
-//             dayinfo.querySelector("span").innerText = item.getDate();
-//             if(istodayDate){dayinfo.classList.add("intarget")};
-//         } else {
-//             dayinfo.querySelector("span").innerText = `${monuthNames[item.getMonth()]} ${item.getDate()}`;
-//             if(istodayDate){dayinfo.classList.add("outtarget")};
-//         }
-//         calendarDays.appendChild(clonedayInfo);
-//     });
-// }
-
 function RenderCalendar(targetDate, dates) {
     let calendar = document.querySelector(".calendar");
     calendar.querySelector(".calendar-date :first-child").innerText = targetDate.getFullYear();
@@ -135,23 +97,14 @@ function RenderCalendar(targetDate, dates) {
         calendardaysWrap.appendChild(calendarDays);
         // console.log(calendarDays);
 
-        // (function (existcalendarDays,calendarDays) {
-        //     setTimeout((function (a, b) {
-        //         console.log(a);
-        //         console.log(b);
-        //         a.style.cssText = "opacity:0; transition: all 1000ms";
-        //         b.style.cssText = "opacity:1; transition: all 1000ms";
-        //     }), 1000);
-        // })();
-
-
-
     }
     else {
         // existcalendarDays.parentNode.removeChild(existcalendarDays);
         // console.log(calendarDays);
         calendardaysWrap.appendChild(calendarDays);
         // console.log(calendarDays);
+
+
     }
 
     console.log(calendarDays);
@@ -188,8 +141,6 @@ function RenderCalendar(targetDate, dates) {
 function CreateCalendardays(targetDate, dates) {
     let calendarDays = document.createElement("div");
     calendarDays.classList.add("calendar-days");
-    calendarDays.style.cssText = "opacity:0";
-
 
     let dayInfo = document.querySelector("#tpl-dayInfo");
 
