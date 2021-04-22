@@ -1,5 +1,4 @@
 let todayDate, currentDate;
-let flags = { render_busy: false };
 const monuthNames = [
   "January",
   "February",
@@ -25,7 +24,7 @@ window.onload = function () {
   let dates = CreateDates(todayDate.getFullYear(), todayDate.getMonth());
   //   console.log(dates);
 
-  RenderCalendarDays(todayDate, dates, true);
+  RenderCalendar(todayDate, dates, true);
 
   // register btnPrev click event
   document
@@ -33,7 +32,7 @@ window.onload = function () {
     .addEventListener("click", function () {
       currentDate.setMonth(currentDate.getMonth() - 1);
 
-      RenderCalendarDays(
+      RenderCalendar(
         new Date(currentDate.getFullYear(), currentDate.getMonth()),
         CreateDates(currentDate.getFullYear(), currentDate.getMonth()),
         false
@@ -46,7 +45,7 @@ window.onload = function () {
     .addEventListener("click", function () {
       currentDate.setMonth(currentDate.getMonth() + 1);
 
-      RenderCalendarDays(
+      RenderCalendar(
         new Date(currentDate.getFullYear(), currentDate.getMonth()),
         CreateDates(currentDate.getFullYear(), currentDate.getMonth()),
         true
@@ -108,7 +107,7 @@ function YM_Equal(dateA, dateB) {
 }
 
 
-function RenderCalendarDays(srcdate, srcdatelist, isIncrease) {
+function RenderCalendar(srcdate, srcdatelist, isIncrease) {
   let calendar = document.querySelector(".calendar");
 
   calendar.querySelector(".calendar-date :first-child").innerText = srcdate.getFullYear();
@@ -116,31 +115,77 @@ function RenderCalendarDays(srcdate, srcdatelist, isIncrease) {
 
   let calendardaysWrap = document.querySelector(".calendar-daysWrap");
 
-  let existcalendarDays = calendardaysWrap.querySelector(".calendar-days");
+  let existcalendarDays = document.querySelector(".calendar-days");
   let calendarDays = CreateCalendardays(srcdate, srcdatelist);
 
-  // calendarDays is not exist, add new calendardays 
-  // calendarDays is exist,=> add new calendardays ,then remove previous calendarDays
+  
   if (existcalendarDays === null) {
     calendardaysWrap.appendChild(calendarDays);
   } else {
-    if (isIncrease) {
-      existcalendarDays.style.cssText = "opacity:0; transform:translate(-100%,0); transition: .2s;";
-      calendarDays.style.cssText = "opacity:1; transform:translate(100%,0);";
-    } else {
-      existcalendarDays.style.cssText = "opacity:0; transform:translate(100%,0); transition: .2s;";
-      calendarDays.style.cssText = "opacity:1; transform:translate(-100%,0);";
-    }
+    let direction;
+
+    // existcalendarDays.parentNode.removeChild(existcalendarDays);
+    // console.log(calendarDays);
+    // calendardaysWrap.appendChild(calendarDays);
+    calendarDays.style.cssText = "opacity:1; transform:translate(-100%,0);";
+    existcalendarDays.style.cssText =
+      "opacity:1; transform:translate(100%,0); transition: .2s;";
     calendardaysWrap.appendChild(calendarDays);
-    setTimeout(() => {
-      calendarDays.style.cssText = "opacity:1; transform:translate(0,0);";
-      let calendardaysWrap = document.querySelector(".calendar-daysWrap");
-      let calendarArray = calendardaysWrap.querySelectorAll(".calendar-days");
-      if (calendarArray.length > 1) {
-        calendardaysWrap.removeChild(calendarArray[0]);
-      }
-    }, 50);
+    // calendarDays.style.cssText =
+    //   "opacity:1; transform:translate(0,0) transition:10s;";
+    existcalendarDays.parentNode.removeChild(existcalendarDays);
+
+    //     setTimeout(() => {
+    //       console.log(existcalendarDays.parentNode);
+    //       console.log(calendarDays);
+
+    //       // calendarDays.style.cssText ="opacity:1; transform:translate(0,0) transition:10s;";
+    //       calendarDays.style.cssText =
+    //         "opacity:1; transform:translate(0,0); transition:.2s;";
+
+    //       if (existcalendarDays !== null) {
+    //         setTimeout(function () {
+    //           console.log(existcalendarDays.parentNode);
+    //           console.log(existcalendarDays);
+
+    //           existcalendarDays.parentNode.removeChild(existcalendarDays);
+    //         }, 1000);
+    //       } else {
+    //         console.log("null null");
+    //       }
+    //     }, 10);
+
+    //     // console.log(calendarDays);
+
+    //     // console.log(calendarDays);
   }
+
+  //   console.log(calendarDays);
+  //   setTimeout(() => {
+  //     // console.log(calendarDays);
+
+  //     existcalendarDays.style.cssText = "opacity:0; transition: all 200ms";
+  //     calendarDays.style.cssText = "opacity:1; transform:translate(50px,0);";
+  //     setTimeout(() => {
+  //       calendarDays.style.cssText =
+  //         "opacity:1; transform:translate(0,0);transition: all 200ms;";
+
+  //       setTimeout(() => {
+  //         existcalendarDays.parentNode.removeChild(existcalendarDays);
+  //       }, 200);
+  //     });
+  //   }, 200);
+
+  // setTimeout(function (existcalendarDays,calendarDays) {
+  //     console.log(calendarDays);
+  //     console.log(existcalendarDays);
+  //     existcalendarDays.style.cssText = "opacity:0; transition: all 1000ms";
+  //     calendarDays.style.cssText = "opacity:1; transition: all 1000ms";
+  // }, 5000);
+  // console.log(calendarDays);
+
+  // calendardaysWrap.appendChild(CreateCalendardays(targetDate, srcdates));
+  // calendardaysWrap.appendChild(CreateCalendardays(targetDate, srcdates));
 }
 
 function CreateCalendardays(srcdate, srcdatelist) {
