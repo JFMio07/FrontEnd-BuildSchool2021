@@ -1,4 +1,4 @@
-let todayDate, currentDate,currentCalendarData,schedules;
+let todayDate, currentDate, currentCalendarData, schedules;
 const monuthNames = [
   "January",
   "February",
@@ -16,40 +16,93 @@ const monuthNames = [
 const dayOfWeek = 7;
 
 
-function dateInfo(year,month,date,day,toDoList){
-  this.year=year,
-  this.month=month,
-  this.date = date,
-  this.day=day,
-  this.toDoList = toDoList
+function dateInfo(year, month, date, day, toDoList) {
+  this.year = year,
+    this.month = month,
+    this.date = date,
+    this.day = day,
+    this.toDoList = toDoList
 }
 
-dateInfo.prototype.toDateObj=function(){
-  return new Date(this.year,this.month,this.date);
+dateInfo.prototype.toDateObj = function () {
+  return new Date(this.year, this.month, this.date);
 };
+
+schedules = [
+  {
+    id:123,
+    year:2021,
+    month:04,
+    date:20,
+    toDo:"he111"
+  }
+];
+// #039be5  fz12
 
 
 window.onload = function () {
   todayDate = new Date();
   currentDate = new Date(todayDate.getFullYear(), todayDate.getMonth());
-  currentCalendarData = CreateCalendarData(todayDate,schedules);
+  currentCalendarData = CreateCalendarData(todayDate, schedules);
   ApplyCalendarDays(currentCalendarData, true);
+  InitAddToDoModal();
   console.log(currentDate);
   console.log(todayDate);
-  
+
 
   // register btnPrev click event
-  document.querySelector(".calendar-btnPrev").addEventListener("click", function(){IncreaseCalendar(false)});
+  document.querySelector(".calendar-btnPrev").addEventListener("click", function () { IncreaseCalendar(false) });
 
   // register btnNext click event
-  document.querySelector(".calendar-btnNext").addEventListener("click", function(){IncreaseCalendar(true)});
+  document.querySelector(".calendar-btnNext").addEventListener("click", function () { IncreaseCalendar(true) });
+
+  // 
+
+  let aa = document.querySelector("#addToDoModal .addEvent").addEventListener("click", function () {
+    InitAddToDoModal();
+    let title = document.querySelector("#addToDoModal #eventTitleInput").value;
+    let date = document.querySelector("#addToDoModal #eventDateInput").value;
+    let desc = document.querySelector("#addToDoModal #eventDescriptInput").value;
+
+    console.log(title);
+    console.log(date);
+    console.log(desc);
+
+    let calendardays = document.querySelector(".calendar-days");
+
+    let aa = currentCalendarData.dates.find(date => date.year === 2021 && date.month === 04 && date.date === 24);
+    console.log(aa);
+
+    if (aa !== undefined) {
+      let bb = currentCalendarData.dates.indexOf(aa);
+      calendardays.querySelectorAll(".dayInfo")[bb].appendChild(document.createTextNode("1234567890"));
+      console.log("in");
+    }
+
+
+
+    // console.log(bb);
+
+
+
+
+
+  });
+
+
 };
+
+function InitAddToDoModal() {
+  document.querySelector("#addToDoModal #eventTitleInput").value = "";
+  document.querySelector("#addToDoModal #eventDateInput").value = `${todayDate.getFullYear()}-${(todayDate.getMonth() + 1).toString().padStart(2, 0)}-${todayDate.getDate().toString().padStart(2, 0)}`;
+  document.querySelector("#addToDoModal #eventDescriptInput").value = "";
+}
 
 // true : increase Calendar
 // false : decrease Calendar
-function IncreaseCalendar (increase){
-  currentDate.setMonth(currentDate.getMonth() + (increase?1:-1));
-  currentCalendarData = CreateCalendarData(currentDate,schedules);
+function IncreaseCalendar(increase) {
+  currentDate.setMonth(currentDate.getMonth() + (increase ? 1 : -1));
+  currentCalendarData = CreateCalendarData(currentDate, schedules);
   ApplyCalendarDays(currentCalendarData, increase);
 }
 
@@ -85,19 +138,19 @@ function CreateDates(year, month) {
 // Create CalendarData: 
 // title : { year , month },
 // dates : [datesInfo] 
-function CreateCalendarData(srcdate,schedules){
-  
+function CreateCalendarData(srcdate, schedules) {
+
   let srcYear = srcdate.getFullYear();
   let srcMonuth = srcdate.getMonth();
 
   let dates = CreateDates(srcYear, srcMonuth);
-  let datesInfo=[];
-  
-  dates.forEach((date)=>{
+  let datesInfo = [];
+
+  dates.forEach((date) => {
     datesInfo.push(
       new dateInfo(
         date.getFullYear(),
-        date.getMonth(), 
+        date.getMonth(),
         date.getDate(),
         date.getDay(),
         [],
@@ -105,9 +158,9 @@ function CreateCalendarData(srcdate,schedules){
   });
 
   return {
-    title:{year: srcYear,month:srcMonuth},
-    dates : datesInfo,
-  } 
+    title: { year: srcYear, month: srcMonuth },
+    dates: datesInfo,
+  }
 }
 
 
@@ -137,7 +190,7 @@ function YM_Equal(dateA, dateB) {
 }
 
 // Apply calendarData to DOM tree
-function ApplyCalendarDays(calendarData , isIncrease) {
+function ApplyCalendarDays(calendarData, isIncrease) {
   let calendar = document.querySelector(".calendar");
 
   calendar.querySelector(
@@ -189,21 +242,31 @@ function CreateCalendardays(calendarData) {
     let clonedayInfo = dayInfo.content.cloneNode(true);
     let dayinfo = clonedayInfo.querySelector(".dayInfo");
     // let daytitle = clonedayInfo.querySelector(".dayTitle");
-   
+
     let istodayDate = YMD_Equal(item.toDateObj(), todayDate);
     if (istodayDate) {
       dayinfo.classList.add("currentDay");
     }
-
-    if (YM_Equal(item.toDateObj(), new Date(calendarData.title.year,calendarData.title.month))) {
+    
+    if (YM_Equal(item.toDateObj(), new Date(calendarData.title.year, calendarData.title.month))) {
       dayinfo.querySelector("span").innerText = item.date;
+      
+      switch(item.day){
+        case 6:
+          dayinfo.classList.add("saturday");
+          break;
+
+        case 0:
+          dayinfo.classList.add("sunday");
+          break;
+      }
+
       if (istodayDate) {
         dayinfo.classList.add("intarget");
       }
     } else {
-      dayinfo.querySelector("span").innerText = `${
-        monuthNames[item.month]
-      } ${item.date}`;
+      dayinfo.querySelector("span").innerText = `${monuthNames[item.month]
+        } ${item.date}`;
       dayinfo.classList.add("outtarget");
     }
     calendarDays.appendChild(clonedayInfo);

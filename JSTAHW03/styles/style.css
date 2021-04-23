@@ -31,9 +31,8 @@ body {
   text-align: center;
 }
 
-
 .calendar-btnPrev,
-.calendar-btnNext{
+.calendar-btnNext {
   font-size: 30px;
 }
 .calendar-date {
@@ -150,6 +149,21 @@ body {
   justify-content: center;
 }
 
+.addToDo {
+  position: fixed;
+  font-size: calc(2rem + 1vw);
+  border-radius: 50%;
+  right: 2%;
+  bottom: 5%;
+  color: #4294ef;
+  border: none;
+  background-color: #fff;
+  padding: 0;
+}
+.addToDo i {
+  display: block;
+}
+
 /* State */
 .currentDay span {
   line-height: 22px;
@@ -158,5 +172,13 @@ body {
 }
 
 .outtarget {
-  color: #dadce0;
+  color: #aab9d6de;
+}
+
+.saturday{
+  color: rgb(155, 214, 5);
+
+}
+.sunday{
+  color: red;
 }
