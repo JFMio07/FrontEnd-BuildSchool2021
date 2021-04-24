@@ -28,26 +28,85 @@ dateInfo.prototype.toDateObj = function () {
   return new Date(this.year, this.month, this.date);
 };
 
+
+function WriteSchedulesFile(schedules) {
+  localStorage.setItem("schedules", JSON.stringify(schedules));
+}
+
+function ReadSchedulesFile() {
+  let raw = localStorage.getItem("schedules");
+
+  if (raw !== undefined) {
+    return JSON.parse(raw);
+  }
+  else {
+    return [];
+  }
+}
 schedules = [
   {
-    id:123,
-    year:2021,
-    month:04,
-    date:20,
-    toDo:"he111"
+    id: 001,
+    year: 2021,
+    month: 04,
+    date: 20,
+    toDo: "12311111111"
+  },
+  {
+    id: 002,
+    year: 2021,
+    month: 04,
+    date: 21,
+    toDo: "45622222222"
+  },
+  {
+    id: 003,
+    year: 2021,
+    month: 04,
+    date: 21,
+    toDo: "7893333333"
+  },
+  {
+    id: 004,
+    year: 2021,
+    month: 05,
+    date: 20,
+    toDo: "101112555555555"
+  },
+  {
+    id: 005,
+    year: 2021,
+    month: 04,
+    date: 24,
+    toDo: "101112555555555"
+  },
+  {
+    id: 006,
+    year: 2021,
+    month: 05,
+    date: 1,
+    toDo: "101112555555555"
   }
 ];
 // #039be5  fz12
 
 
 window.onload = function () {
+
   todayDate = new Date();
+  // todayDate = new Date(2021,4,1);
+  let temp = new Date();
   currentDate = new Date(todayDate.getFullYear(), todayDate.getMonth());
+  // currentDate = new Date(temp.getFullYear(), temp.getMonth());
+  WriteSchedulesFile(schedules);
+  schedules = ReadSchedulesFile();
+  console.log(schedules);
+  // currentCalendarData = CreateCalendarData(temp, schedules);
   currentCalendarData = CreateCalendarData(todayDate, schedules);
   ApplyCalendarDays(currentCalendarData, true);
   InitAddToDoModal();
-  console.log(currentDate);
-  console.log(todayDate);
+  // console.log(currentDate);
+  // console.log(todayDate);
+  // console.log(currentCalendarData);
 
 
   // register btnPrev click event
@@ -55,40 +114,6 @@ window.onload = function () {
 
   // register btnNext click event
   document.querySelector(".calendar-btnNext").addEventListener("click", function () { IncreaseCalendar(true) });
-
-  // 
-
-  let aa = document.querySelector("#addToDoModal .addEvent").addEventListener("click", function () {
-    InitAddToDoModal();
-    let title = document.querySelector("#addToDoModal #eventTitleInput").value;
-    let date = document.querySelector("#addToDoModal #eventDateInput").value;
-    let desc = document.querySelector("#addToDoModal #eventDescriptInput").value;
-
-    console.log(title);
-    console.log(date);
-    console.log(desc);
-
-    let calendardays = document.querySelector(".calendar-days");
-
-    let aa = currentCalendarData.dates.find(date => date.year === 2021 && date.month === 04 && date.date === 24);
-    console.log(aa);
-
-    if (aa !== undefined) {
-      let bb = currentCalendarData.dates.indexOf(aa);
-      calendardays.querySelectorAll(".dayInfo")[bb].appendChild(document.createTextNode("1234567890"));
-      console.log("in");
-    }
-
-
-
-    // console.log(bb);
-
-
-
-
-
-  });
-
 
 };
 
@@ -146,15 +171,15 @@ function CreateCalendarData(srcdate, schedules) {
   let dates = CreateDates(srcYear, srcMonuth);
   let datesInfo = [];
 
-  dates.forEach((date) => {
-    datesInfo.push(
-      new dateInfo(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate(),
-        date.getDay(),
-        [],
-      ));
+  dates.forEach((item) => {
+    let year = item.getFullYear();
+    let month = item.getMonth();
+    let date = item.getDate();
+    let day = item.getDay();
+    let todo = schedules.filter(schedule => {
+      return schedule.year === year && schedule.month - 1 === month && schedule.date === date;
+    });
+    datesInfo.push(new dateInfo(year, month, date, day, todo));
   });
 
   return {
@@ -236,27 +261,31 @@ function CreateCalendardays(calendarData) {
   let calendarDays = document.createElement("div");
   calendarDays.classList.add("calendar-days");
 
-  let dayInfo = document.querySelector("#tpl-dayInfo");
+  let tpldayInfo = document.querySelector("#tpl-dayInfo");
 
   calendarData.dates.forEach((item, index) => {
-    let clonedayInfo = dayInfo.content.cloneNode(true);
+    let clonedayInfo = tpldayInfo.content.cloneNode(true);
     let dayinfo = clonedayInfo.querySelector(".dayInfo");
     // let daytitle = clonedayInfo.querySelector(".dayTitle");
 
     let istodayDate = YMD_Equal(item.toDateObj(), todayDate);
+
+    dayinfo.querySelector(".dayInfo-title").innerText = `${monuthNames[item.month]} ${item.date}`;
     if (istodayDate) {
       dayinfo.classList.add("currentDay");
     }
-    
+
     if (YM_Equal(item.toDateObj(), new Date(calendarData.title.year, calendarData.title.month))) {
-      dayinfo.querySelector("span").innerText = item.date;
-      
-      switch(item.day){
+      dayinfo.querySelector(".dayInfo-label>span").innerText = item.date;
+
+      switch (item.day) {
         case 6:
+          // item.day = 6 : saturday
           dayinfo.classList.add("saturday");
           break;
 
         case 0:
+          // item.day = 0 : sunday
           dayinfo.classList.add("sunday");
           break;
       }
@@ -269,8 +298,33 @@ function CreateCalendardays(calendarData) {
         } ${item.date}`;
       dayinfo.classList.add("outtarget");
     }
+
+    // console.log(item.toDoList);
+
+    let dayInfoToDoBox = dayinfo.querySelector(".dayInfo-toDoBox");
+    item.toDoList.forEach((todo) => {
+      let p = document.createElement("p");
+      p.innerText = todo.toDo;
+      dayInfoToDoBox.appendChild(p);
+
+    });
+
     calendarDays.appendChild(clonedayInfo);
   });
 
   return calendarDays;
+}
+
+// Create UUID
+// reference : Calendar file from TA
+function _uuid() {
+  var d = Date.now();
+  if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
+    d += performance.now(); //use high-precision timer if available
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
 }
