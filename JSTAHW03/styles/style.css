@@ -139,13 +139,8 @@ body {
   border-radius: 5%;
 }
 .dayInfo {
-  /* position: relative; */
   display: flex;
-  /* flex-wrap: wrap; */
   flex-direction: column;
-  /* align-items: stretch; */
-  /* align-content: center; */
-  /* align-content: flex-start; */
 }
 
 .dayInfo-title {
@@ -179,8 +174,8 @@ body {
   right: 0;
   margin: auto;
   overflow: hidden;
-  z-index: 10;
-  color: red;  
+  z-index: 10; 
+  font-size: 12px;
 }
 
 .dayInfo-toDoItem {
@@ -200,9 +195,20 @@ body {
   overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;
-  font-size: 12px;
   color: #fff;
   padding: 0 2px;
+}
+
+.dayInfo-toDoItemMore {
+  background-color: #fff;
+  font-weight: bold;
+  height: 20px;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 2px;
+  border: none;
+  outline: none;
+  text-align: left;
 }
 
 .addToDo {
