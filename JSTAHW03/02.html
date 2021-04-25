@@ -57,10 +57,18 @@
                 <span></span>
             </div>
             <div class="dayInfo-toDo">
-                <div class="dayInfo-toDoBox"></div>
+                <div class="dayInfo-toDoBox">
+                    <template id="tpl-dayInfo-toToItem">
+                        <button class="dayInfo-toDoItem">
+                            <span></span>
+                        </button>
+                    </template>
+                </div>
             </div>
         </div>
-    </template>
+    </template>    
+
+
     <!-- Modal -->
     <div class="modal fade" id="addToDoModal" tabindex="-1" aria-labelledby="addToDoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -74,9 +82,9 @@
                         <input type="text" class="form-control" id="eventTitleInput"
                             placeholder="Please input event title.">
                     </div>
-                    <div class="mb-3">
-                        <input type="date" class="form-control" id="eventDateInput"
-                            placeholder="Please input event title.">
+                    <div class="mb-3 d-flex">
+                        <input type="date" class="form-control" id="eventDateInput">
+                        <input type="time" class="form-control" id="eventTimeInput">
                     </div>
                     <div class="mb-3">
                         <textarea class="form-control" id="eventDescriptInput" rows="3"
@@ -94,7 +102,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
-    <script src="./js/action-02.js"></script>
+    <script src="./js/action-03.js"></script>
 </body>
 
 </html>

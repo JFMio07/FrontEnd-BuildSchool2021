@@ -76,7 +76,7 @@ body {
 }
 
 .calendar-weeklabel div,
-.calendar-days >div {
+.calendar-days > div {
   overflow: hidden;
   width: 14.2857142%;
   box-sizing: border-box;
@@ -138,7 +138,7 @@ body {
 .currentDay.outtarget span {
   border-radius: 5%;
 }
-.dayInfo{
+.dayInfo {
   /* position: relative; */
   display: flex;
   /* flex-wrap: wrap; */
@@ -164,7 +164,6 @@ body {
   font-size: 16px;
 }
 
-
 .dayInfo-toDo {
   position: relative;
   width: 100%;
@@ -172,7 +171,7 @@ body {
   /* background-color:red; */
 }
 
-.dayInfo-toDoBox{
+.dayInfo-toDoBox {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -181,11 +180,30 @@ body {
   margin: auto;
   overflow: hidden;
   z-index: 10;
-  color: red;
+  color: red;  
 }
 
+.dayInfo-toDoItem {
+  background-color: #039be5;
+  height: 20px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 3px;
+  margin-bottom: 2px;
+  display: flex;
+  border: none;
+  outline: none;
+}
 
-
+.dayInfo-toDoItem span {
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  font-size: 12px;
+  color: #fff;
+  padding: 0 2px;
+}
 
 .addToDo {
   position: fixed;
@@ -197,6 +215,7 @@ body {
   border: none;
   background-color: #fff;
   padding: 0;
+  z-index: 100;
 }
 .addToDo i {
   display: block;
@@ -214,10 +233,9 @@ body {
   color: #aab9d6de;
 }
 
-.saturday{
+.saturday {
   color: rgb(155, 214, 5);
-
 }
-.sunday{
+.sunday {
   color: red;
 }

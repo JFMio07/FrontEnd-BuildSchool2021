@@ -49,42 +49,53 @@ schedules = [
     year: 2021,
     month: 04,
     date: 20,
-    toDo: "12311111111"
+    title: "12311111111",
+    description: "----"
   },
   {
     id: 002,
     year: 2021,
     month: 04,
     date: 21,
-    toDo: "45622222222"
+    title: "45622222222",
+    description: "----"
+
   },
   {
     id: 003,
     year: 2021,
     month: 04,
     date: 21,
-    toDo: "7893333333"
+    title: "7893333333",
+    description: "----"
+
   },
   {
     id: 004,
     year: 2021,
     month: 05,
     date: 20,
-    toDo: "101112555555555"
+    title: "101112555555555",
+    description: "----"
+
   },
   {
     id: 005,
     year: 2021,
     month: 04,
     date: 24,
-    toDo: "101112555555555"
+    title: "101112555555555",
+    description: "----"
+
   },
   {
     id: 006,
     year: 2021,
     month: 05,
     date: 1,
-    toDo: "101112555555555"
+    title: "101112555555555",
+    description: "----"
+
   }
 ];
 // #039be5  fz12
@@ -230,10 +241,15 @@ function ApplyCalendarDays(calendarData, isIncrease) {
 
   let calendarDays = CreateCalendardays(calendarData);
 
+  console.log(calendarDays.clientHeight);
+  console.log(calendarDays.clientWidth);
+
   // calendarDays is not exist, add new calendardays
   // calendarDays is exist,=> add new calendardays ,then remove previous calendarDays
   if (existCalendarDays === null) {
     calendardaysWrap.appendChild(calendarDays);
+    // console.log(calendarDays.clientHeight);
+    // console.log(calendarDays.clientWidth);
   } else {
     if (isIncrease) {
       existCalendarDays.style.cssText =
@@ -245,6 +261,8 @@ function ApplyCalendarDays(calendarData, isIncrease) {
       calendarDays.style.cssText = "opacity:1; transform:translate(-100%,0);";
     }
     calendardaysWrap.appendChild(calendarDays);
+    console.log(calendarDays.clientHeight);
+    console.log(calendarDays.clientWidth);
     setTimeout(() => {
       calendarDays.style.cssText = "opacity:1; transform:translate(0,0);";
       let calendardaysWrap = document.querySelector(".calendar-daysWrap");
@@ -301,11 +319,26 @@ function CreateCalendardays(calendarData) {
 
     // console.log(item.toDoList);
 
+
+
+    // ............................................................
+
+
     let dayInfoToDoBox = dayinfo.querySelector(".dayInfo-toDoBox");
     item.toDoList.forEach((todo) => {
-      let p = document.createElement("p");
-      p.innerText = todo.toDo;
-      dayInfoToDoBox.appendChild(p);
+
+      let toDoItem = document.createElement("div");
+      toDoItem.classList.add("toDoItem");
+
+
+
+      // toDoItem.innerText = todo.title;
+
+
+      // StringCutOff(string, maxlength)
+
+
+      dayInfoToDoBox.appendChild(toDoItem);
 
     });
 
@@ -316,15 +349,25 @@ function CreateCalendardays(calendarData) {
 }
 
 // Create UUID
-// reference : Calendar file from TA
+// reference : pdf file of calendar  from TA
 function _uuid() {
   var d = Date.now();
-  if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
+  if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
     d += performance.now(); //use high-precision timer if available
   }
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     var r = (d + Math.random() * 16) % 16 | 0;
     d = Math.floor(d / 16);
-      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
   });
+}
+
+
+function StringCutOff(input, maxLength) {
+  if (input.length < maxLength){
+    return input
+  }
+  else{
+    return input.substring(0,maxLength-3) + "...";
+  }
 }
