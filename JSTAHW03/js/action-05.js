@@ -272,56 +272,68 @@ function ClearToDoModal() {
     modalfooter.innerHTML = "";
 }
 
-function ClearToDoListModal(){
+function ClearToDoListModal() {
     let toDoListModal = document.querySelector("#toDoListModal");
-    console.log("ClearToDoListModal");
+    toDoListModal.querySelector("#toDoListModalLabel").innerText = "";
+    toDoListModal.querySelector(".modal-body").innerHTML = "";    
 }
 
 
 function InitAddToDoModal(date) {
-     
+
     // let date = new Date();
     console.log(date);
     date = date || todayDate;
     console.log(date);
 
     let toDoModal = document.querySelector("#toDoModal");
-    
+
     toDoModal.addEventListener("hidden.bs.modal", function () {
         ClearToDoModal();
     })
 
     toDoModal.querySelector("#toDoModalLabel").innerText = "Create Event";
-    
+
     let titleInput = toDoModal.querySelector("#eventTitleInput");
     titleInput.value = "";
-    
+
     let dataInput = toDoModal.querySelector("#eventDateInput");
     dataInput.value = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, 0)}-${date.getDate().toString().padStart(2, 0)}`;
-    
+
     let timeInput = toDoModal.querySelector("#eventTimeInput")
     timeInput.value = `${date.getHours().toString().padStart(2, 0)}:${date.getMinutes().toString().padStart(2, 0)}`;
-    
+
     let descriptInput = toDoModal.querySelector("#eventDescriptInput");
     descriptInput.value = "";
-    
+
     let modalfooter = toDoModal.querySelector(".modal-footer");
     modalfooter.innerHTML = "";
 
-    let cancelbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
-    let cancelbtn = CreateBtn(["btn", "btn-secondary", "modal-closeBtn"], cancelbtnattrib, "Cancel");
-    modalfooter.appendChild(cancelbtn);
-
     let addbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
-    let addbtn = CreateBtn(["btn", "btn-primary", "modal-addBtn"], addbtnattrib, "Add");
-    addbtn.addEventListener("click",()=>{
-        AddToDo(titleInput.value,dataInput.value,timeInput.value,descriptInput.value);
+    let addbtn = CreateDOMElement(
+        "button",
+        ["iconBtn", "modal-addBtn"],
+        addbtnattrib
+    );
+
+    addbtn.innerHTML = '<i class="far fa-plus-square"></i>';
+    addbtn.addEventListener("click", () => {
+        AddToDo(titleInput.value, dataInput.value, timeInput.value, descriptInput.value);
     });
     modalfooter.appendChild(addbtn);
 
 }
-function InitToDOListModal(){
-    console.log("InitToDOListModal");
+function InitToDOListModal(toDoList) {
+    let toDoListModal = document.querySelector("#toDoListModal");
+    toDoListModal.querySelector("#toDoListModalLabel").innerText = `
+    ${toDoList[0].year}-${toDoList[0].month.toString().padStart(2,"0")}-${toDoList[0].date.toString().padStart(2,"0")}`;
+    toDoListModal.addEventListener("hidden.bs.modal", function () {
+        ClearToDoListModal();
+    });
+    
+
+
+
 }
 
 function InitEditToDoModal(toDoItem) {
@@ -350,21 +362,27 @@ function InitEditToDoModal(toDoItem) {
 
     let modalfooter = toDoModal.querySelector(".modal-footer");
     modalfooter.innerHTML = "";
+    
+    let delbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
+    let dellbtn = CreateDOMElement(
+        "button",
+        // ["btn", "btn-danger", "modal-delBtn"],
+        ["iconBtn", "modal-delBtn"],
+        delbtnattrib
+    );
+    dellbtn.innerHTML = '<i class="far fa-trash-alt"></i>';
+    dellbtn.addEventListener("click", () => { DeleteToDo(toDoItem.id) });
+    modalfooter.appendChild(dellbtn);
 
+    let editbtn = CreateDOMElement(
+        "button",
+        ["iconBtn", "modal-editBtn"]
+    );
 
-    let cancelbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
-    let cancelbtn = CreateBtn(["btn", "btn-secondary", "modal-closeBtn"], cancelbtnattrib, "Cancel");
-    modalfooter.appendChild(cancelbtn);
-
-    let editbtn = CreateBtn(["btn", "btn-info", "modal-editBtn"], [], "Edit");
+    editbtn.innerHTML = '<i class="far fa-edit"></i>';
     editbtn.addEventListener("click", () => { EditToDoModal(toDoItem.id) });
     modalfooter.appendChild(editbtn);
 
-
-    let delbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
-    let dellbtn = CreateBtn(["btn", "btn-danger", "modal-delBtn"], delbtnattrib, "Delete");
-    dellbtn.addEventListener("click", () => { DeleteToDo(toDoItem.id) });
-    modalfooter.appendChild(dellbtn);
 
 }
 
@@ -388,20 +406,23 @@ function EditToDoModal(id) {
     let editBtn = modalfooter.querySelector(".modal-editBtn");
     editBtn.classList.remove("btn-info", "modal-editBtn");
 
-    let savebtn = editBtn.cloneNode(true);
-    savebtn.classList.add("btn-success", "modal-savebtn");
-    savebtn.setAttribute("data-bs-dismiss","modal");
-    savebtn.innerText = "Save Change";
-    savebtn.addEventListener("click",()=>{
-        SaveToDo(id,titleInput.value,dataInput.value,timeInput.value,descriptInput.value);
+    let savebtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
+    let savebtn = CreateDOMElement(
+        "button",
+        ["iconBtn", "modal-savebtn"],
+        savebtnattrib
+    );
+    savebtn.innerHTML = '<i class="far fa-save"></i>';
+    savebtn.addEventListener("click", () => {
+        SaveToDo(id, titleInput.value, dataInput.value, timeInput.value, descriptInput.value);
     });
 
-    editBtn.parentNode.replaceChild(savebtn,editBtn);
+    editBtn.parentNode.replaceChild(savebtn, editBtn);
 }
 
 //#endregion
 
-function AddToDo(titleInput,dataInput,timeInput,descriptInput){
+function AddToDo(titleInput, dataInput, timeInput, descriptInput) {
     console.log(titleInput);
     console.log(dataInput);
     console.log(timeInput);
@@ -409,7 +430,7 @@ function AddToDo(titleInput,dataInput,timeInput,descriptInput){
 
 }
 
-function SaveToDo(id,titleInput,dataInput,timeInput,descriptInput) {
+function SaveToDo(id, titleInput, dataInput, timeInput, descriptInput) {
     console.log(id);
     console.log(titleInput);
     console.log(dataInput);
@@ -417,7 +438,7 @@ function SaveToDo(id,titleInput,dataInput,timeInput,descriptInput) {
     console.log(descriptInput);
 }
 
-function DeleteToDo(id){
+function DeleteToDo(id) {
     console.log(id);
 }
 
@@ -532,7 +553,7 @@ function ApplyCalendarDays(calendarData, isIncrease) {
     // calendarDays is not exist, add new calendardays
     // calendarDays is exist,=> add new calendardays ,then remove previous calendarDays
     if (existCalendarDays === null) {
-        calendarDays.style.opacity = 1;        
+        calendarDays.style.opacity = 1;
     } else {
         if (isIncrease) {
             existCalendarDays.style.cssText =
@@ -566,10 +587,10 @@ function CreateCalendardays(calendarData) {
         let clonedayInfo = tpldayInfo.content.cloneNode(true);
         let dayinfo = clonedayInfo.querySelector(".dayInfo");
         // let daytitle = clonedayInfo.querySelector(".dayTitle");
-        
+
         let istodayDate = YMD_Equal(item.toDateObj(), todayDate);
-        dayinfo.addEventListener("click",function(){
-            InitAddToDoModal(new Date(item.year,item.month,item.date));
+        dayinfo.addEventListener("click", function () {
+            InitAddToDoModal(new Date(item.year, item.month, item.date));
         });
         dayinfo.querySelector(".dayInfo-title").innerText = `${monuthNames[item.month]} ${item.date}`;
         if (istodayDate) {
@@ -600,7 +621,7 @@ function CreateCalendardays(calendarData) {
             dayinfo.classList.add("outtarget");
         }
 
-        calendarDays.appendChild(clonedayInfo);        
+        calendarDays.appendChild(clonedayInfo);
     });
 
     return calendarDays;
@@ -627,6 +648,7 @@ function daytoDoBoxResizeAction(entries) {
         CreateDayInfotoDoItems(entry, toDoList);
     });
 }
+
 
 // Create todooitem of dayinfo  by todolist and size of entry 
 function CreateDayInfotoDoItems(resizeEntry, toDoList) {
@@ -668,8 +690,8 @@ function CreateDayInfotoDoItems(resizeEntry, toDoList) {
                 { key: "data-bs-target", value: "#toDoListModal" }
             ];
             let content = `${toDoList.length - index} more `;
-            let remain = CreateBtn(classList,attrib,content);
-            remain.addEventListener("click",()=>{InitToDOListModal(toDoList);});
+            let remain = CreateDOMElement("button", classList, attrib, content);
+            remain.addEventListener("click", () => { InitToDOListModal(toDoList); });
             resizeEntry.target.appendChild(remain);
         }
     }
@@ -677,13 +699,18 @@ function CreateDayInfotoDoItems(resizeEntry, toDoList) {
 
 // Create ToDoItem by object of ScheduleItem 
 function CreateToDoItem(scheduleItem) {
-    let btn = document.createElement("button");
-    btn.classList.add("dayInfo-toDoItem");
-    btn.setAttribute("data-bs-toggle", "modal");
-    btn.setAttribute("data-bs-target", "#toDoModal");
-    btn.addEventListener("click", function (event) { 
+
+    let btn = CreateDOMElement(
+        "button",
+        ["dayInfo-toDoItem"],
+        [
+            { key: "data-bs-toggle", value: "modal" },
+            { key: "data-bs-target", value: "#toDoModal" }
+        ]
+    );
+    btn.addEventListener("click", function (event) {
         event.stopPropagation();
-        InitEditToDoModal(scheduleItem); 
+        InitEditToDoModal(scheduleItem);
     });
 
     let span = document.createElement("span");
@@ -693,20 +720,25 @@ function CreateToDoItem(scheduleItem) {
     return btn;
 }
 
-//CreateModalbutton by parameter
+//CreateDOMElement by parameter
+// tag : string of tag
 // classList : CSS Classes
 // attributes : HTML tag attributes
 // content : innerText content
-function CreateBtn(classList = ["btn"], attributes = [], content) {
-    let btn = document.createElement("button");
-    btn.classList.add(...classList);
-    btn.innerText = content;
+function CreateDOMElement(tag = "div", classList = [], attributes = [], content = "") {
+    let element = document.createElement(tag);
 
-    for (let i = 0; i < attributes.length; i++) {
-        btn.setAttribute(attributes[i].key, attributes[i].value);
+    element.innerText = content;
+
+    if (classList.length !== 0) {
+        element.classList.add(...classList);
     }
 
-    return btn;
+    for (let i = 0; i < attributes.length; i++) {
+        element.setAttribute(attributes[i].key, attributes[i].value);
+    }
+
+    return element;
 }
 
 // Create UUID
