@@ -237,6 +237,12 @@ window.onload = function () {
     //     });
     // });
 
+    let toDoListModal = document.querySelector("#toDoListModal");
+    toDoListModal.addEventListener("hidden.bs.modal", function () {
+        ClearToDoListModal();
+    })
+
+
 };
 
 
@@ -266,9 +272,19 @@ function ClearToDoModal() {
     modalfooter.innerHTML = "";
 }
 
-function InitAddToDoModal() {
+function ClearToDoListModal(){
+    let toDoListModal = document.querySelector("#toDoListModal");
+    console.log("ClearToDoListModal");
+}
 
-    let date = new Date();
+
+function InitAddToDoModal(date) {
+     
+    // let date = new Date();
+    console.log(date);
+    date = date || todayDate;
+    console.log(date);
+
     let toDoModal = document.querySelector("#toDoModal");
     
     toDoModal.addEventListener("hidden.bs.modal", function () {
@@ -281,7 +297,7 @@ function InitAddToDoModal() {
     titleInput.value = "";
     
     let dataInput = toDoModal.querySelector("#eventDateInput");
-    dataInput.value = `${todayDate.getFullYear()}-${(todayDate.getMonth() + 1).toString().padStart(2, 0)}-${todayDate.getDate().toString().padStart(2, 0)}`;
+    dataInput.value = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, 0)}-${date.getDate().toString().padStart(2, 0)}`;
     
     let timeInput = toDoModal.querySelector("#eventTimeInput")
     timeInput.value = `${date.getHours().toString().padStart(2, 0)}:${date.getMinutes().toString().padStart(2, 0)}`;
@@ -293,18 +309,20 @@ function InitAddToDoModal() {
     modalfooter.innerHTML = "";
 
     let cancelbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
-    let cancelbtn = CreateModealBtn(["btn", "btn-secondary", "modal-closeBtn"], cancelbtnattrib, "Cancel");
+    let cancelbtn = CreateBtn(["btn", "btn-secondary", "modal-closeBtn"], cancelbtnattrib, "Cancel");
     modalfooter.appendChild(cancelbtn);
 
     let addbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
-    let addbtn = CreateModealBtn(["btn", "btn-primary", "modal-addBtn"], addbtnattrib, "Add");
+    let addbtn = CreateBtn(["btn", "btn-primary", "modal-addBtn"], addbtnattrib, "Add");
     addbtn.addEventListener("click",()=>{
         AddToDo(titleInput.value,dataInput.value,timeInput.value,descriptInput.value);
     });
     modalfooter.appendChild(addbtn);
 
 }
-
+function InitToDOListModal(){
+    console.log("InitToDOListModal");
+}
 
 function InitEditToDoModal(toDoItem) {
 
@@ -335,16 +353,16 @@ function InitEditToDoModal(toDoItem) {
 
 
     let cancelbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
-    let cancelbtn = CreateModealBtn(["btn", "btn-secondary", "modal-closeBtn"], cancelbtnattrib, "Cancel");
+    let cancelbtn = CreateBtn(["btn", "btn-secondary", "modal-closeBtn"], cancelbtnattrib, "Cancel");
     modalfooter.appendChild(cancelbtn);
 
-    let editbtn = CreateModealBtn(["btn", "btn-info", "modal-editBtn"], [], "Edit");
+    let editbtn = CreateBtn(["btn", "btn-info", "modal-editBtn"], [], "Edit");
     editbtn.addEventListener("click", () => { EditToDoModal(toDoItem.id) });
     modalfooter.appendChild(editbtn);
 
 
     let delbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
-    let dellbtn = CreateModealBtn(["btn", "btn-danger", "modal-delBtn"], delbtnattrib, "Delete");
+    let dellbtn = CreateBtn(["btn", "btn-danger", "modal-delBtn"], delbtnattrib, "Delete");
     dellbtn.addEventListener("click", () => { DeleteToDo(toDoItem.id) });
     modalfooter.appendChild(dellbtn);
 
@@ -553,7 +571,9 @@ function CreateCalendardays(calendarData) {
         // let daytitle = clonedayInfo.querySelector(".dayTitle");
         
         let istodayDate = YMD_Equal(item.toDateObj(), todayDate);
-        dayinfo.addEventListener("click",function(){ InitAddToDoModal();});
+        dayinfo.addEventListener("click",function(){
+            InitAddToDoModal(new Date(item.year,item.month,item.date));
+        });
         dayinfo.querySelector(".dayInfo-title").innerText = `${monuthNames[item.month]} ${item.date}`;
         if (istodayDate) {
             dayinfo.classList.add("currentDay");
@@ -646,9 +666,14 @@ function CreateDayInfotoDoItems(resizeEntry, toDoList) {
             }
 
             // if space is not enough space, use the text of button to indicate
-            let remain = document.createElement("button");
-            remain.classList.add("dayInfo-toDoItemMore")
-            remain.innerText = `${toDoList.length - index} more `;
+            let classList = ["dayInfo-toDoItemMore"];
+            let attrib = [
+                { key: "data-bs-toggle", value: "modal" },
+                { key: "data-bs-target", value: "#toDoListModal" }
+            ];
+            let content = `${toDoList.length - index} more `;
+            let remain = CreateBtn(classList,attrib,content);
+            remain.addEventListener("click",()=>{InitToDOListModal(toDoList);});
             resizeEntry.target.appendChild(remain);
         }
     }
@@ -676,7 +701,7 @@ function CreateToDoItem(scheduleItem) {
 // classList : CSS Classes
 // attributes : HTML tag attributes
 // content : innerText content
-function CreateModealBtn(classList = ["btn"], attributes = [], content) {
+function CreateBtn(classList = ["btn"], attributes = [], content) {
     let btn = document.createElement("button");
     btn.classList.add(...classList);
     btn.innerText = content;
