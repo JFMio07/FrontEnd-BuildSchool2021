@@ -237,12 +237,10 @@ window.onload = function () {
     //     });
     // });
 
-
-
 };
 
 
-
+// #region toDoModal
 
 function ClearToDoModal() {
     let toDoModal = document.querySelector("#toDoModal");
@@ -272,33 +270,49 @@ function InitAddToDoModal() {
 
     let date = new Date();
     let toDoModal = document.querySelector("#toDoModal");
+    
+    toDoModal.addEventListener("hidden.bs.modal", function () {
+        ClearToDoModal();
+    })
+
     toDoModal.querySelector("#toDoModalLabel").innerText = "Create Event";
-    toDoModal.querySelector("#eventTitleInput").value = "";
-    toDoModal.querySelector("#eventDateInput").value = `${todayDate.getFullYear()}-${(todayDate.getMonth() + 1).toString().padStart(2, 0)}-${todayDate.getDate().toString().padStart(2, 0)}`;
-    toDoModal.querySelector("#eventTimeInput").value = `${date.getHours().toString().padStart(2, 0)}:${date.getMinutes().toString().padStart(2, 0)}`;
-    toDoModal.querySelector("#eventDescriptInput").value = "";
+    
+    let titleInput = toDoModal.querySelector("#eventTitleInput");
+    titleInput.value = "";
+    
+    let dataInput = toDoModal.querySelector("#eventDateInput");
+    dataInput.value = `${todayDate.getFullYear()}-${(todayDate.getMonth() + 1).toString().padStart(2, 0)}-${todayDate.getDate().toString().padStart(2, 0)}`;
+    
+    let timeInput = toDoModal.querySelector("#eventTimeInput")
+    timeInput.value = `${date.getHours().toString().padStart(2, 0)}:${date.getMinutes().toString().padStart(2, 0)}`;
+    
+    let descriptInput = toDoModal.querySelector("#eventDescriptInput");
+    descriptInput.value = "";
+    
     let modalfooter = toDoModal.querySelector(".modal-footer");
     modalfooter.innerHTML = "";
 
-
-    // let cancelbtnattrib = [{ key: "data-bs-toggle", value: "modal" }, { key: "data-bs-target", value: "#toDoModal" }]
     let cancelbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
     let cancelbtn = CreateModealBtn(["btn", "btn-secondary", "modal-closeBtn"], cancelbtnattrib, "Cancel");
     modalfooter.appendChild(cancelbtn);
 
-
     let addbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
     let addbtn = CreateModealBtn(["btn", "btn-primary", "modal-addBtn"], addbtnattrib, "Add");
+    addbtn.addEventListener("click",()=>{
+        AddToDo(titleInput.value,dataInput.value,timeInput.value,descriptInput.value);
+    });
     modalfooter.appendChild(addbtn);
 
 }
-
 
 
 function InitEditToDoModal(toDoItem) {
 
     let toDoModal = document.querySelector("#toDoModal");
     toDoModal.querySelector("#toDoModalLabel").innerText = "Edit Event";
+    toDoModal.addEventListener("hidden.bs.modal", function () {
+        ClearToDoModal();
+    })
 
     let titleInput = toDoModal.querySelector("#eventTitleInput");
     titleInput.value = toDoItem.title;
@@ -325,12 +339,13 @@ function InitEditToDoModal(toDoItem) {
     modalfooter.appendChild(cancelbtn);
 
     let editbtn = CreateModealBtn(["btn", "btn-info", "modal-editBtn"], [], "Edit");
+    editbtn.addEventListener("click", () => { EditToDoModal(toDoItem.id) });
     modalfooter.appendChild(editbtn);
-    editbtn.addEventListener("click", (id) => { EditToDoModal(id) });
 
 
     let delbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
     let dellbtn = CreateModealBtn(["btn", "btn-danger", "modal-delBtn"], delbtnattrib, "Delete");
+    dellbtn.addEventListener("click", () => { DeleteToDo(toDoItem.id) });
     modalfooter.appendChild(dellbtn);
 
 }
@@ -339,22 +354,54 @@ function EditToDoModal(id) {
 
     let toDoModal = document.querySelector("#toDoModal");
 
-    toDoModal.querySelector("#eventTitleInput").removeAttribute("readonly");
-    toDoModal.querySelector("#eventDateInput").removeAttribute("readonly");
-    toDoModal.querySelector("#eventTimeInput").removeAttribute("readonly");
-    toDoModal.querySelector("#eventDescriptInput").removeAttribute("readonly");;
+    let titleInput = toDoModal.querySelector("#eventTitleInput");
+    titleInput.removeAttribute("readonly");
+
+    let dataInput = toDoModal.querySelector("#eventDateInput");
+    dataInput.removeAttribute("readonly");
+
+    let timeInput = toDoModal.querySelector("#eventTimeInput");
+    timeInput.removeAttribute("readonly");
+
+    let descriptInput = toDoModal.querySelector("#eventDescriptInput");
+    descriptInput.removeAttribute("readonly");
 
     let modalfooter = toDoModal.querySelector(".modal-footer");
-    let savebtn = modalfooter.querySelector(".modal-editBtn");
-    savebtn.classList.remove("btn-info", "modal-editBtn");
+    let editBtn = modalfooter.querySelector(".modal-editBtn");
+    editBtn.classList.remove("btn-info", "modal-editBtn");
+
+    let savebtn = editBtn.cloneNode(true);
     savebtn.classList.add("btn-success", "modal-savebtn");
+    savebtn.setAttribute("data-bs-dismiss","modal");
     savebtn.innerText = "Save Change";
-    savebtn.addEventListener("click", SaveToDoModal);
+    savebtn.addEventListener("click",()=>{
+        SaveToDo(id,titleInput.value,dataInput.value,timeInput.value,descriptInput.value);
+    });
+
+    editBtn.parentNode.replaceChild(savebtn,editBtn);
+}
+
+//#endregion
+
+function AddToDo(titleInput,dataInput,timeInput,descriptInput){
+    console.log(titleInput);
+    console.log(dataInput);
+    console.log(timeInput);
+    console.log(descriptInput);
 
 }
 
+function SaveToDo(id,titleInput,dataInput,timeInput,descriptInput) {
+    console.log(id);
+    console.log(titleInput);
+    console.log(dataInput);
+    console.log(timeInput);
+    console.log(descriptInput);
+}
 
-function SaveToDoModal() { };
+function DeleteToDo(id){
+    console.log(id);
+}
 
 // true : increase Calendar
 // false : decrease Calendar
@@ -421,7 +468,7 @@ function CreateCalendarData(srcdate, schedules) {
     }
 }
 
-
+// compare YMD
 function YMD_Equal(dateA, dateB) {
     // debugger;
     if (!YM_Equal(dateA, dateB)) {
@@ -436,6 +483,7 @@ function YMD_Equal(dateA, dateB) {
     return true;
 }
 
+// compare YM
 function YM_Equal(dateA, dateB) {
     if (dateA.getFullYear() !== dateB.getFullYear()) {
         return false;
@@ -452,8 +500,7 @@ function ApplyCalendarDays(calendarData, isIncrease) {
     let calendar = document.querySelector(".calendar");
 
     calendar.querySelector(".calendar-date :first-child").innerText = calendarData.title.year;
-    calendar.querySelector(".calendar-date :last-child").innerText =
-        monuthNames[calendarData.title.month];
+    calendar.querySelector(".calendar-date :last-child").innerText = monuthNames[calendarData.title.month];
 
     let calendardaysWrap = document.querySelector(".calendar-daysWrap");
 
@@ -462,7 +509,7 @@ function ApplyCalendarDays(calendarData, isIncrease) {
     let calendarDays = CreateCalendardays(calendarData);
     calendarDays.style.opacity = 0;
     calendardaysWrap.appendChild(calendarDays);
-    AddDaysToDoItem(calendarDays, calendarData);
+    AddDaysToDoItem(calendarDays);
 
     // calendarDays is not exist, add new calendardays
     // calendarDays is exist,=> add new calendardays ,then remove previous calendarDays
@@ -493,8 +540,6 @@ function ApplyCalendarDays(calendarData, isIncrease) {
     }
 }
 
-
-
 // Create DOM of Calendardays
 function CreateCalendardays(calendarData) {
     let calendarDays = document.createElement("div");
@@ -506,9 +551,9 @@ function CreateCalendardays(calendarData) {
         let clonedayInfo = tpldayInfo.content.cloneNode(true);
         let dayinfo = clonedayInfo.querySelector(".dayInfo");
         // let daytitle = clonedayInfo.querySelector(".dayTitle");
-
+        
         let istodayDate = YMD_Equal(item.toDateObj(), todayDate);
-        // dayinfo.addEventListener("click", function () { console.log("dayInfo is clicked") });
+        dayinfo.addEventListener("click",function(){ InitAddToDoModal();});
         dayinfo.querySelector(".dayInfo-title").innerText = `${monuthNames[item.month]} ${item.date}`;
         if (istodayDate) {
             dayinfo.classList.add("currentDay");
@@ -544,27 +589,31 @@ function CreateCalendardays(calendarData) {
     return calendarDays;
 }
 
-
-function AddDaysToDoItem(target, calendarData) {
+// 
+function AddDaysToDoItem(target) {
 
     // clear previous resizeobserve
     daytoDoBoxResizeObs.disconnect();
 
     let toDoBoxes = target.querySelectorAll(".dayInfo-toDoBox");
 
-    toDoBoxes.forEach((tDoBox) => {
-        daytoDoBoxResizeObs.observe(tDoBox);
+    toDoBoxes.forEach((toDoBox) => {
+        // register resize event for each toDoBox 
+        daytoDoBoxResizeObs.observe(toDoBox);
     });
 }
 
+// when size of dayToDoBox is changed
 function daytoDoBoxResizeAction(entries) {
     entries.forEach((entry, index) => {
         let toDoList = currentCalendarData.dates[index].toDoList;
-        CreateDayInfotoDoItem(entry, toDoList);
+        CreateDayInfotoDoItems(entry, toDoList);
     });
 }
 
-function CreateDayInfotoDoItem(resizeEntry, toDoList) {
+
+// Create todooitem of dayinfo  by todolist and size of entry 
+function CreateDayInfotoDoItems(resizeEntry, toDoList) {
     let contentHeight, totaltoDoListHeight, toDoItem;
     const toDoItemHeight = 22;
     const moreInfoHeight = 22;
@@ -605,13 +654,16 @@ function CreateDayInfotoDoItem(resizeEntry, toDoList) {
     }
 }
 
-// function CreateToDoItem(hour, minute, toDoTitle) {
+// Create ToDoItem by object of ScheduleItem 
 function CreateToDoItem(scheduleItem) {
     let btn = document.createElement("button");
     btn.classList.add("dayInfo-toDoItem");
     btn.setAttribute("data-bs-toggle", "modal");
     btn.setAttribute("data-bs-target", "#toDoModal");
-    btn.addEventListener("click", function () { InitEditToDoModal(scheduleItem) });
+    btn.addEventListener("click", function (event) { 
+        event.stopPropagation();
+        InitEditToDoModal(scheduleItem); 
+    });
 
     let span = document.createElement("span");
     span.innerText = `${scheduleItem.hour.toString().padStart(2, "0")}:${scheduleItem.minute.toString().padStart(2, "0")} ${scheduleItem.title}`;
@@ -620,6 +672,10 @@ function CreateToDoItem(scheduleItem) {
     return btn;
 }
 
+//CreateModalbutton by parameter
+// classList : CSS Classes
+// attributes : HTML tag attributes
+// content : innerText content
 function CreateModealBtn(classList = ["btn"], attributes = [], content) {
     let btn = document.createElement("button");
     btn.classList.add(...classList);
@@ -630,7 +686,6 @@ function CreateModealBtn(classList = ["btn"], attributes = [], content) {
     }
 
     return btn;
-
 }
 
 // Create UUID
@@ -646,7 +701,6 @@ function _uuid() {
         return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
 }
-
 
 function StringCutOff(input, maxLength) {
     if (input.length < maxLength) {
