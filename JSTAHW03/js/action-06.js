@@ -72,8 +72,8 @@ schedules = [
         year: 2021,
         month: 3,
         date: 21,
-        hour: 1,
-        minute: 2,
+        hour: 10,
+        minute: 20,
         title: "789333333312312313213212389413613219812319813",
         description: "----"
 
@@ -83,7 +83,7 @@ schedules = [
         year: 2021,
         month: 3,
         date: 21,
-        hour: 1,
+        hour: 5,
         minute: 2,
         title: "789333333312312313213212389413613219812319813",
         description: "----"
@@ -94,8 +94,8 @@ schedules = [
         year: 2021,
         month: 3,
         date: 21,
-        hour: 1,
-        minute: 2,
+        hour: 3,
+        minute: 12,
         title: "1",
         description: "----"
 
@@ -116,7 +116,7 @@ schedules = [
         year: 2021,
         month: 3,
         date: 21,
-        hour: 1,
+        hour: 0,
         minute: 2,
         title: "3",
         description: "----"
@@ -127,8 +127,8 @@ schedules = [
         year: 2021,
         month: 3,
         date: 21,
-        hour: 1,
-        minute: 2,
+        hour: 21,
+        minute: 30,
         title: "4",
         description: "----"
 
@@ -138,8 +138,8 @@ schedules = [
         year: 2021,
         month: 3,
         date: 21,
-        hour: 1,
-        minute: 2,
+        hour: 11,
+        minute: 22,
         title: "5",
         description: "----"
 
@@ -149,7 +149,7 @@ schedules = [
         year: 2021,
         month: 3,
         date: 21,
-        hour: 1,
+        hour: 23,
         minute: 2,
         title: "6",
         description: "----"
@@ -160,7 +160,7 @@ schedules = [
         year: 2021,
         month: 3,
         date: 21,
-        hour: 1,
+        hour: 14,
         minute: 2,
         title: "7",
         description: "----"
@@ -384,20 +384,6 @@ function InitEditToDoModal(toDoItem, backModalId) {
 function EditToDoModal(id, backModalId) {
 
     let toDoModal = document.querySelector("#toDoModal");
-
-    // let titleInput = toDoModal.querySelector("#eventTitleInput");
-    // titleInput.removeAttribute("readonly");
-
-    // let dataInput = toDoModal.querySelector("#eventDateInput");
-    // dataInput.removeAttribute("readonly");
-
-    // let timeInput = toDoModal.querySelector("#eventTimeInput");
-    // timeInput.removeAttribute("readonly");
-
-    // let descriptInput = toDoModal.querySelector("#eventDescriptInput");
-    // descriptInput.removeAttribute("readonly");
-
-    
     let inputs = toDoModal.querySelectorAll(".form-control")
     inputs.forEach((el, index) => {
         el.removeAttribute("readonly");
@@ -459,6 +445,7 @@ function AddToDo(titleInput, dateInput, timeInput, descriptInput) {
 
     if (dateindex >= 0) {
         currentCalendarData.dates[dateindex].toDoList.push(newItem);
+        currentCalendarData.dates[dateindex].toDoList.sort(CompareScheduleOfDay);
         CreateDayInfotoDoItems(toDoBoxes[dateindex], currentCalendarData.dates[dateindex].toDoList);
     }
 }
@@ -565,9 +552,8 @@ function CreateCalendarData(srcdate, schedules) {
         let month = item.getMonth();
         let date = item.getDate();
         let day = item.getDay();
-        let todo = schedules.filter(schedule => {
-            return schedule.year === year && schedule.month === month && schedule.date === date;
-        });
+        let todo = schedules.filter(schedule =>schedule.year === year && schedule.month === month && schedule.date === date)
+                            .sort(CompareScheduleOfDay);
         datesInfo.push(new dateInfo(year, month, date, day, todo));
     });
 
@@ -575,33 +561,6 @@ function CreateCalendarData(srcdate, schedules) {
         title: { year: srcYear, month: srcMonuth },
         dates: datesInfo,
     }
-}
-
-// compare YMD
-function YMD_Equal(dateA, dateB) {
-    // debugger;
-    if (!YM_Equal(dateA, dateB)) {
-        return false;
-    }
-    if (dateA.getDate() !== dateB.getDate()) {
-        return false;
-    }
-    if (dateA.getDay() !== dateB.getDay()) {
-        return false;
-    }
-    return true;
-}
-
-// compare YM
-function YM_Equal(dateA, dateB) {
-    if (dateA.getFullYear() !== dateB.getFullYear()) {
-        return false;
-    }
-    if (dateA.getMonth() !== dateB.getMonth()) {
-        return false;
-    }
-
-    return true;
 }
 
 // Apply calendarData to DOM tree
@@ -800,7 +759,7 @@ function CreateToDoItemOnList(scheduleItem, clickevent) {
     }
 
     let span = document.createElement("span");
-    span.innerText = CreateTimeString(scheduleItem.hour, scheduleItem.minute) + ` ${scheduleItem.title}`;
+    span.innerText = `[${CreateTimeString(scheduleItem.hour, scheduleItem.minute)}] ${scheduleItem.title}`;
     btn.appendChild(span);
 
     return btn;
@@ -820,7 +779,7 @@ function CreateToDoItemOnCalendar(scheduleItem, clickevent) {
     }
 
     let span = document.createElement("span");
-    span.innerText = CreateTimeString(scheduleItem.hour, scheduleItem.minute) + ` ${scheduleItem.title}`;
+    span.innerText = `[${CreateTimeString(scheduleItem.hour, scheduleItem.minute)}] ${scheduleItem.title}`;
     btn.appendChild(span);
 
     return btn;
@@ -860,6 +819,41 @@ function _uuid() {
         return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
 }
+
+
+function CompareScheduleOfDay(a,b){
+    let tmpA = a.hour*100 + a.minute;
+    let tmpB = b.hour*100 + b.minute;
+    return tmpA-tmpB;
+}
+// compare YMD
+function YMD_Equal(dateA, dateB) {
+    // debugger;
+    if (!YM_Equal(dateA, dateB)) {
+        return false;
+    }
+    if (dateA.getDate() !== dateB.getDate()) {
+        return false;
+    }
+    if (dateA.getDay() !== dateB.getDay()) {
+        return false;
+    }
+    return true;
+}
+
+// compare YM
+function YM_Equal(dateA, dateB) {
+    if (dateA.getFullYear() !== dateB.getFullYear()) {
+        return false;
+    }
+    if (dateA.getMonth() !== dateB.getMonth()) {
+        return false;
+    }
+
+    return true;
+}
+
+
 
 function CreateDateString(year, month, date) {
     return `${year}-${month.toString().padStart(2, "0")}-${date.toString().padStart(2, "0")}`;
