@@ -16,7 +16,6 @@ const monuthNames = [
 ];
 const dayOfWeek = 7;
 
-
 function dateInfo(year, month, date, day, toDoList) {
     this.year = year,
         this.month = month,
@@ -245,6 +244,28 @@ window.onload = function () {
 
 };
 
+// #region toDoListModal
+function ClearToDoListModal() {
+    let toDoListModal = document.querySelector("#toDoListModal");
+    toDoListModal.querySelector("#toDoListModalLabel").innerText = "";
+    toDoListModal.querySelector(".modal-body").innerHTML = "";
+}
+
+function InitToDOListModal(toDoList) {
+    let toDoListModal = document.querySelector("#toDoListModal");
+    toDoListModal.querySelector("#toDoListModalLabel").innerText = CreateDateString(toDoList[0].year, toDoList[0].month, toDoList[0].date);
+    toDoListModal.addEventListener("hidden.bs.modal", function () {
+        ClearToDoListModal();
+    });
+
+    let modalBody = toDoListModal.querySelector(".modal-body");
+
+    toDoList.forEach((scheduleItem) => {
+        modalBody.appendChild(CreateToDoItem(scheduleItem));
+    });
+}
+// #endregion
+
 
 // #region toDoModal
 
@@ -271,13 +292,6 @@ function ClearToDoModal() {
     let modalfooter = toDoModal.querySelector(".modal-footer");
     modalfooter.innerHTML = "";
 }
-
-function ClearToDoListModal() {
-    let toDoListModal = document.querySelector("#toDoListModal");
-    toDoListModal.querySelector("#toDoListModalLabel").innerText = "";
-    toDoListModal.querySelector(".modal-body").innerHTML = "";
-}
-
 
 function InitAddToDoModal(date) {
 
@@ -323,24 +337,6 @@ function InitAddToDoModal(date) {
     modalfooter.appendChild(addbtn);
 
 }
-function InitToDOListModal(toDoList) {
-    let toDoListModal = document.querySelector("#toDoListModal");
-    toDoListModal.querySelector("#toDoListModalLabel").innerText = CreateDateString(toDoList[0].year, toDoList[0].month, toDoList[0].date);
-    toDoListModal.addEventListener("hidden.bs.modal", function () {
-        ClearToDoListModal();
-    });
-
-    let modalBody = toDoListModal.querySelector(".modal-body");
-
-    toDoList.forEach((scheduleItem) => {
-        modalBody.appendChild(CreateToDoItem(scheduleItem));
-    });
-
-
-
-
-}
-
 
 function InitEditToDoModal(toDoItem) {
 
@@ -370,15 +366,15 @@ function InitEditToDoModal(toDoItem) {
     modalfooter.innerHTML = "";
 
     let delbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
-    let dellbtn = CreateDOMElement(
+    let delbtn = CreateDOMElement(
         "button",
         // ["btn", "btn-danger", "modal-delBtn"],
         ["iconBtn", "modal-delBtn"],
         delbtnattrib
     );
-    dellbtn.innerHTML = '<i class="far fa-trash-alt"></i>';
-    dellbtn.addEventListener("click", () => { DeleteToDo(toDoItem.id) });
-    modalfooter.appendChild(dellbtn);
+    delbtn.innerHTML = '<i class="far fa-trash-alt"></i>';
+    delbtn.addEventListener("click", () => { DeleteToDo(toDoItem) });
+    modalfooter.appendChild(delbtn);
 
     let editbtn = CreateDOMElement(
         "button",
@@ -386,7 +382,7 @@ function InitEditToDoModal(toDoItem) {
     );
 
     editbtn.innerHTML = '<i class="far fa-edit"></i>';
-    editbtn.addEventListener("click", () => { EditToDoModal(toDoItem.id) });
+    editbtn.addEventListener("click", () => { EditToDoModal(toDoItem) });
     modalfooter.appendChild(editbtn);
 
 
@@ -444,19 +440,30 @@ function SaveToDo(id, titleInput, dataInput, timeInput, descriptInput) {
     console.log(descriptInput);
 }
 
-function DeleteToDo(id) {
-    console.log(id);
-
+function DeleteToDo(toDoItem) {
+    
     let target = document.querySelector(".calendar-days");
-    // console.log(target);
     let toDoBoxes = target.querySelectorAll(".dayInfo-toDoBox");
-    // console.log(toDoBoxes);
-    toDoBoxes[0].clientHeight = toDoBoxes[0].clientHeight;
-    console.log(toDoBoxes[0].clientHeight);
+   console.log(toDoItem); 
+   console.log(currentCalendarData.dates); 
+    let loc = currentCalendarData.dates.findIndex((dateInfo)=>{
+        dateInfo.year == toDoItem.year && dateInfo.month === toDoItem.month-1 && dateInfo.date === toDoItem.date
+    }); 
+    console.log(loc);
 
-    // daytoDoBoxResizeObs.observe(toDoBox);
-    // daytoDoBoxResizeObs.unobserve(toDoBoxes[0]);
-    // daytoDoBoxResizeObs.observe(toDoBoxes[0]);
+//     date: 20
+// description: "----"
+// hour: 1
+// id: 1
+// minute: 2
+// month: 4
+// title: "04200102"
+// year: 2021
+// __proto__: Ob
+    
+    // console.log(target);
+    // console.log(toDoBoxes);
+
 }
 
 // true : increase Calendar
@@ -663,52 +670,46 @@ function daytoDoBoxResizeAction(entries) {
     console.log(entries);
     entries.forEach((entry, index) => {
         let toDoList = currentCalendarData.dates[index].toDoList;
-        CreateDayInfotoDoItems(entry, toDoList);
+        CreateDayInfotoDoItems(entry.target, toDoList);
     });
 }
 
 
 // Create todooitem of dayinfo  by todolist and size of entry 
-function CreateDayInfotoDoItems(resizeEntry, toDoList) {
-    let contentHeight, totaltoDoListHeight, toDoItem;
+function CreateDayInfotoDoItems(target,toDoList) {
+    let targetHeight = target.clientHeight;
+    let totaltoDoListHeight, toDoItem;
     const toDoItemHeight = 22;
     const moreInfoHeight = 22;
     if (toDoList.length !== 0) {
 
-        contentHeight = resizeEntry.contentBoxSize[0].blockSize;
+        // height = resizeEntry.contentBoxSize[0].blockSize;
         // assume the height of each toDoItem is 22px
         totaltoDoListHeight = toDoList.length * toDoItemHeight;
         // clear exist toDoItem
-        resizeEntry.target.innerHTML = "";
-
-
-
-        // let click = function(event,scheduleItem){
-        //     event.stopPropagation();
-        //     InitEditToDoModal(scheduleItem);
-        // };
+        target.innerHTML = "";
 
         // 
-        if (totaltoDoListHeight <= contentHeight) {
+        if (totaltoDoListHeight <= targetHeight) {
 
             toDoList.forEach((scheduleItem) => {
                 toDoItem = CreateToDoItem(scheduleItem, (event) => {
                     OnClickToDoItemOfCalendar(event,scheduleItem);
                 });                
-                resizeEntry.target.appendChild(toDoItem);
+                target.appendChild(toDoItem);
             });
         }
         else {
 
-            contentHeight -= moreInfoHeight;
+            targetHeight -= moreInfoHeight;
             let index = 0;
             // create todoItem until the space is used up
-            while ((contentHeight -= toDoItemHeight) > 0) {
+            while ((targetHeight -= toDoItemHeight) > 0) {
                 let scheduleItem = toDoList[index];                
                 toDoItem = CreateToDoItem(scheduleItem, (event) => {
                     OnClickToDoItemOfCalendar(event,scheduleItem);
                 });
-                resizeEntry.target.appendChild(toDoItem);
+                target.appendChild(toDoItem);
                 index++
             }
 
@@ -721,7 +722,7 @@ function CreateDayInfotoDoItems(resizeEntry, toDoList) {
             let content = `${toDoList.length - index} more `;
             let remain = CreateDOMElement("button", classList, attrib, content);
             remain.addEventListener("click", () => { InitToDOListModal(toDoList); });
-            resizeEntry.target.appendChild(remain);
+            target.appendChild(remain);
         }
     }
 }
