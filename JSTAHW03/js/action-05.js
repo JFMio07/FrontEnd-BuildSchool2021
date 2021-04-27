@@ -275,7 +275,7 @@ function ClearToDoModal() {
 function ClearToDoListModal() {
     let toDoListModal = document.querySelector("#toDoListModal");
     toDoListModal.querySelector("#toDoListModalLabel").innerText = "";
-    toDoListModal.querySelector(".modal-body").innerHTML = "";    
+    toDoListModal.querySelector(".modal-body").innerHTML = "";
 }
 
 
@@ -325,16 +325,22 @@ function InitAddToDoModal(date) {
 }
 function InitToDOListModal(toDoList) {
     let toDoListModal = document.querySelector("#toDoListModal");
-    toDoListModal.querySelector("#toDoListModalLabel").innerText = `
-    ${toDoList[0].year}-${toDoList[0].month.toString().padStart(2,"0")}-${toDoList[0].date.toString().padStart(2,"0")}`;
+    toDoListModal.querySelector("#toDoListModalLabel").innerText = CreateDateString(toDoList[0].year, toDoList[0].month, toDoList[0].date);
     toDoListModal.addEventListener("hidden.bs.modal", function () {
         ClearToDoListModal();
     });
-    
+
+    let modalBody = toDoListModal.querySelector(".modal-body");
+
+    toDoList.forEach((scheduleItem) => {
+        modalBody.appendChild(CreateToDoItem(scheduleItem));
+    });
+
 
 
 
 }
+
 
 function InitEditToDoModal(toDoItem) {
 
@@ -349,11 +355,11 @@ function InitEditToDoModal(toDoItem) {
     titleInput.setAttribute("readonly", "");
 
     let dateInput = toDoModal.querySelector("#eventDateInput");
-    dateInput.value = `${toDoItem.year}-${toDoItem.month.toString().padStart(2, 0)}-${toDoItem.date.toString().padStart(2, 0)}`;
+    dateInput.value = CreateDateString(toDoItem.year, toDoItem.month, toDoItem.date);
     dateInput.setAttribute("readonly", "");
 
     let timeInput = toDoModal.querySelector("#eventTimeInput");
-    timeInput.value = `${toDoItem.hour.toString().padStart(2, 0)}:${toDoItem.minute.toString().padStart(2, 0)}`
+    timeInput.value = CreateTimeString(toDoItem.hour, toDoItem.minute);
     timeInput.setAttribute("readonly", "");
 
     let descriptInput = toDoModal.querySelector("#eventDescriptInput");
@@ -362,7 +368,7 @@ function InitEditToDoModal(toDoItem) {
 
     let modalfooter = toDoModal.querySelector(".modal-footer");
     modalfooter.innerHTML = "";
-    
+
     let delbtnattrib = [{ key: "data-bs-dismiss", value: "modal" }];
     let dellbtn = CreateDOMElement(
         "button",
@@ -440,6 +446,17 @@ function SaveToDo(id, titleInput, dataInput, timeInput, descriptInput) {
 
 function DeleteToDo(id) {
     console.log(id);
+
+    let target = document.querySelector(".calendar-days");
+    // console.log(target);
+    let toDoBoxes = target.querySelectorAll(".dayInfo-toDoBox");
+    // console.log(toDoBoxes);
+    toDoBoxes[0].clientHeight = toDoBoxes[0].clientHeight;
+    console.log(toDoBoxes[0].clientHeight);
+
+    // daytoDoBoxResizeObs.observe(toDoBox);
+    // daytoDoBoxResizeObs.unobserve(toDoBoxes[0]);
+    // daytoDoBoxResizeObs.observe(toDoBoxes[0]);
 }
 
 // true : increase Calendar
@@ -643,6 +660,7 @@ function AddDaysToDoItem(target) {
 
 // when size of dayToDoBox is changed
 function daytoDoBoxResizeAction(entries) {
+    console.log(entries);
     entries.forEach((entry, index) => {
         let toDoList = currentCalendarData.dates[index].toDoList;
         CreateDayInfotoDoItems(entry, toDoList);
@@ -663,11 +681,20 @@ function CreateDayInfotoDoItems(resizeEntry, toDoList) {
         // clear exist toDoItem
         resizeEntry.target.innerHTML = "";
 
+
+
+        // let click = function(event,scheduleItem){
+        //     event.stopPropagation();
+        //     InitEditToDoModal(scheduleItem);
+        // };
+
         // 
         if (totaltoDoListHeight <= contentHeight) {
 
             toDoList.forEach((scheduleItem) => {
-                toDoItem = CreateToDoItem(scheduleItem);
+                toDoItem = CreateToDoItem(scheduleItem, (event) => {
+                    OnClickToDoItemOfCalendar(event,scheduleItem);
+                });                
                 resizeEntry.target.appendChild(toDoItem);
             });
         }
@@ -675,10 +702,12 @@ function CreateDayInfotoDoItems(resizeEntry, toDoList) {
 
             contentHeight -= moreInfoHeight;
             let index = 0;
-
             // create todoItem until the space is used up
             while ((contentHeight -= toDoItemHeight) > 0) {
-                toDoItem = CreateToDoItem(toDoList[index]);
+                let scheduleItem = toDoList[index];                
+                toDoItem = CreateToDoItem(scheduleItem, (event) => {
+                    OnClickToDoItemOfCalendar(event,scheduleItem);
+                });
                 resizeEntry.target.appendChild(toDoItem);
                 index++
             }
@@ -697,8 +726,14 @@ function CreateDayInfotoDoItems(resizeEntry, toDoList) {
     }
 }
 
+function OnClickToDoItemOfCalendar(event, scheduleItem) {
+    event.stopPropagation();
+    InitEditToDoModal(scheduleItem);
+}
+
+
 // Create ToDoItem by object of ScheduleItem 
-function CreateToDoItem(scheduleItem) {
+function CreateToDoItem(scheduleItem, clickevent) {
 
     let btn = CreateDOMElement(
         "button",
@@ -708,13 +743,12 @@ function CreateToDoItem(scheduleItem) {
             { key: "data-bs-target", value: "#toDoModal" }
         ]
     );
-    btn.addEventListener("click", function (event) {
-        event.stopPropagation();
-        InitEditToDoModal(scheduleItem);
-    });
+    if (typeof clickevent === "function") {
+        btn.addEventListener("click", clickevent);
+    }
 
     let span = document.createElement("span");
-    span.innerText = `${scheduleItem.hour.toString().padStart(2, "0")}:${scheduleItem.minute.toString().padStart(2, "0")} ${scheduleItem.title}`;
+    span.innerText = CreateTimeString(scheduleItem.hour, scheduleItem.minute) + ` ${scheduleItem.title}`;
     btn.appendChild(span);
 
     return btn;
@@ -754,6 +788,15 @@ function _uuid() {
         return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
 }
+
+function CreateDateString(year, month, date) {
+    return `${year}-${month.toString().padStart(2, "0")}-${date.toString().padStart(2, "0")}`;
+}
+
+function CreateTimeString(hour, minute) {
+    return `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`;
+}
+
 
 function StringCutOff(input, maxLength) {
     if (input.length < maxLength) {

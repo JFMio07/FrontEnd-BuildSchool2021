@@ -188,6 +188,7 @@ body {
   display: flex;
   border: none;
   outline: none;
+  font-size: 12px;
 }
 
 .dayInfo-toDoItem span {
