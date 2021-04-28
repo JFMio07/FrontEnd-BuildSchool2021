@@ -310,10 +310,10 @@ function InitAddToDoModal(date) {
 
 }
 
-function InitEditToDoModal(toDoItem, backModalId) {
+function InitEditToDoModal(toDoItem, backModal) {
 
     // console.log(toDoItem);
-    backModalId = backModalId || "";
+    backModal = backModal || {id:"",callback:""};
     let toDoModal = document.querySelector("#toDoModal");
     toDoModal.querySelector("#toDoModalLabel").innerText = "Edit Event";
     toDoModal.addEventListener("hidden.bs.modal", function () {
@@ -333,11 +333,16 @@ function InitEditToDoModal(toDoItem, backModalId) {
     // console.log(backModalId);
     let modalfooter = toDoModal.querySelector(".modal-footer");
     modalfooter.innerHTML = "";
-    let delbtnattrib = [
-        // { key: "data-bs-target", value: "#toDoListModal" },
-        { key: "data-bs-dismiss", value: "modal" }, //modal
-        { key: "data-bs-target", value: `${backModalId}` }
-    ];
+    let delbtnattrib =[];
+
+    if(backModal.id !==""){
+        delbtnattrib = [
+            { key: "data-bs-dismiss", value: "modal" },
+            { key: "data-bs-target", value: `${backModal.id}` },
+            { key: "data-bs-toggle", value: "modal" }
+        ];
+    }
+    
     let delbtn = CreateDOMElement(
         "button",
         ["iconBtn", "modal-delBtn"],
@@ -345,6 +350,20 @@ function InitEditToDoModal(toDoItem, backModalId) {
     );
     delbtn.innerHTML = '<i class="far fa-trash-alt"></i>';
     delbtn.addEventListener("click", () => { DeleteToDo(toDoItem) });
+
+
+    
+
+    if(typeof backModal.callback ==="function"){
+        
+        delbtn.addEventListener("click", () => { 
+            
+            let dateindex = currentCalendarData.dates.findIndex((dateInfo) => {
+                return dateInfo.year === toDoItem.year && dateInfo.month === toDoItem.month && dateInfo.date === toDoItem.date;
+            });
+            backModal.callback(currentCalendarData.dates[dateindex]); 
+        });
+    }
     modalfooter.appendChild(delbtn);
 
     let editbtn = CreateDOMElement(
@@ -748,7 +767,7 @@ function OnClickToDoItemOfCalendar(event, scheduleItem) {
 
 function OnClickToDoItemOfList(event, scheduleItem) {
     event.stopPropagation();
-    InitEditToDoModal(scheduleItem, "#toDoListModal");
+    InitEditToDoModal(scheduleItem, {id:"#toDoListModal",callback:InitToDOListModal});
 }
 
 // Create ToDoItemOnList by object of ScheduleItem 
@@ -779,10 +798,17 @@ function CreateToDoItemOnList(scheduleItem, clickevent) {
 // Create ToDoItemOnCalendar by object of ScheduleItem 
 function CreateToDoItemOnCalendar(scheduleItem, clickevent) {
 
+    // { key: "data-bs-toggle", value: "modal" },
+    // { key: "data-bs-target", value: "#toDoModal" },
+    // { key: "data-bs-dismiss", value: "modal" }
+
     let btn = CreateDOMElement(
         "button",
         ["dayInfo-toDoItem"],
-        []
+        [
+            { key: "data-bs-toggle", value: "modal" },
+            { key: "data-bs-target", value: "#toDoModal" }
+        ]
     );
     if (typeof clickevent === "function") {
         btn.addEventListener("click", clickevent);

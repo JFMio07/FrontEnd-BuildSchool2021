@@ -176,6 +176,8 @@ body {
   overflow: hidden;
   z-index: 10; 
   font-size: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 .dayInfo-toDoItem {
@@ -189,15 +191,24 @@ body {
   border: none;
   outline: none;
   font-size: 12px;
+  padding: 0;
 }
 
 .dayInfo-toDoItem span {
+  border-radius: 3px;
   text-align: left;
   overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;
   color: #fff;
-  padding: 0 2px;
+  padding: 0 5px;
+  height: 100%;
+}
+
+.dayInfo-toDoItem span:first-child{
+  background-color: green;
+  padding: 0 5px;
+  flex-shrink: 0;
 }
 
 .dayInfo-toDoItemMore {
@@ -210,6 +221,7 @@ body {
   border: none;
   outline: none;
   text-align: left;
+  flex-grow: 1;
 }
 
 .addToDo {
