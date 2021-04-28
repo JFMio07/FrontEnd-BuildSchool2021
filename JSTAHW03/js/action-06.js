@@ -34,8 +34,8 @@ function WriteSchedulesFile(schedules) {
 
 function ReadSchedulesFile() {
     let raw = localStorage.getItem("schedules");
-console.log(raw);
-    if (raw !== undefined) {
+// console.log(raw);
+    if (raw !== null) {
         return JSON.parse(raw);
     }
     else {
