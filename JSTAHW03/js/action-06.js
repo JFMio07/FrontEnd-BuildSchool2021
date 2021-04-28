@@ -375,21 +375,21 @@ function InitEditToDoModal(toDoItem, backModalId) {
     );
 
     editbtn.innerHTML = '<i class="far fa-edit"></i>';
-    editbtn.addEventListener("click", () => { EditToDoModal(toDoItem.id, backModalId); });
+    editbtn.addEventListener("click", () => { EditToDoModal(toDoItem, backModalId); });
     modalfooter.appendChild(editbtn);
 
 
 }
 
-function EditToDoModal(id, backModalId) {
+function EditToDoModal(toDoItem, backModalId) {
 
     let toDoModal = document.querySelector("#toDoModal");
     let inputs = toDoModal.querySelectorAll(".form-control")
     inputs.forEach((el, index) => {
         el.removeAttribute("readonly");
     });
-    
-    
+
+
     let modalfooter = toDoModal.querySelector(".modal-footer");
     let editBtn = modalfooter.querySelector(".modal-editBtn");
     editBtn.classList.remove("btn-info", "modal-editBtn");
@@ -411,7 +411,7 @@ function EditToDoModal(id, backModalId) {
             values.push(item.value);
         });
 
-        SaveToDo(id, ...values);
+        SaveToDo(toDoItem, ...values);
     });
     editBtn.parentNode.replaceChild(savebtn, editBtn);
 }
@@ -450,8 +450,8 @@ function AddToDo(titleInput, dateInput, timeInput, descriptInput) {
     }
 }
 
-function SaveToDo(id, titleInput, dateInput, timeInput, descriptInput) {
-    console.log(id);
+function SaveToDo(origin, titleInput, dateInput, timeInput, descriptInput) {
+    console.log(origin.id);
     console.log(titleInput);
     console.log(dateInput);
     console.log(timeInput);
@@ -460,9 +460,8 @@ function SaveToDo(id, titleInput, dateInput, timeInput, descriptInput) {
     let toDoBoxes = document.querySelectorAll(".calendar-days .dayInfo-toDoBox");
     let date = dateInput.split("-");
     let time = timeInput.split(":");
-
     let newItem = {
-        id: id,
+        id: origin.id,
         year: parseInt(date[0], 10),
         month: parseInt(date[1], 10) - 1,
         date: parseInt(date[2], 10),
@@ -471,12 +470,44 @@ function SaveToDo(id, titleInput, dateInput, timeInput, descriptInput) {
         title: titleInput,
         description: descriptInput
     };
-    
+    let isdateOfChange = origin.year !== newItem.year || origin.month !== newItem.month || origin.date !== newItem.date;
+
+
+    // get index of origin date in dates
+    let originDateIndex = currentCalendarData.dates.findIndex((dateInfo) => {
+        return dateInfo.year === origin.year && dateInfo.month === origin.month && dateInfo.date === origin.date;
+    });
+
+    // get index of origin ToDoItem in toDoList
+    let originToDoIndex = currentCalendarData.dates[originDateIndex].toDoList.indexOf(origin);
+
+    // get index of origin scheduleItem in schedules
     let scheduleIndex = schedules.findIndex(item => item.id === newItem.id);
 
+
+
     if (scheduleIndex >= 0) {
-        schedules.splice(scheduleIndex, 1,newItem);
+        schedules.splice(scheduleIndex, 1, newItem);
         WriteSchedulesFile(schedules);
+    }
+
+
+    if (!isdateOfChange && originDateIndex >= 0 && originToDoIndex >= 0) {
+        currentCalendarData.dates[originDateIndex].toDoList.splice(originToDoIndex, 1, newItem);
+        currentCalendarData.dates[originDateIndex].toDoList.sort(CompareScheduleOfDay);
+        CreateDayInfotoDoItems(toDoBoxes[originDateIndex], currentCalendarData.dates[originDateIndex].toDoList);
+        return;
+    }
+
+    // get index of new date in dates
+    let newDateIndex = currentCalendarData.dates.findIndex((dateInfo) => {
+        return dateInfo.year === newItem.year && dateInfo.month === newItem.month && dateInfo.date === newItem.date;
+    });
+
+    if (isdateOfChange && newDateIndex >= 0) {
+        currentCalendarData.dates[newDateIndex].toDoList.push(newItem);
+        currentCalendarData.dates[newDateIndex].toDoList.sort(CompareScheduleOfDay);
+        CreateDayInfotoDoItems(toDoBoxes[newDateIndex], currentCalendarData.dates[newDateIndex].toDoList);
     }
 }
 
@@ -552,8 +583,8 @@ function CreateCalendarData(srcdate, schedules) {
         let month = item.getMonth();
         let date = item.getDate();
         let day = item.getDay();
-        let todo = schedules.filter(schedule =>schedule.year === year && schedule.month === month && schedule.date === date)
-                            .sort(CompareScheduleOfDay);
+        let todo = schedules.filter(schedule => schedule.year === year && schedule.month === month && schedule.date === date)
+            .sort(CompareScheduleOfDay);
         datesInfo.push(new dateInfo(year, month, date, day, todo));
     });
 
@@ -821,10 +852,10 @@ function _uuid() {
 }
 
 
-function CompareScheduleOfDay(a,b){
-    let tmpA = a.hour*100 + a.minute;
-    let tmpB = b.hour*100 + b.minute;
-    return tmpA-tmpB;
+function CompareScheduleOfDay(a, b) {
+    let tmpA = a.hour * 100 + a.minute;
+    let tmpB = b.hour * 100 + b.minute;
+    return tmpA - tmpB;
 }
 // compare YMD
 function YMD_Equal(dateA, dateB) {
